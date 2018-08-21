@@ -1,0 +1,37 @@
+{
+  "type": "forge:ore_shaped",
+  
+  "pattern": [
+     "%%#",
+     " @$",
+     "  ?"
+  ],
+  
+  "key": {
+	 "%":{
+	 "type": "forge:ore_dict",
+	 "ore": "ingotBronze"
+	},
+	 "#":{
+	 "item": "fluidizationcraft:itemCellAcid",
+	 "data": 0 
+	},
+	 "@":{
+	 "type": "forge:ore_dict",
+	 "ore": "ingotAluminum"
+	},
+	 "$":{
+	 "item": "fluidizationcraft:itemVialEmpty",
+	 "data": 2
+	},
+	 "?":{
+	 "type": "forge:ore_dict",
+	 "ore" : "ingotIron"
+	}
+  },
+  
+  "result": {
+    "item": "fluidizationcraft:itemGunCryo",
+    "data": 0
+  }
+}

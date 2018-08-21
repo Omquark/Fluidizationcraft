@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  
+  "pattern": [
+     "#@#",
+     "@$@",
+     "#@#"
+  ],
+  
+  "key": {
+	 "#":{
+	 "type": "forge:ore_dict",
+	 "ore": "ingotAluminum"
+	},
+	 "@":{
+	 "type": "forge:ore_dict",
+	 "ore": "blockGlassTempered"
+	},
+	 "$":{
+	 "item": "minecraft:bucket",
+	 "data": 0
+	}
+  },
+  
+  "result": {
+    "item": "fluidizationcraft:itemvialempty",
+    "data": 0
+  }
+}
