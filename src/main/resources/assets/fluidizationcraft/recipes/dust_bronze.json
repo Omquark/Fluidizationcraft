@@ -1,0 +1,26 @@
+{
+	"type": "forge:ore_shapeless",
+	"result": {
+		"item": "fluidizationcraft:itemmaterial",
+		"data": 3,
+		"count": 4
+	},
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustCopper"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustCopper"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustCopper"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustTin"
+		}
+	]
+}

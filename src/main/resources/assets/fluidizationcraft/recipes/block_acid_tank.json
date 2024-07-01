@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  
+  "pattern": [
+     "#@#",
+     "@$@",
+     "#@#"
+  ],
+  
+  "key": {
+	 "#":{
+	 "type": "forge:ore_dict",
+	 "ore": "ingotCopper"
+	},
+	 "@":{
+	 "type": "forge:ore_dict",
+	 "ore": "blockGlassTempered"
+	},
+	 "$":{
+	 "item": "fluidizationcraft:itemVialEmpty",
+	 "data": 0
+	}
+  },
+  
+  "result": {
+     "item": "fluidizationcraft:blocktankacid",
+     "data": 0
+  }
+}
