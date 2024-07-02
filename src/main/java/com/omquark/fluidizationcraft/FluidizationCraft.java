@@ -3,6 +3,7 @@ package com.omquark.fluidizationcraft;
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
+import com.omquark.fluidizationcraft.Fluids.AcidFluid;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
@@ -44,6 +45,9 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
+                output.accept(FluidizationItems.VIAL_EMPTY.get());
+                output.accept(FluidizationItems.VIAL_ACID.get());
+                output.accept(FluidizationItems.VIAL_CRYONITE.get());
             })
             .title(Component.literal("Fluidization Craft"))
             .build());
@@ -111,7 +115,7 @@ public class FluidizationCraft
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_ACID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_CRYONITE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_CRYONITE.get(), RenderType.translucent());
-//            FluidizationFluids.buildFluidInteractions();
+            AcidFluid.addInteractions();
         }
     }
 }

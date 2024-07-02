@@ -38,16 +38,4 @@ public class FluidizationFluids {
     public static void register(IEventBus eventBus) {
         FLUIDS.register(eventBus);
     }
-
-    public static void buildFluidInteractions() {
-        FluidInteractionRegistry.addInteraction(Fluids.WATER.getFluidType(),
-                new FluidInteractionRegistry.InteractionInformation(
-                        FluidizationFluidTypes.ACID_FLUID_TYPE.get(), Blocks.CLAY.defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(Fluids.WATER.getFluidType(),
-                new FluidInteractionRegistry.InteractionInformation(
-                        FluidizationFluidTypes.CRYONITE_FLUID_TYPE.get(), FluidizationBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(FluidizationFluidTypes.CRYONITE_FLUID_TYPE.get(),
-                new FluidInteractionRegistry.InteractionInformation(
-                        Fluids.WATER.getFluidType(), Blocks.ICE.defaultBlockState()));
-    }
 }

@@ -30,6 +30,7 @@ public class DataGeneratorHandler {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(true, new FluidizationBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new FluidizationItemProvider(packOutput, FluidizationCraft.MODID, existingFileHelper));
 
         generator.addProvider(event.includeServer(),
                 new RegistriesDatapackGenerator(packOutput,

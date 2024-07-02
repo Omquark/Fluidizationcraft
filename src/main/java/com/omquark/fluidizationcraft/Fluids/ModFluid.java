@@ -20,8 +20,8 @@ public abstract class ModFluid extends ForgeFlowingFluid implements Fluidization
 
     //Used to determine block interactions. This depends on the children to define this and add interactions.
     //Used for blocks vs fluids, not Fluids vs Fluids - Use the FluidInteractionFactory for now...
-    protected HashMap<BlockState, BlockState> blockInteractions;
-    protected HashMap<FluidType, BlockState> fluidInteractions;
+    protected static HashMap<BlockState, BlockState> blockInteractions;
+    protected static HashMap<FluidType, BlockState> fluidInteractions;
 
     protected ModFluid(Properties props) {
         super(props);

@@ -23,16 +23,20 @@ import java.util.stream.Stream;
 public abstract class AcidFluid extends ModFluid {
     protected AcidFluid(Properties props) {
         super(props);
+    }
+
+    public static void addInteractions(){
         blockInteractions = new HashMap<>();
         blockInteractions.put(Blocks.GRASS_BLOCK.defaultBlockState(), Blocks.DIRT.defaultBlockState());
         blockInteractions.put(Blocks.DIRT.defaultBlockState(), Blocks.COARSE_DIRT.defaultBlockState());
         blockInteractions.put(Blocks.SANDSTONE.defaultBlockState(), Blocks.SAND.defaultBlockState());
 
         fluidInteractions = new HashMap<>();
-//        fluidInteractions.put(Fluids.WATER.getFluidType(), Blocks.ICE.defaultBlockState());
-        fluidInteractions.put(FluidizationFluidTypes.ACID_FLUID_TYPE.get(),
-                FluidizationBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState());
+        fluidInteractions.put(Fluids.WATER.getFluidType(), Blocks.ICE.defaultBlockState());
+//        fluidInteractions.put(FluidizationFluidTypes.ACID_FLUID_TYPE.get(),
+//                FluidizationBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState());
     }
+
 
     @Override
     public Fluid getFlowing() {
@@ -77,7 +81,6 @@ public abstract class AcidFluid extends ModFluid {
 
     @Override
     public void tick(Level level, BlockPos pos, FluidState state) {
-        //TODO: Handle the fluid interactions from the classes, ForgeFluidInteractions is wonky
         checkFluidInteractions(level, pos);
         super.tick(level, pos, state);
     }
@@ -86,8 +89,8 @@ public abstract class AcidFluid extends ModFluid {
         Stream.of(net.minecraft.core.Direction.values()).forEach((dir) -> {
             if(dir != net.minecraft.core.Direction.UP) {
                 FluidState otherState = level.getFluidState(pos.relative(dir));
-                if(otherState != Fluids.EMPTY.defaultFluidState() && fluidInteractions.containsKey(otherState)){
-                    level.setBlock(pos.relative(dir), fluidInteractions.get(otherState), 2);
+                if(otherState != Fluids.EMPTY.defaultFluidState() && fluidInteractions.containsKey(otherState.getFluidType())){
+                    level.setBlock(pos.relative(dir), fluidInteractions.get(otherState.getFluidType()), 2);
                 }
             }
         });
