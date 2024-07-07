@@ -22,11 +22,9 @@ public class FluidizationBucket extends BucketItem implements FluidizationBaseIt
     @Override
     public boolean emptyContents(@Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult blockHitResult, @Nullable ItemStack container) {
         if (super.emptyContents(player, level, pos, blockHitResult, container)) {
-            if (container != null && player != null && !player.isCreative()) {
-                FluidizationCraft.LOGGER.debug(String.valueOf(container.getCount()));
+            if (container != null && player != null && !player.hasInfiniteMaterials()) {
 //                container.setCount(0);
                 container.shrink(Integer.MAX_VALUE);
-                FluidizationCraft.LOGGER.debug(String.valueOf(container.getCount()));
 //                container.consume(Integer.MAX_VALUE, player);
             }
 //            return true;

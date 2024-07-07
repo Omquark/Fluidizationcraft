@@ -2,5 +2,21 @@
   "block.fluidizationcraft.acid_frozen": "Frozen Acid",
 
   "item.fluidizationcraft.bucket_acid": "Acid Bucket",
-  "item.fluidizationcraft.bucket_cryonite": "Cryonite Bucket"
+  "item.fluidizationcraft.bucket_cryonite": "Cryonite Bucket",
+  "item.fluidizationcraft.bucket_neptunium": "Neptunium Bucket",
+  "item.fluidizationcraft.bucket_netherflow": "Netherflow Bucket",
+  "item.fluidizationcraft.bucket_plutonium": "Plutonium Bucket",
+  "item.fluidizationcraft.bucket_pyronite": "Pyronite Bucket",
+  "item.fluidizationcraft.bucket_radionite": "Radionite Bucket",
+  "item.fluidizationcraft.bucket_uranium": "Uranium Bucket",
+
+  "item.fluidizationcraft.vial_empty": "Empty Vial",
+  "item.fluidizationcraft.vial_acid": "Acid Vial",
+  "item.fluidizationcraft.vial_cryonite": "Cryonite Vial",
+  "item.fluidizationcraft.vial_neptunium": "Neptunium Vial",
+  "item.fluidizationcraft.vial_netherflow": "Netherflow Vial",
+  "item.fluidizationcraft.vial_plutonium": "Plutonium Vial",
+  "item.fluidizationcraft.vial_pyronite": "Pyronite Vial",
+  "item.fluidizationcraft.vial_radionite": "Radionite Vial",
+  "item.fluidizationcraft.vial_uranium": "Uranium Vial"
 }

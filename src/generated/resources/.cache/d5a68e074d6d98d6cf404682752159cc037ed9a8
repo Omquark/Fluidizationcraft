@@ -1,4 +1,10 @@
-// 1.20.6	2024-07-01T23:01:42.2855658	Item Models: fluidizationcraft
+// 1.20.6	2024-07-06T19:52:33.9019932	Item Models: fluidizationcraft
 f92407074782802b7567e58f110996a5290bd887 assets/fluidizationcraft/models/item/vial_acid.json
 5eb3d631ff5c646c82d93581b1af77f4f49d7af6 assets/fluidizationcraft/models/item/vial_cryonite.json
 f0266bce5df39d3fc55bf568f5cfeda6dc75c832 assets/fluidizationcraft/models/item/vial_empty.json
+49b00e922e13b92253e5834bc54edd622c1ab999 assets/fluidizationcraft/models/item/vial_neptunium.json
+d827a8988c813b01d08e1410439bbf387b9f5d33 assets/fluidizationcraft/models/item/vial_netherflow.json
+400aea50d85b709dffe2eaa006a05fd8edda9fdd assets/fluidizationcraft/models/item/vial_plutonium.json
+c4bf200a03a311a490e620bbf2a1099796ca548e assets/fluidizationcraft/models/item/vial_pyronite.json
+2f26d0b6a6f60dcd17f01d7b3eb20c31ba28d6cd assets/fluidizationcraft/models/item/vial_radionite.json
+9727367b3ca8f2bbf1970ade430115f9b38c3dd0 assets/fluidizationcraft/models/item/vial_uranium.json

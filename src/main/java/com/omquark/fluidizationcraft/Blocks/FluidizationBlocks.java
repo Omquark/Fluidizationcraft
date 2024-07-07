@@ -1,10 +1,13 @@
 package com.omquark.fluidizationcraft.Blocks;
 
+import com.omquark.fluidizationcraft.DamageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
+import net.minecraft.world.entity.Crackiness;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -23,14 +26,46 @@ public class FluidizationBlocks {
     private FluidizationBlocks() {}
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FluidizationCraft.MODID);
     public static final RegistryObject<Block> FROZEN_ACID_BLOCK = registerBlock("acid_frozen", () -> new AcidFrozen(null));
-    public static final RegistryObject<LiquidBlock> ACID_BLOCK = registerBlock("acid_block",
-            () -> new AcidBlock(FluidizationFluids.SOURCE_ACID, BlockBehaviour.Properties.of()
+    public static final RegistryObject<ModLiquidBlock> ACID_BLOCK = registerBlock("acid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_ACID, BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN).replaceable().noCollission().strength(100f)
-                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks()));
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.ACID_DAMAGE));
     public static final RegistryObject<LiquidBlock> CRYONITE_BLOCK = registerBlock("cryonite_block",
-            () -> new CryoniteBlock(FluidizationFluids.SOURCE_CRYONITE, BlockBehaviour.Properties.of()
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_CRYONITE, BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
-                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks()));
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.CRYONITE_DAMAGE));
+    public static final RegistryObject<LiquidBlock> NEPTUNIUM_FLUID_BLOCK = registerBlock("neptunium_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_NEPTUNIUM, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.NEPTUNIUM_DAMAGE));
+    public static final RegistryObject<LiquidBlock> NETHERFLOW_FLUID_BLOCK = registerBlock("netherflow_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_NETHERFLOW, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.NETHERFLOW_DAMAGE));
+    public static final RegistryObject<LiquidBlock> PLUTONIUM_FLUID_BLOCK = registerBlock("plutonium_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_PLUTONIUM, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.PLUTONIUM_DAMAGE));
+    public static final RegistryObject<LiquidBlock> PYRONITE_FLUID_BLOCK = registerBlock("pyronite_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_PYRONITE, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.PYRONITE_DAMAGE));
+    public static final RegistryObject<LiquidBlock> RADIONITE_FLUID_BLOCK = registerBlock("radionite_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_RADIONITE, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.RADIONITE_DAMAGE));
+    public static final RegistryObject<LiquidBlock> URANIUM_FLUID_BLOCK = registerBlock("uranium_fluid_block",
+            () -> new ModLiquidBlock(FluidizationFluids.SOURCE_URANIUM, BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
+                    .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
+                    FluidizationDamageTypes.URANIUM_DAMAGE));
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, registeredBlock);

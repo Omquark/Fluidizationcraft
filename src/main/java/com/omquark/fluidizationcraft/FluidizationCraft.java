@@ -3,7 +3,6 @@ package com.omquark.fluidizationcraft;
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
-import com.omquark.fluidizationcraft.Fluids.AcidFluid;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
@@ -45,9 +44,21 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_NEPTUNIUM.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_NETHERFLOW.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_PLUTONIUM.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_PYRONITE.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_RADIONITE.get().getBucket());
+                output.accept(FluidizationFluids.SOURCE_URANIUM.get().getBucket());
                 output.accept(FluidizationItems.VIAL_EMPTY.get());
                 output.accept(FluidizationItems.VIAL_ACID.get());
                 output.accept(FluidizationItems.VIAL_CRYONITE.get());
+                output.accept(FluidizationItems.VIAL_NEPTUNIUM.get());
+                output.accept(FluidizationItems.VIAL_NETHERFLOW.get());
+                output.accept(FluidizationItems.VIAL_PLUTONIUM.get());
+                output.accept(FluidizationItems.VIAL_PYRONITE.get());
+                output.accept(FluidizationItems.VIAL_RADIONITE.get());
+                output.accept(FluidizationItems.VIAL_URANIUM.get());
             })
             .title(Component.literal("Fluidization Craft"))
             .build());
@@ -61,7 +72,7 @@ public class FluidizationCraft
 
         FluidizationItems.register(modEventBus);
         FluidizationBlocks.register(modEventBus);
-        FluidizationFluidTypes.register(modEventBus);
+        FluidizationFluidTypes.registerWithWaterRL(modEventBus);
         FluidizationFluids.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
@@ -115,7 +126,19 @@ public class FluidizationCraft
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_ACID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_CRYONITE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_CRYONITE.get(), RenderType.translucent());
-            AcidFluid.addInteractions();
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_NEPTUNIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_NEPTUNIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_NETHERFLOW.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_NETHERFLOW.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_PLUTONIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_PLUTONIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_PYRONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_PYRONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_RADIONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_RADIONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_URANIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_URANIUM.get(), RenderType.translucent());
+//            AcidFluid.addInteractions();
         }
     }
 }
