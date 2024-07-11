@@ -33,23 +33,27 @@ public class FluidizationItems {
     public static final RegistryObject<Item> BUCKET_URANIUM = ITEMS.register("bucket_uranium",
             () -> new FluidizationBucket(FluidizationFluids.SOURCE_URANIUM, new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> VIAL_EMPTY = ITEMS.register("vial_empty",
-            () -> new FluidizationVial(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_ACID = ITEMS.register("vial_acid",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_ACID, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_ACID, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_CRYONITE = ITEMS.register("vial_cryonite",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_CRYONITE, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_CRYONITE, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_NEPTUNIUM = ITEMS.register("vial_neptunium",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_NEPTUNIUM, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_NEPTUNIUM, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_NETHERFLOW = ITEMS.register("vial_netherflow",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_NETHERFLOW, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_NETHERFLOW, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_PLUTONIUM = ITEMS.register("vial_plutonium",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_PLUTONIUM, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_PLUTONIUM, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_PYRONITE = ITEMS.register("vial_pyronite",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_PYRONITE, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_PYRONITE, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_RADIONITE = ITEMS.register("vial_radionite",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_RADIONITE, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_RADIONITE, new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> VIAL_URANIUM = ITEMS.register("vial_uranium",
-            () -> new FluidizationVial(FluidizationFluids.SOURCE_URANIUM, new Item.Properties().stacksTo(16)));
+            () -> new ModVial(FluidizationFluids.SOURCE_URANIUM, new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> CELL_ACID = ITEMS.register("cell_acid",
+            () -> new ModCell(new Item.Properties().durability(16).stacksTo(1)));
+    public static final RegistryObject<Item> GUN_ACID = ITEMS.register("gun_acid",
+            () -> new ItemGunAcid(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

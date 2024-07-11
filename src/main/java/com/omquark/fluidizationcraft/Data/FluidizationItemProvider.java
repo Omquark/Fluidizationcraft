@@ -2,10 +2,8 @@ package com.omquark.fluidizationcraft.Data;
 
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 
 public class FluidizationItemProvider extends ItemModelProvider {
     public FluidizationItemProvider(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {
@@ -23,6 +21,8 @@ public class FluidizationItemProvider extends ItemModelProvider {
         basicItem(FluidizationItems.VIAL_PYRONITE.get());
         basicItem(FluidizationItems.VIAL_RADIONITE.get());
         basicItem(FluidizationItems.VIAL_URANIUM.get());
+        basicItem(FluidizationItems.CELL_ACID.get());
+        basicItem(FluidizationItems.GUN_ACID.get());
     }
 
 //    private void basicItem(RegistryObject<Item> item){

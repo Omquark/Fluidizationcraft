@@ -1,4 +1,7 @@
-// 1.20.6	2024-06-29T20:20:20.717492	Block States: fluidizationcraft
+// 1.20.6	2024-07-07T21:07:28.8934152	Block States: fluidizationcraft
 86a3157a748b1cb0e9dc0ca724d687b843c4238f assets/fluidizationcraft/blockstates/acid_frozen.json
+c1e82a080872474749691169dca04c3501d93b72 assets/fluidizationcraft/blockstates/ore_aluminum.json
 9098bf6897ca060bccf7067dcb01c0b68c2e0df1 assets/fluidizationcraft/models/block/acid_frozen.json
+8b6ff114d93c76f3d16822c6d7d21169c44eab74 assets/fluidizationcraft/models/block/ore_aluminum.json
 94176d5874bf54d981c0175afa2b600e649736be assets/fluidizationcraft/models/item/acid_frozen.json
+cd0227202de00376165900a01c0a30c3c1fcb944 assets/fluidizationcraft/models/item/ore_aluminum.json

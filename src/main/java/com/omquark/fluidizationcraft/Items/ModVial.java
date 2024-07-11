@@ -1,6 +1,5 @@
 package com.omquark.fluidizationcraft.Items;
 
-import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.Fluids.ModFluid;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -29,10 +28,10 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class FluidizationVial extends BucketItem implements FluidizationBaseItem {
+public class ModVial extends BucketItem implements FluidizationBaseItem {
     private final Supplier<? extends Fluid> fluidSupplier;
 
-    public FluidizationVial(Supplier<? extends Fluid> supplier, Properties builder) {
+    public ModVial(Supplier<? extends Fluid> supplier, Properties builder) {
         super(supplier, builder);
         this.fluidSupplier = supplier;
     }

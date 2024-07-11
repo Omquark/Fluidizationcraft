@@ -59,6 +59,16 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.VIAL_PYRONITE.get());
                 output.accept(FluidizationItems.VIAL_RADIONITE.get());
                 output.accept(FluidizationItems.VIAL_URANIUM.get());
+                output.accept(FluidizationItems.CELL_ACID.get());
+                output.accept(FluidizationItems.GUN_ACID.get());
+                output.accept(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.ARGENTITE_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.LEAD_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.TIN_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
             })
             .title(Component.literal("Fluidization Craft"))
             .build());

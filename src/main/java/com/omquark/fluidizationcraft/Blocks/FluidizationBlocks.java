@@ -66,6 +66,38 @@ public class FluidizationBlocks {
                     .mapColor(MapColor.COLOR_LIGHT_BLUE).replaceable().noCollission().strength(100f)
                     .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
                     FluidizationDamageTypes.URANIUM_DAMAGE));
+    public static final RegistryObject<Block> ALUMINUM_ORE_BLOCK = registerBlock("aluminum_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> ARGENTITE_ORE_BLOCK = registerBlock("argentite_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> LEAD_ORE_BLOCK = registerBlock("lead_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> NEPTUNIUM_ORE_BLOCK = registerBlock("neptunium_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> PLUTONIUM_ORE_BLOCK = registerBlock("plutonium_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> RADIONITE_ORE_BLOCK = registerBlock("radionite_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> TIN_ORE_BLOCK = registerBlock("tin_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> URANIUM_ORE_BLOCK = registerBlock("uranium_ore",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()));
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> registeredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, registeredBlock);

@@ -18,6 +18,13 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockItemWithTranslucency(FluidizationBlocks.FROZEN_ACID_BLOCK);
+        blockWithItem(FluidizationBlocks.ALUMINUM_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.LEAD_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.PLUTONIUM_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.RADIONITE_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK);
+        blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK);
     }
 
     private ResourceLocation key(Block block) {
