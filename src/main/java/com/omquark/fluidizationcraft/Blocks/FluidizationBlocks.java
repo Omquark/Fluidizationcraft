@@ -67,11 +67,7 @@ public class FluidizationBlocks {
                     .pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).randomTicks(),
                     FluidizationDamageTypes.URANIUM_DAMAGE));
     public static final RegistryObject<Block> ALUMINUM_ORE_BLOCK = registerBlock("aluminum_ore",
-            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
-                    .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
-                    .requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> ARGENTITE_ORE_BLOCK = registerBlock("argentite_ore",
-            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+            () -> new Block(BlockBehaviour.Properties.of().strength(2f)
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
                     .requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> LEAD_ORE_BLOCK = registerBlock("lead_ore",

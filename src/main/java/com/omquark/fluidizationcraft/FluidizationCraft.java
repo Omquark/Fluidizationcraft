@@ -3,13 +3,18 @@ package com.omquark.fluidizationcraft;
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
+import com.omquark.fluidizationcraft.Entity.AcidShotProjectile;
+import com.omquark.fluidizationcraft.Entity.CryoShotProjectile;
+import com.omquark.fluidizationcraft.Entity.ModEntities;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,6 +32,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -61,14 +67,22 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.VIAL_URANIUM.get());
                 output.accept(FluidizationItems.CELL_ACID.get());
                 output.accept(FluidizationItems.GUN_ACID.get());
+                output.accept(FluidizationItems.GUN_CRYO.get());
                 output.accept(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.ARGENTITE_ORE_BLOCK.get());
+//                output.accept(FluidizationBlocks.ARGENTITE_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.LEAD_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TIN_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
+                output.accept(FluidizationItems.RAW_ALUMINUM.get());
+                output.accept(FluidizationItems.RAW_LEAD.get());
+                output.accept(FluidizationItems.RAW_NEPTUNIUM.get());
+                output.accept(FluidizationItems.RAW_PLUTONIUM.get());
+                output.accept(FluidizationItems.RAW_RADIONITE.get());
+                output.accept(FluidizationItems.RAW_TIN.get());
+                output.accept(FluidizationItems.RAW_URANIUM.get());
             })
             .title(Component.literal("Fluidization Craft"))
             .build());
@@ -84,6 +98,7 @@ public class FluidizationCraft
         FluidizationBlocks.register(modEventBus);
         FluidizationFluidTypes.registerWithWaterRL(modEventBus);
         FluidizationFluids.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -148,6 +163,19 @@ public class FluidizationCraft
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_RADIONITE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_URANIUM.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_URANIUM.get(), RenderType.translucent());
+            EntityRenderers.register(ModEntities.ACID_PROJECTILE.get(), context -> new ArrowRenderer<>(context) {
+                @Override
+                public @NotNull ResourceLocation getTextureLocation(@NotNull AcidShotProjectile p_114482_) {
+                    return new ResourceLocation(FluidizationCraft.MODID, "textures/entity/plasmaball.png");
+                }
+            });
+            EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(), context -> new ArrowRenderer<>(context) {
+                @Override
+                public @NotNull ResourceLocation getTextureLocation(@NotNull CryoShotProjectile p_114482_) {
+                    return new ResourceLocation(FluidizationCraft.MODID, "textures/entity/railgunbolt.png");
+                }
+            });
+
 //            AcidFluid.addInteractions();
         }
     }

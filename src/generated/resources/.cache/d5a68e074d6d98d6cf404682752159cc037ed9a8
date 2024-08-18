@@ -1,6 +1,14 @@
-// 1.20.6	2024-07-07T15:48:50.9340038	Item Models: fluidizationcraft
+// 1.20.6	2024-08-17T23:21:02.7159329	Item Models: fluidizationcraft
 3898be66f455efd486f8db5fc04ce600c490cbed assets/fluidizationcraft/models/item/cell_acid.json
 a697cc1a3ca83641b08a0f2d4391fb8d251337cf assets/fluidizationcraft/models/item/gun_acid.json
+b8ca5208d888e98bb719236615b3df9dcb183bc2 assets/fluidizationcraft/models/item/gun_cryo.json
+3eef8852dad5d87f280203f872ae7f18af15aa5a assets/fluidizationcraft/models/item/raw_aluminum.json
+a5de8ee848c118a178eacd6616457d2bd78ede90 assets/fluidizationcraft/models/item/raw_lead.json
+700d019d987f41743d8e5027a67e094698d315f6 assets/fluidizationcraft/models/item/raw_neptunium.json
+adb33c0d420af781aa1f71525913610a2205aeb9 assets/fluidizationcraft/models/item/raw_plutonium.json
+8639d2a4dca60be05255668d7b6a7e3a8359b8c5 assets/fluidizationcraft/models/item/raw_radionite.json
+ff37480874a8458c896f0042821551cc9a37da41 assets/fluidizationcraft/models/item/raw_tin.json
+f8bb1d1a335eefee53715266ba0edbdc31b40518 assets/fluidizationcraft/models/item/raw_uranium.json
 f92407074782802b7567e58f110996a5290bd887 assets/fluidizationcraft/models/item/vial_acid.json
 5eb3d631ff5c646c82d93581b1af77f4f49d7af6 assets/fluidizationcraft/models/item/vial_cryonite.json
 f0266bce5df39d3fc55bf568f5cfeda6dc75c832 assets/fluidizationcraft/models/item/vial_empty.json

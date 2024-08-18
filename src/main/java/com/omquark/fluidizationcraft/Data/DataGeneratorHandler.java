@@ -31,6 +31,9 @@ public class DataGeneratorHandler {
 
         generator.addProvider(true, new FluidizationBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(true, new FluidizationItemProvider(packOutput, FluidizationCraft.MODID, existingFileHelper));
+        generator.addProvider(true, new ModRecipeProvider(packOutput, event.getLookupProvider()));
+        generator.addProvider(true, ModLootTableProvider.create(packOutput, event.getLookupProvider()));
+        generator.addProvider(true, new ModBlockDataGenerator(packOutput, event.getLookupProvider(), existingFileHelper));
 
         generator.addProvider(event.includeServer(),
                 new RegistriesDatapackGenerator(packOutput,

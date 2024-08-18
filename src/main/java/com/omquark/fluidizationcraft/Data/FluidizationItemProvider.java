@@ -23,9 +23,13 @@ public class FluidizationItemProvider extends ItemModelProvider {
         basicItem(FluidizationItems.VIAL_URANIUM.get());
         basicItem(FluidizationItems.CELL_ACID.get());
         basicItem(FluidizationItems.GUN_ACID.get());
+        basicItem(FluidizationItems.GUN_CRYO.get());
+        basicItem(FluidizationItems.RAW_ALUMINUM.get());
+        basicItem(FluidizationItems.RAW_LEAD.get());
+        basicItem(FluidizationItems.RAW_NEPTUNIUM.get());
+        basicItem(FluidizationItems.RAW_PLUTONIUM.get());
+        basicItem(FluidizationItems.RAW_RADIONITE.get());
+        basicItem(FluidizationItems.RAW_TIN.get());
+        basicItem(FluidizationItems.RAW_URANIUM.get());
     }
-
-//    private void basicItem(RegistryObject<Item> item){
-//        super.basicItem(item.get());
-//    }
 }

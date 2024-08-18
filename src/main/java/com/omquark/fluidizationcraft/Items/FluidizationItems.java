@@ -53,7 +53,24 @@ public class FluidizationItems {
     public static final RegistryObject<Item> CELL_ACID = ITEMS.register("cell_acid",
             () -> new ModCell(new Item.Properties().durability(16).stacksTo(1)));
     public static final RegistryObject<Item> GUN_ACID = ITEMS.register("gun_acid",
-            () -> new ItemGunAcid(new Item.Properties().stacksTo(1)));
+            () -> new ItemGunAcid(new Item.Properties().durability(16).stacksTo(1)));
+    public static final RegistryObject<Item> GUN_CRYO = ITEMS.register("gun_cryo",
+            () -> new ItemGunCryo(new Item.Properties().durability(16).stacksTo(1)));
+
+    public static final RegistryObject<Item> RAW_ALUMINUM = ITEMS.register("raw_aluminum",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_LEAD = ITEMS.register("raw_lead",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_NEPTUNIUM = ITEMS.register("raw_neptunium",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_PLUTONIUM = ITEMS.register("raw_plutonium",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_RADIONITE = ITEMS.register("raw_radionite",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> RAW_URANIUM = ITEMS.register("raw_uranium",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
