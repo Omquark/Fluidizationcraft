@@ -6,6 +6,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -17,14 +18,18 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockItemWithTranslucency(FluidizationBlocks.FROZEN_ACID_BLOCK);
-        blockWithItem(FluidizationBlocks.ALUMINUM_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.LEAD_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.PLUTONIUM_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.RADIONITE_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK);
-        blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK);
+        blockItemWithTranslucency(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
+        blockItemWithTranslucency(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
+
+        blockWithItem(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
+
+        blockWithItem(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.LEAD_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK.get());
+        blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
     }
 
     private ResourceLocation key(Block block) {
@@ -34,16 +39,16 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
         return key(block).getPath();
     }
 
-    private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    private void blockWithItem(Block block) {
+        simpleBlockWithItem(block, cubeAll(block));
     }
 
-    private void blockItemWithTranslucency(RegistryObject<Block> blockRegistryObject){
+    private void blockItemWithTranslucency(Block block){
         models()
                 .cubeAll(
-                        name(blockRegistryObject.get()),
-                        blockTexture(blockRegistryObject.get()))
+                        name(block),
+                        blockTexture(block))
                 .renderType("translucent");
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+        simpleBlockWithItem(block, cubeAll(block));
     }
 }

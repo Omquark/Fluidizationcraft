@@ -4,10 +4,8 @@ import com.omquark.fluidizationcraft.DamageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
-import net.minecraft.world.entity.Crackiness;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -25,7 +23,9 @@ public class FluidizationBlocks {
 
     private FluidizationBlocks() {}
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FluidizationCraft.MODID);
-    public static final RegistryObject<Block> FROZEN_ACID_BLOCK = registerBlock("acid_frozen", () -> new AcidFrozen(null));
+    public static final RegistryObject<Block> FROZEN_ACID_BLOCK = registerBlock("acid_frozen", AcidFrozen::new);
+    public static final RegistryObject<Block> FROZEN_CRYONITE_BLOCK = registerBlock("cryonite_frozen", CryoniteFrozen::new);
+    public static final RegistryObject<Block> DISSOLVINATOR_BLOCK = registerBlock("dissolvinator", DissolvinatorBlock::new);
     public static final RegistryObject<ModLiquidBlock> ACID_BLOCK = registerBlock("acid_block",
             () -> new ModLiquidBlock(FluidizationFluids.SOURCE_ACID, BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GREEN).replaceable().noCollission().strength(100f)

@@ -15,17 +15,17 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class AcidFrozen extends HalfTransparentBlock {
-    public static final MapCodec<AcidFrozen> CODEC = simpleCodec(block -> new AcidFrozen());
+public class CryoniteFrozen extends HalfTransparentBlock {
+    public static final MapCodec<CryoniteFrozen> CODEC = simpleCodec(block -> new CryoniteFrozen());
 
     @Override
-    protected MapCodec<? extends AcidFrozen> codec() {
+    protected MapCodec<? extends CryoniteFrozen> codec() {
         return CODEC;
     }
 
-    public AcidFrozen() {
+    public CryoniteFrozen() {
         super(BlockBehaviour.Properties.of()
-                .mapColor(MapColor.COLOR_LIGHT_GREEN)
+                .mapColor(MapColor.COLOR_LIGHT_BLUE)
                 .sound(SoundType.GLASS)
                 .friction(.95f)
                 .isViewBlocking((blockState, blockGetter, blockPos) -> false)
@@ -35,6 +35,6 @@ public class AcidFrozen extends HalfTransparentBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 1f);
+        entity.hurt(level.damageSources().source(FluidizationDamageTypes.CRYONITE_DAMAGE), 1f);
     }
 }

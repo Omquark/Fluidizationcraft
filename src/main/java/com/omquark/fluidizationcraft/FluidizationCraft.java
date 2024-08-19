@@ -1,7 +1,9 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.Blocks.Entity.ModBlockEntities;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.Client.ModArrowRenderer;
 import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
 import com.omquark.fluidizationcraft.Entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.Entity.CryoShotProjectile;
@@ -9,12 +11,16 @@ import com.omquark.fluidizationcraft.Entity.ModEntities;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.Screen.DissolvinatorScreen;
+import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,7 +38,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -47,7 +52,9 @@ public class FluidizationCraft
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem());
+                output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
+                output.accept(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
+                output.accept(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_NEPTUNIUM.get().getBucket());
@@ -99,6 +106,8 @@ public class FluidizationCraft
         FluidizationFluidTypes.registerWithWaterRL(modEventBus);
         FluidizationFluids.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -163,20 +172,11 @@ public class FluidizationCraft
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_RADIONITE.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_URANIUM.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_URANIUM.get(), RenderType.translucent());
-            EntityRenderers.register(ModEntities.ACID_PROJECTILE.get(), context -> new ArrowRenderer<>(context) {
-                @Override
-                public @NotNull ResourceLocation getTextureLocation(@NotNull AcidShotProjectile p_114482_) {
-                    return new ResourceLocation(FluidizationCraft.MODID, "textures/entity/plasmaball.png");
-                }
-            });
-            EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(), context -> new ArrowRenderer<>(context) {
-                @Override
-                public @NotNull ResourceLocation getTextureLocation(@NotNull CryoShotProjectile p_114482_) {
-                    return new ResourceLocation(FluidizationCraft.MODID, "textures/entity/railgunbolt.png");
-                }
-            });
-
-//            AcidFluid.addInteractions();
+            EntityRenderers.register(ModEntities.ACID_PROJECTILE.get(),
+                    context -> new ModArrowRenderer(context, "textures/entity/plasmaball.png"));
+            EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(),
+                    context -> new ModArrowRenderer(context, "textures/entity/railgunbolt.png"));
+            MenuScreens.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
         }
     }
 }

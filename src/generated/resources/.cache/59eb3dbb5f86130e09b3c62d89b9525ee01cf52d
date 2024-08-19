@@ -1,6 +1,8 @@
-// 1.20.6	2024-08-17T14:30:15.7606154	Loot Tables
+// 1.20.6	2024-08-18T20:53:36.9893704	Loot Tables
 a05bbc5aa2780e04d3d5da72b4b9a57e756259c0 data/fluidizationcraft/loot_tables/blocks/acid_frozen.json
 a193adf83e4d88b167e78b6b2ffb1bd58ad60845 data/fluidizationcraft/loot_tables/blocks/aluminum_ore.json
+65afffe1dc5d12c2c78d3e7f1339c234a76ca3ec data/fluidizationcraft/loot_tables/blocks/cryonite_frozen.json
+25369d245df515802712b118383cdbae96c4cb81 data/fluidizationcraft/loot_tables/blocks/dissolvinator.json
 aba8751bf4d0d76b0c65775cc6c138437b4bc5ae data/fluidizationcraft/loot_tables/blocks/lead_ore.json
 fb65b6e28ca5894dfb4592af511ba2293f3b10a6 data/fluidizationcraft/loot_tables/blocks/neptunium_ore.json
 0d488e0988f693b4b551f08071470eac5c03b089 data/fluidizationcraft/loot_tables/blocks/plutonium_ore.json

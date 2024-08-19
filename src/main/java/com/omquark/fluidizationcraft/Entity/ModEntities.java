@@ -21,6 +21,7 @@ public class ModEntities {
             ENTITY_TYPES.register("cryo_shot", () -> EntityType.Builder.<CryoShotProjectile>of(CryoShotProjectile::new,
                     net.minecraft.world.entity.MobCategory.MISC).build("cryo_shot"));
 
+
     public static void register(IEventBus eventBus){
         ENTITY_TYPES.register(eventBus);
     }

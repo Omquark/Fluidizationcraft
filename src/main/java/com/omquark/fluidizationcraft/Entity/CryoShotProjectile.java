@@ -1,5 +1,6 @@
 package com.omquark.fluidizationcraft.Entity;
 
+import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -49,7 +50,7 @@ public class CryoShotProjectile extends AbstractArrow {
             int rand = random.nextIntBetweenInclusive(0, 99);
             Block spawnedBlock;
             if(rand == 99 && !spawnCryo.get()){
-                spawnedBlock = Blocks.BLUE_ICE;
+                spawnedBlock = FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get();
                 spawnCryo.set(true);
             } else if (rand < 99 && rand >= 80) {
                 spawnedBlock = Blocks.ICE;

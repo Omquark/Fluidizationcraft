@@ -34,6 +34,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> createOreDrop(FluidizationBlocks.URANIUM_ORE_BLOCK.get(), FluidizationItems.RAW_URANIUM.get()));
 
         dropSelf(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
+        dropSelf(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
+        dropSelf(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
     }
 
     @Override

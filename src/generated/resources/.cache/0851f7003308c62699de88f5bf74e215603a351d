@@ -1,5 +1,4 @@
-// 1.20.6	2024-08-17T14:38:52.5117839	Tags for minecraft:block mod id fluidizationcraft
-81050b76715a15143391dae3bbbe9dc9a803014b data/fluidizationcraft/tags/blocks/aluminum_ore.json
+// 1.20.6	2024-08-18T20:53:36.9913766	Tags for minecraft:block mod id fluidizationcraft
 c8bb2828cb2ebcc0183ea4162fb8babae69eaa18 data/forge/tags/blocks/ores.json
-c8bb2828cb2ebcc0183ea4162fb8babae69eaa18 data/minecraft/tags/blocks/mineable/pickaxe.json
+9f5aa5d591d104dd877223dd1a4496697fe23d5d data/minecraft/tags/blocks/mineable/pickaxe.json
 c8bb2828cb2ebcc0183ea4162fb8babae69eaa18 data/minecraft/tags/blocks/needs_iron_tool.json

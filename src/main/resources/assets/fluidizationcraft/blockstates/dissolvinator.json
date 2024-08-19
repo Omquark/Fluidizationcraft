@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "fluidizationcraft:blocks/dissolvinator_sides",
-        "front": "fluidizationcraft:blocks/dissolvinator_front_inactive",
-        "side": "fluidizationcraft:blocks/dissolvinator_sides"
-    }
-}
