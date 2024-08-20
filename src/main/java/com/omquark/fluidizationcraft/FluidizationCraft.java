@@ -5,13 +5,12 @@ import com.omquark.fluidizationcraft.Blocks.Entity.ModBlockEntities;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Client.ModArrowRenderer;
 import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
-import com.omquark.fluidizationcraft.Entity.AcidShotProjectile;
-import com.omquark.fluidizationcraft.Entity.CryoShotProjectile;
 import com.omquark.fluidizationcraft.Entity.ModEntities;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
-import com.omquark.fluidizationcraft.Screen.DissolvinatorScreen;
+import com.omquark.fluidizationcraft.Screen.Dissolvinator.DissolvinatorScreen;
+import com.omquark.fluidizationcraft.Screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -19,8 +18,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -177,6 +174,7 @@ public class FluidizationCraft
             EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(),
                     context -> new ModArrowRenderer(context, "textures/entity/railgunbolt.png"));
             MenuScreens.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
+            MenuScreens.register(ModMenuTypes.FLUID_SHOOTER_MENU.get(), FluidShooterScreen::new);
         }
     }
 }

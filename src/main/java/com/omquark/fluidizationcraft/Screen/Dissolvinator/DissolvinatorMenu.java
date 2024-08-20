@@ -1,7 +1,9 @@
-package com.omquark.fluidizationcraft.Screen;
+package com.omquark.fluidizationcraft.Screen.Dissolvinator;
 
 import com.omquark.fluidizationcraft.Blocks.Entity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -43,7 +45,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             inputSlot = new SlotItemHandler(iItemHandler, 0, 55, 24);
-            outputSlot = new SlotItemHandler(iItemHandler, 1, 105, 24);
+            outputSlot = new SlotItemHandler(iItemHandler, 1, 114, 24);
             inFuelSlot = new SlotItemHandler(iItemHandler, 2, 63, 57);
             outFuelSlot = new SlotItemHandler(iItemHandler, 3, 99, 57);
             this.addSlot(inputSlot);
@@ -116,6 +118,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
+
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
@@ -125,14 +128,17 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 9; j++){
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                FluidizationCraft.LOGGER.debug("Adding player inventory");
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 9 + j * 18, 85 + i * 18));
+//                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotBar(Inventory playerInventory){
         for(int i = 0; i < 9; i++){
-                this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+                this.addSlot(new Slot(playerInventory, i, 9 + i * 18, 142));
+//                this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

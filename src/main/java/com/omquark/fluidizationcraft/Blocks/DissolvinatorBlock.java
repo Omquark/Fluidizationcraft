@@ -78,8 +78,8 @@ public class DissolvinatorBlock extends BaseEntityBlock {
     protected void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState newState, boolean isMoving) {
         if(state.getBlock() != newState.getBlock()){
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof DissolvinatorBlockEntity){
-                ((DissolvinatorBlockEntity) blockEntity).drops();
+            if(blockEntity instanceof DissolvinatorBlockEntity dissolvinatorEntity){
+                dissolvinatorEntity.drops();
             }
         }
         super.onRemove(state, level, blockPos, newState, isMoving);

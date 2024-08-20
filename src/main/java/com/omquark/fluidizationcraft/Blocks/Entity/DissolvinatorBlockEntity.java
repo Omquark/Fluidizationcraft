@@ -1,6 +1,7 @@
 package com.omquark.fluidizationcraft.Blocks.Entity;
 
-import com.omquark.fluidizationcraft.Screen.DissolvinatorMenu;
+import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.Screen.Dissolvinator.DissolvinatorMenu;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -23,7 +24,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.windows.INPUT;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvider {
     private static final int SLOT_COUNT = 4;
-    private final ItemStackHandler itemHandler = new ItemStackHandler(SLOT_COUNT);
+    private final ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
 
     private final static int INPUT_SLOT = 0;
     private final static int OUTPUT_SLOT = 1;
@@ -52,10 +52,10 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case (INPUT_SLOT) -> DissolvinatorBlockEntity.this.progress;
-                    case (OUTPUT_SLOT) -> DissolvinatorBlockEntity.this.maxProgress;
-                    case (INPUT_FUEL_SLOT) -> DissolvinatorBlockEntity.this.fuelMb;
-                    case (OUTPUT_FUEL_SLOT) -> DissolvinatorBlockEntity.this.maxFuelMb;
+                    case (0) -> DissolvinatorBlockEntity.this.progress;
+                    case (1) -> DissolvinatorBlockEntity.this.maxProgress;
+                    case (2) -> DissolvinatorBlockEntity.this.fuelMb;
+                    case (3) -> DissolvinatorBlockEntity.this.maxFuelMb;
                     default -> 0;
                 };
             }
@@ -63,10 +63,10 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
             @Override
             public void set(int index, int value) {
                 switch (index){
-                    case(INPUT_SLOT) : DissolvinatorBlockEntity.this.progress = value;
-                    case(OUTPUT_SLOT) : DissolvinatorBlockEntity.this.maxProgress = value;
-                    case(INPUT_FUEL_SLOT) : DissolvinatorBlockEntity.this.fuelMb = value;
-                    case(OUTPUT_FUEL_SLOT) : DissolvinatorBlockEntity.this.maxFuelMb = value;
+                    case(0) : DissolvinatorBlockEntity.this.progress = value;
+                    case(1) : DissolvinatorBlockEntity.this.maxProgress = value;
+                    case(2) : DissolvinatorBlockEntity.this.fuelMb = value;
+                    case(3) : DissolvinatorBlockEntity.this.maxFuelMb = value;
                 }
             }
 
@@ -88,7 +88,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public void onLoad() {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        lazyItemHandler = LazyOptional.of(() -> itemStackHandler);
 
     }
 
@@ -104,9 +104,9 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for(int i = 0; i < itemHandler.getSlots(); i++){
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        SimpleContainer inventory = new SimpleContainer(itemStackHandler.getSlots());
+        for(int i = 0; i < itemStackHandler.getSlots(); i++){
+            inventory.setItem(i, itemStackHandler.getStackInSlot(i));
         }
 
         if(this.level != null)
@@ -116,19 +116,20 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        FluidizationCraft.LOGGER.debug("Creating DissolvinatorMenu");
         return new DissolvinatorMenu(containerId, playerInventory, this, this.data);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        tag.put("inventory", itemHandler.serializeNBT(provider));
+        tag.put("inventory", itemStackHandler.serializeNBT(provider));
         tag.putInt("dissolvinator.progress", progress);
         tag.putInt("dissolvinator.fuelMb", fuelMb);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        itemHandler.deserializeNBT(provider, tag);
+        itemStackHandler.deserializeNBT(provider, tag);
         progress = tag.getInt("dissolvinator.progress");
         fuelMb = tag.getInt("dissolvinator.fuelMb");
     }

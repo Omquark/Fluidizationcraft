@@ -1,7 +1,8 @@
-package com.omquark.fluidizationcraft.Screen;
+package com.omquark.fluidizationcraft.Screen.FluidShooter;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,10 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class DissolvinatorScreen extends AbstractContainerScreen<DissolvinatorMenu> {
+@MethodsReturnNonnullByDefault
+public class FluidShooterScreen extends AbstractContainerScreen<FluidShooterMenu> {
+
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(FluidizationCraft.MODID, "textures/gui/dissolvinator.png");
-    public DissolvinatorScreen(DissolvinatorMenu menu, Inventory inventory, Component component) {
+            new ResourceLocation(FluidizationCraft.MODID, "textures/gui/fluid_shooter.png");
+
+    public FluidShooterScreen(FluidShooterMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -36,17 +40,15 @@ public class DissolvinatorScreen extends AbstractContainerScreen<DissolvinatorMe
 
         graphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
-        renderProgressArrow(graphics, x, y);
+        renderTank(graphics, x, y);
     }
 
-    private void renderProgressArrow(GuiGraphics graphics, int x, int y){
-        if(menu.isCrafting()){
-            graphics.blit(TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress());
-        }
+    private void renderTank(GuiGraphics graphics, int x, int y) {
+//        graphics.blit(TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress());
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta){
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderMenuBackground(graphics);
         super.render(graphics, mouseX, mouseY, delta);
         renderTooltip(graphics, mouseX, mouseY);
