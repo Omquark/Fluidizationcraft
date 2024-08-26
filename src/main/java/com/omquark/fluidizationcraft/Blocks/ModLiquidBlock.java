@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Blocks;
+package com.omquark.fluidizationcraft.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;

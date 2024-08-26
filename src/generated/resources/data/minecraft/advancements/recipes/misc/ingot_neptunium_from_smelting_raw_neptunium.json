@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_raw_aluminum": {
+    "has_raw_neptunium": {
       "conditions": {
         "items": [
           {
-            "items": "fluidizationcraft:raw_aluminum"
+            "items": "fluidizationcraft:raw_neptunium"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:raw_aluminum_from_smelting_raw_aluminum"
+        "recipe": "minecraft:ingot_neptunium_from_smelting_raw_neptunium"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_raw_aluminum"
+      "has_raw_neptunium"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:raw_aluminum_from_smelting_raw_aluminum"
+      "minecraft:ingot_neptunium_from_smelting_raw_neptunium"
     ]
   }
 }

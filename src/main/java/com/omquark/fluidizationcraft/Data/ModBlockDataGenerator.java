@@ -1,6 +1,6 @@
-package com.omquark.fluidizationcraft.Data;
+package com.omquark.fluidizationcraft.data;
 
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

@@ -1,6 +1,6 @@
-package com.omquark.fluidizationcraft.Data;
+package com.omquark.fluidizationcraft.data;
 
-import com.omquark.fluidizationcraft.DamageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.core.Cloner;
 import net.minecraft.core.HolderLookup;

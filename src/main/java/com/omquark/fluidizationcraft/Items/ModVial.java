@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.Items;
 
-import com.omquark.fluidizationcraft.Fluids.ModFluid;
+import com.omquark.fluidizationcraft.fluids.ModFluid;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;

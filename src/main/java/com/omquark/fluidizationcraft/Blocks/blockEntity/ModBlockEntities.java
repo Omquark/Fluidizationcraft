@@ -1,6 +1,6 @@
-package com.omquark.fluidizationcraft.Blocks.Entity;
+package com.omquark.fluidizationcraft.blocks.blockEntity;
 
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;

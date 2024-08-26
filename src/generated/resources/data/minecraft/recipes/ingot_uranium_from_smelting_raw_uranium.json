@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "raw_uranium",
+  "ingredient": {
+    "item": "fluidizationcraft:raw_uranium"
+  },
+  "result": {
+    "id": "fluidizationcraft:ingot_uranium"
+  }
+}

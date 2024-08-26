@@ -1,7 +1,7 @@
-package com.omquark.fluidizationcraft.Blocks.Entity;
+package com.omquark.fluidizationcraft.blocks.blockEntity;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.Screen.Dissolvinator.DissolvinatorMenu;
+import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -24,6 +24,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.core.Direction;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -78,7 +79,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable net.minecraft.core.Direction side) {
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER){
             return lazyItemHandler.cast();
         }

@@ -1,8 +1,8 @@
 package com.omquark.fluidizationcraft.Items;
 
-import com.omquark.fluidizationcraft.Entity.AcidShotProjectile;
+import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.Screen.FluidShooter.FluidShooterMenu;
+import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemGunAcid extends Item implements MenuProvider {
+public class ItemGunFluid extends Item implements MenuProvider {
 
     protected final ContainerData data;
     private final static int SLOT_COUNT = 2;
@@ -32,14 +31,14 @@ public class ItemGunAcid extends Item implements MenuProvider {
     private int fuelMaxMb = 16000;
     ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
 
-    public ItemGunAcid(Properties properties) {
+    public ItemGunFluid(Properties properties) {
         super(properties);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case (0) -> ItemGunAcid.this.fuelMb;
-                    case (1) -> ItemGunAcid.this.fuelMaxMb;
+                    case (0) -> ItemGunFluid.this.fuelMb;
+                    case (1) -> ItemGunFluid.this.fuelMaxMb;
                     default -> 0;
                 };
             }
@@ -47,8 +46,8 @@ public class ItemGunAcid extends Item implements MenuProvider {
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case (0) -> ItemGunAcid.this.fuelMb = value;
-                    case (1) -> ItemGunAcid.this.fuelMaxMb = value;
+                    case (0) -> ItemGunFluid.this.fuelMb = value;
+                    case (1) -> ItemGunFluid.this.fuelMaxMb = value;
                 }
             }
 

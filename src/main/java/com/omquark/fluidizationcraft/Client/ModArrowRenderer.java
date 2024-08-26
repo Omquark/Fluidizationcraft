@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Client;
+package com.omquark.fluidizationcraft.client;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.MethodsReturnNonnullByDefault;

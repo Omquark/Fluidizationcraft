@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Data;
+package com.omquark.fluidizationcraft.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

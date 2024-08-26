@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Fluids;
+package com.omquark.fluidizationcraft.fluids;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
@@ -83,8 +83,8 @@ public class ModFluidType extends FluidType {
             @Override
             public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
                                         float nearDistance, float farDistance, com.mojang.blaze3d.shaders.FogShape shape) {
-                RenderSystem.setShaderFogStart(1f);
-                RenderSystem.setShaderFogEnd(6f);
+                RenderSystem.setShaderFogStart(6f);
+                RenderSystem.setShaderFogEnd(10f);
             }
         });
     }

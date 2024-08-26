@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Util;
+package com.omquark.fluidizationcraft.util;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.resources.ResourceLocation;

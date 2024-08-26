@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Data;
+package com.omquark.fluidizationcraft.data;
 
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.data.PackOutput;
@@ -31,5 +31,12 @@ public class FluidizationItemProvider extends ItemModelProvider {
         basicItem(FluidizationItems.RAW_RADIONITE.get());
         basicItem(FluidizationItems.RAW_TIN.get());
         basicItem(FluidizationItems.RAW_URANIUM.get());
+        basicItem(FluidizationItems.INGOT_ALUMINUM.get());
+        basicItem(FluidizationItems.INGOT_LEAD.get());
+        basicItem(FluidizationItems.INGOT_NEPTUNIUM.get());
+        basicItem(FluidizationItems.INGOT_PLUTONIUM.get());
+        basicItem(FluidizationItems.INGOT_RADIONITE.get());
+        basicItem(FluidizationItems.INGOT_TIN.get());
+        basicItem(FluidizationItems.INGOT_URANIUM.get());
     }
 }

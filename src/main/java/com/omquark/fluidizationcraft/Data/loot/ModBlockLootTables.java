@@ -1,6 +1,6 @@
-package com.omquark.fluidizationcraft.Data.loot;
+package com.omquark.fluidizationcraft.data.loot;
 
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -36,6 +36,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
         dropSelf(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
         dropSelf(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
+        dropSelf(FluidizationBlocks.REINFORCED_GLASS.get());
+        dropSelf(FluidizationBlocks.ACID_TNT.get());
     }
 
     @Override

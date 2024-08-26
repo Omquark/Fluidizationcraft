@@ -1,8 +1,22 @@
 1.20.x Changelog
 50.1
 ====
- - 50.1.0 1.20.6 RB 1
-          https://forums.minecraftforge.net/topic/149458-forge-501-minecraft-1206/
+ - 50.1.12 Fix `onPlaceItemIntoWorld` always resetting item stack when in creative mode (#10048)
+ - 50.1.11 Fix matrix stack translations for `RenderHighlightEvent` (#10051)
+ - 50.1.10 Make HangingSignBlockEntity useable with custom BlockEntityTypes. #10038
+ - 50.1.9  Choose default JarJar mod file type based on parent JAR Closes #9939 (#10021)
+           Co-authored-by: thedarkcolour <30441001+thedarkcolour@users.noreply.github.com>
+ - 50.1.8  Fixed falling block entities not rendering as moving blocks (#10006)
+           Co-authored-by: Ven <tudurap.com@gmail.com>
+ - 50.1.7  Fix conditional checking swallowing decoding errors when loading registry entries from datapacks. Fixes #9995
+ - 50.1.6  Fix ClientTickEvent not firing properly.
+ - 50.1.5  Change tick event to have pre/post classes (#9890)
+ - 50.1.4  Fix Bogged and Wolf armor not being shearable by custom shears. Closes #10005
+ - 50.1.3  Cleanup FML Bindings (#10004)
+ - 50.1.2  Fix NPE when calling ForgeHooks.getDefaultCreatorModId(ItemStack) on Spawn Eggs. Closes #10002
+ - 50.1.1  Fix boat travel distance being incorrect. Closes #9997
+ - 50.1.0  1.20.6 RB 1
+           https://forums.minecraftforge.net/topic/149458-forge-501-minecraft-1206/
 
 50.0
 ====

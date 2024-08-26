@@ -2,6 +2,8 @@
   "block.fluidizationcraft.acid_frozen": "Frozen Acid",
   "block.fluidizationcraft.cryonite_frozen": "Frozen Cryonite",
   "block.fluidizationcraft.dissolvinator": "Dissolvinator",
+  "block.fluidizationcraft.reinforced_glass": "Reinforced Glass",
+  "block.fluidizationcraft.acid_tnt": "Acid TNT",
 
   "block.fluidizationcraft.aluminum_ore": "Aluminum Ore",
   "block.fluidizationcraft.lead_ore": "Lead Ore",
@@ -22,6 +24,14 @@
   "item.fluidizationcraft.raw_radionite": "Raw Radionite",
   "item.fluidizationcraft.raw_tin": "Raw Tin",
   "item.fluidizationcraft.raw_uranium": "Raw Uranium",
+
+  "item.fluidizationcraft.ingot_aluminum": "Ingot Aluminum",
+  "item.fluidizationcraft.ingot_lead": "Ingot Lead",
+  "item.fluidizationcraft.ingot_neptunium": "Ingot Neptunium",
+  "item.fluidizationcraft.ingot_plutonium": "Ingot Plutonium",
+  "item.fluidizationcraft.ingot_radionite": "Ingot Radionite",
+  "item.fluidizationcraft.ingot_tin": "Ingot Tin",
+  "item.fluidizationcraft.ingot_uranium": "Ingot Uranium",
 
   "item.fluidizationcraft.bucket_acid": "Acid Bucket",
   "item.fluidizationcraft.bucket_cryonite": "Cryonite Bucket",

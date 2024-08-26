@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_ingots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_reinforced_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:reinforced_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "fluidizationcraft:vial_empty"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_reinforced_glass",
+      "has_iron_ingots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fluidizationcraft:vial_empty"
+    ]
+  }
+}

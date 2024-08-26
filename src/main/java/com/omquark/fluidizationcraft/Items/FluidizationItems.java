@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.Items;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -53,7 +53,7 @@ public class FluidizationItems {
     public static final RegistryObject<Item> CELL_ACID = ITEMS.register("cell_acid",
             () -> new ModCell(new Item.Properties().durability(16).stacksTo(1)));
     public static final RegistryObject<Item> GUN_ACID = ITEMS.register("gun_acid",
-            () -> new ItemGunAcid(new Item.Properties().durability(16).stacksTo(1)));
+            () -> new ItemGunFluid(new Item.Properties().durability(16).stacksTo(1)));
     public static final RegistryObject<Item> GUN_CRYO = ITEMS.register("gun_cryo",
             () -> new ItemGunCryo(new Item.Properties().durability(16).stacksTo(1)));
 
@@ -70,6 +70,20 @@ public class FluidizationItems {
     public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_URANIUM = ITEMS.register("raw_uranium",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_ALUMINUM = ITEMS.register("ingot_aluminum",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_LEAD = ITEMS.register("ingot_lead",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_NEPTUNIUM = ITEMS.register("ingot_neptunium",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_PLUTONIUM = ITEMS.register("ingot_plutonium",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_RADIONITE = ITEMS.register("ingot_radionite",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_TIN = ITEMS.register("ingot_tin",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INGOT_URANIUM = ITEMS.register("ingot_uranium",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

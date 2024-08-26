@@ -1,7 +1,14 @@
-// 1.20.6	2024-08-18T20:53:36.988365	Item Models: fluidizationcraft
+// 1.20.6	2024-08-25T17:41:08.5787754	Item Models: fluidizationcraft
 3898be66f455efd486f8db5fc04ce600c490cbed assets/fluidizationcraft/models/item/cell_acid.json
 a697cc1a3ca83641b08a0f2d4391fb8d251337cf assets/fluidizationcraft/models/item/gun_acid.json
 b8ca5208d888e98bb719236615b3df9dcb183bc2 assets/fluidizationcraft/models/item/gun_cryo.json
+cbff3c9bbd5ed6533267654dfa3e3d5cd644bb79 assets/fluidizationcraft/models/item/ingot_aluminum.json
+af1799556133d6c6e8186870c110a4671ccd7e46 assets/fluidizationcraft/models/item/ingot_lead.json
+51e0fe90e7c0e188644501fdf5a32f43a78405e1 assets/fluidizationcraft/models/item/ingot_neptunium.json
+e728d87c21877d7bf6b0332f70bcdca0244a9f90 assets/fluidizationcraft/models/item/ingot_plutonium.json
+41e0073c7f1a37a51e08d15ac508aa69a6397218 assets/fluidizationcraft/models/item/ingot_radionite.json
+f3eb100a21e5aea6a4c89702952a3f874df0ac8e assets/fluidizationcraft/models/item/ingot_tin.json
+fa8450dc711b0466e027f8bc93c471a86ffd0b3a assets/fluidizationcraft/models/item/ingot_uranium.json
 3eef8852dad5d87f280203f872ae7f18af15aa5a assets/fluidizationcraft/models/item/raw_aluminum.json
 a5de8ee848c118a178eacd6616457d2bd78ede90 assets/fluidizationcraft/models/item/raw_lead.json
 700d019d987f41743d8e5027a67e094698d315f6 assets/fluidizationcraft/models/item/raw_neptunium.json

@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Fluids;
+package com.omquark.fluidizationcraft.fluids;
 
 /**
  * marker interface for Fluidization specific Fluids

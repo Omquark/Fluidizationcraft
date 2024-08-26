@@ -1,7 +1,6 @@
 package com.omquark.fluidizationcraft.Items;
 
-import com.omquark.fluidizationcraft.Entity.AcidShotProjectile;
-import com.omquark.fluidizationcraft.Entity.CryoShotProjectile;
+import com.omquark.fluidizationcraft.entity.CryoShotProjectile;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

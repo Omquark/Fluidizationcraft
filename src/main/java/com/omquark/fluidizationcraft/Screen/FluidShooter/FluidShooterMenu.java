@@ -1,6 +1,6 @@
-package com.omquark.fluidizationcraft.Screen.FluidShooter;
+package com.omquark.fluidizationcraft.screen.FluidShooter;
 
-import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
+import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,9 +35,11 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotBar(inv);
 
+        Slot inputSlot = new SlotItemHandler(itemStackHandler, INPUT_SLOT, 47, 37);
+        Slot outputSlot = new SlotItemHandler(itemStackHandler, OUTPUT_SLOT, 115, 37);
 
-        this.addSlot(new SlotItemHandler(itemStackHandler, INPUT_SLOT, 47, 37));
-        this.addSlot(new SlotItemHandler(itemStackHandler, OUTPUT_SLOT, 115, 37));
+        this.addSlot(inputSlot);
+        this.addSlot(outputSlot);
 
         addDataSlots(data);
     }

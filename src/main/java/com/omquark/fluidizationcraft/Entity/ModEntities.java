@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Entity;
+package com.omquark.fluidizationcraft.entity;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.world.entity.EntityType;

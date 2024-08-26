@@ -1,7 +1,8 @@
-package com.omquark.fluidizationcraft.Blocks;
+package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.omquark.fluidizationcraft.DamageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -11,10 +12,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class AcidFrozen extends HalfTransparentBlock {
     public static final MapCodec<AcidFrozen> CODEC = simpleCodec(block -> new AcidFrozen());
 
@@ -29,12 +30,12 @@ public class AcidFrozen extends HalfTransparentBlock {
                 .sound(SoundType.GLASS)
                 .friction(.95f)
                 .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                .noOcclusion()
-                .ignitedByLava());
+                .noOcclusion());
     }
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 1f);
+        super.stepOn(level, pos, state, entity);
     }
 }

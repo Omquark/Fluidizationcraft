@@ -1,7 +1,6 @@
-package com.omquark.fluidizationcraft.Entity;
+package com.omquark.fluidizationcraft.entity;
 
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;

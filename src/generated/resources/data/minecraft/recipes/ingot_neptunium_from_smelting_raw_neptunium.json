@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "raw_neptunium",
+  "ingredient": {
+    "item": "fluidizationcraft:raw_neptunium"
+  },
+  "result": {
+    "id": "fluidizationcraft:ingot_neptunium"
+  }
+}

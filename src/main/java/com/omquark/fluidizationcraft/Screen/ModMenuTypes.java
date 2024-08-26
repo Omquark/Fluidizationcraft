@@ -1,8 +1,8 @@
-package com.omquark.fluidizationcraft.Screen;
+package com.omquark.fluidizationcraft.screen;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.Screen.Dissolvinator.DissolvinatorMenu;
-import com.omquark.fluidizationcraft.Screen.FluidShooter.FluidShooterMenu;
+import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
+import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;

@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.DamageTypes;
+package com.omquark.fluidizationcraft.damageTypes;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.core.registries.Registries;

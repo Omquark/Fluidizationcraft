@@ -1,17 +1,17 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
-import com.omquark.fluidizationcraft.Blocks.Entity.ModBlockEntities;
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.Client.ModArrowRenderer;
-import com.omquark.fluidizationcraft.Data.DataGeneratorHandler;
-import com.omquark.fluidizationcraft.Entity.ModEntities;
-import com.omquark.fluidizationcraft.Fluids.FluidizationFluidTypes;
-import com.omquark.fluidizationcraft.Fluids.FluidizationFluids;
+import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.client.ModArrowRenderer;
+import com.omquark.fluidizationcraft.data.DataGeneratorHandler;
+import com.omquark.fluidizationcraft.entity.ModEntities;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
-import com.omquark.fluidizationcraft.Screen.Dissolvinator.DissolvinatorScreen;
-import com.omquark.fluidizationcraft.Screen.FluidShooter.FluidShooterScreen;
-import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
+import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
+import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
+import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -80,6 +80,8 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TIN_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
+                output.accept(FluidizationBlocks.REINFORCED_GLASS.get());
+                output.accept(FluidizationBlocks.ACID_TNT.get());
                 output.accept(FluidizationItems.RAW_ALUMINUM.get());
                 output.accept(FluidizationItems.RAW_LEAD.get());
                 output.accept(FluidizationItems.RAW_NEPTUNIUM.get());
@@ -87,6 +89,14 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.RAW_RADIONITE.get());
                 output.accept(FluidizationItems.RAW_TIN.get());
                 output.accept(FluidizationItems.RAW_URANIUM.get());
+                output.accept(FluidizationItems.INGOT_ALUMINUM.get());
+                output.accept(FluidizationItems.INGOT_LEAD.get());
+                output.accept(FluidizationItems.INGOT_NEPTUNIUM.get());
+                output.accept(FluidizationItems.INGOT_PLUTONIUM.get());
+                output.accept(FluidizationItems.INGOT_RADIONITE.get());
+                output.accept(FluidizationItems.INGOT_TIN.get());
+                output.accept(FluidizationItems.INGOT_URANIUM.get());
+
             })
             .title(Component.literal("Fluidization Craft"))
             .build());
@@ -175,6 +185,7 @@ public class FluidizationCraft
                     context -> new ModArrowRenderer(context, "textures/entity/railgunbolt.png"));
             MenuScreens.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
             MenuScreens.register(ModMenuTypes.FLUID_SHOOTER_MENU.get(), FluidShooterScreen::new);
+            FluidizationFluids.createInteractions();
         }
     }
 }

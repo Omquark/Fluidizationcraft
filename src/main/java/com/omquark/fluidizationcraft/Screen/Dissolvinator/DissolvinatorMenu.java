@@ -1,9 +1,9 @@
-package com.omquark.fluidizationcraft.Screen.Dissolvinator;
+package com.omquark.fluidizationcraft.screen.Dissolvinator;
 
-import com.omquark.fluidizationcraft.Blocks.Entity.DissolvinatorBlockEntity;
-import com.omquark.fluidizationcraft.Blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.Screen.ModMenuTypes;
+import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

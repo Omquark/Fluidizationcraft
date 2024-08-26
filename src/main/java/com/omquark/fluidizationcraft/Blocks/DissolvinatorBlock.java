@@ -1,8 +1,8 @@
-package com.omquark.fluidizationcraft.Blocks;
+package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.omquark.fluidizationcraft.Blocks.Entity.DissolvinatorBlockEntity;
-import com.omquark.fluidizationcraft.Blocks.Entity.ModBlockEntities;
+import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
+import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -10,8 +10,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -28,12 +33,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class DissolvinatorBlock extends BaseEntityBlock {
     public static final MapCodec<DissolvinatorBlock> CODEC = simpleCodec(block -> new DissolvinatorBlock());
+//    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 //    public static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     public DissolvinatorBlock() {
         super(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.STONE)
-                .sound(SoundType.METAL)
-                .noOcclusion());
+                .sound(SoundType.METAL));
     }
 
     @Override
@@ -42,6 +47,16 @@ public class DissolvinatorBlock extends BaseEntityBlock {
     }
 
 //    @Override
+//    protected VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+//        return SHAPE;
+//    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
+    }
+
+    //    @Override
 //    protected VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos blockPos, CollisionContext collisionContext) {
 //        return SHAPE;
 //    }
