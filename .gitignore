@@ -16,10 +16,13 @@ out
 # gradle
 build
 .gradle
+.gradle/*
 
 # other
 eclipse
 run
+runs
+runs/*
 run-data
 run-data/*
 
