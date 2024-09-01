@@ -3,55 +3,60 @@ package com.omquark.fluidizationcraft.fluids;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+//import net.minecraftforge.eventbus.api.IEventBus;
+//import net.minecraftforge.fluids.FluidType;
+//import net.minecraftforge.registries.DeferredRegister;
+//import net.minecraftforge.registries.ForgeRegistries;
+//import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.HashMap;
 
 public class FluidizationFluids {
     public static final DeferredRegister<Fluid> FLUIDS =
-            DeferredRegister.create(ForgeRegistries.FLUIDS, FluidizationCraft.MODID);
+            DeferredRegister.create(BuiltInRegistries.FLUID, FluidizationCraft.MODID);
 
-    public static final RegistryObject<ModFluid.Source> SOURCE_ACID = FLUIDS.register("acid_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_ACID = FLUIDS.register("acid_fluid",
             () -> new ModFluid.Source(FluidizationFluids.ACID_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_ACID = FLUIDS.register("acid_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_ACID = FLUIDS.register("acid_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.ACID_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_CRYONITE = FLUIDS.register("cryonite_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_CRYONITE = FLUIDS.register("cryonite_fluid",
             () -> new ModFluid.Source(FluidizationFluids.CRYONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_CRYONITE = FLUIDS.register("cryonite_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_CRYONITE = FLUIDS.register("cryonite_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.CRYONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_NEPTUNIUM = FLUIDS.register("neptunium_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_NEPTUNIUM = FLUIDS.register("neptunium_fluid",
             () -> new ModFluid.Source(FluidizationFluids.NEPTUNIUM_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_NEPTUNIUM = FLUIDS.register("neptunium_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_NEPTUNIUM = FLUIDS.register("neptunium_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.NEPTUNIUM_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_NETHERFLOW = FLUIDS.register("netherflow_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_NETHERFLOW = FLUIDS.register("netherflow_fluid",
             () -> new ModFluid.Source(FluidizationFluids.NETHERFLOW_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_NETHERFLOW = FLUIDS.register("netherflow_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_NETHERFLOW = FLUIDS.register("netherflow_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.NETHERFLOW_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_PLUTONIUM = FLUIDS.register("plutonium_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_PLUTONIUM = FLUIDS.register("plutonium_fluid",
             () -> new ModFluid.Source(FluidizationFluids.PLUTONIUM_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_PLUTONIUM = FLUIDS.register("plutonium_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_PLUTONIUM = FLUIDS.register("plutonium_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.PLUTONIUM_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_PYRONITE = FLUIDS.register("pyronite_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_PYRONITE = FLUIDS.register("pyronite_fluid",
             () -> new ModFluid.Source(FluidizationFluids.PYRONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_PYRONITE = FLUIDS.register("pyronite_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_PYRONITE = FLUIDS.register("pyronite_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.PYRONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_RADIONITE = FLUIDS.register("radionite_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_RADIONITE = FLUIDS.register("radionite_fluid",
             () -> new ModFluid.Source(FluidizationFluids.RADIONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_RADIONITE = FLUIDS.register("radionite_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_RADIONITE = FLUIDS.register("radionite_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.RADIONITE_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Source> SOURCE_URANIUM = FLUIDS.register("uranium_fluid",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_URANIUM = FLUIDS.register("uranium_fluid",
             () -> new ModFluid.Source(FluidizationFluids.URANIUM_FLUID_PROPERTIES));
-    public static final RegistryObject<ModFluid.Flowing> FLOWING_URANIUM = FLUIDS.register("uranium_flowing",
+    public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_URANIUM = FLUIDS.register("uranium_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.URANIUM_FLUID_PROPERTIES));
     public static final ModFluid.ModProperties ACID_FLUID_PROPERTIES = (ModFluid.ModProperties) new ModFluid.ModProperties(
             FluidizationFluidTypes.ACID_FLUID_TYPE, SOURCE_ACID, FLOWING_ACID)

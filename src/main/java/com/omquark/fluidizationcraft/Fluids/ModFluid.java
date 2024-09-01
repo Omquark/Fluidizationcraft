@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.fluids;
 
-import com.omquark.fluidizationcraft.FluidizationCraft;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -8,24 +8,34 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
+import net.neoforged.neoforge.fluids.FluidType;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import static net.minecraft.world.level.material.FlowingFluid.LEVEL;
+
 @ParametersAreNonnullByDefault
-public abstract class ModFluid extends ForgeFlowingFluid {
+@MethodsReturnNonnullByDefault
+public abstract class ModFluid extends BaseFlowingFluid {
 
     private static final int BLOCK_INTERACTION_CHANCE = 15;
+    private Block fluidBlock;
 
     //Used to determine block interactions. This depends on the children to define this and add interactions.
     //Used for blocks vs fluids, not Fluids vs Fluids
@@ -58,6 +68,11 @@ public abstract class ModFluid extends ForgeFlowingFluid {
         super.tick(level, blockPos, state);
     }
 
+    @Override
+    protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> pBuilder) {
+        pBuilder.add(LEVEL).add(FALLING);
+    }
+
     public void setFluidInteractions(HashMap<FluidType, BlockState> fluidInteractions) {
         this.fluidInteractions = fluidInteractions;
     }
@@ -75,7 +90,6 @@ public abstract class ModFluid extends ForgeFlowingFluid {
     protected boolean isRandomlyTicking() {
         return true;
     }
-
 
 
     protected void checkFluidInteractions(Level level, BlockPos pos){
@@ -104,8 +118,42 @@ public abstract class ModFluid extends ForgeFlowingFluid {
         });
     }
 
+    public static class Flowing extends ModFluid{
 
-    public static class ModProperties extends ForgeFlowingFluid.Properties {
+        protected Flowing(ModProperties props) {
+            super(props);
+        }
+
+        @Override
+        public boolean isSource(FluidState pState) {
+            return false;
+        }
+
+        @Override
+        public int getAmount(FluidState pState) {
+            return pState.getValue(LEVEL);
+        }
+    }
+
+    public static class Source extends ModFluid {
+
+        protected Source(ModProperties props) {
+            super(props);
+        }
+
+        @Override
+        public boolean isSource(FluidState pState) {
+            return true;
+        }
+
+        @Override
+        public int getAmount(FluidState pState) {
+            return 8;
+        }
+    }
+
+
+    public static class ModProperties extends BaseFlowingFluid.Properties {
 
         private Supplier<? extends Item> vial;
         public ModProperties(Supplier<? extends FluidType> fluidType, Supplier<? extends Fluid> still, Supplier<? extends Fluid> flowing) {
@@ -117,45 +165,4 @@ public abstract class ModFluid extends ForgeFlowingFluid {
             return this;
         }
     }
-
-    public static class Flowing extends ModFluid {
-
-        public Flowing(ModProperties props) {
-            super(props);
-        }
-
-        @Override
-        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
-            super.createFluidStateDefinition(builder);
-            builder.add(LEVEL);
-        }
-
-        @Override
-        public int getAmount(FluidState state) {
-            return state.getValue(LEVEL);
-        }
-
-        @Override
-        public boolean isSource(FluidState state) {
-            return false;
-        }
-    }
-
-    public static class Source extends ModFluid {
-
-        public Source(ModProperties props) {
-            super(props);
-        }
-
-        @Override
-        public int getAmount(FluidState state) {
-            return 8;
-        }
-
-        @Override
-        public boolean isSource(FluidState state) {
-            return true;
-        }
-    }
-
 }

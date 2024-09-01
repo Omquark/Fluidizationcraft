@@ -22,7 +22,7 @@ public class ItemGunCryo extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
         if (!level.isClientSide) {
-            CryoShotProjectile cryoShot = new CryoShotProjectile(level, player, player.getItemInHand(hand));
+            CryoShotProjectile cryoShot = new CryoShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
             cryoShot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
             level.addFreshEntity(cryoShot);
         }

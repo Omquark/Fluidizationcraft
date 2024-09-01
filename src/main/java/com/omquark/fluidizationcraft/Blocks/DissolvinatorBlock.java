@@ -10,35 +10,50 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.Mirror;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class DissolvinatorBlock extends BaseEntityBlock {
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;//DirectionProperty.create("facing");
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+
     public static final MapCodec<DissolvinatorBlock> CODEC = simpleCodec(block -> new DissolvinatorBlock());
-//    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-//    public static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+
     public DissolvinatorBlock() {
         super(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.STONE)
                 .sound(SoundType.METAL));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(ACTIVE, false));
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        return this.defaultBlockState()
+                .setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite())
+                .setValue(ACTIVE, Boolean.FALSE);
     }
 
     @Override
@@ -46,20 +61,10 @@ public class DissolvinatorBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-//    @Override
-//    protected VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-//        return SHAPE;
-//    }
-
     @Override
     protected RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
-
-    //    @Override
-//    protected VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos blockPos, CollisionContext collisionContext) {
-//        return SHAPE;
-//    }
 
     @Override
     protected void tick(BlockState state, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
@@ -73,14 +78,30 @@ public class DissolvinatorBlock extends BaseEntityBlock {
     }
 
     @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
+//        stateBuilder.add(FACING, ACTIVE);
+        stateBuilder.add(FACING).add(ACTIVE);
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos blockPos, Player player, BlockHitResult hitResult) {
         return use(state, level, blockPos, player, hitResult);
     }
 
-    protected InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, BlockHitResult hitResult){
-        if(!level.isClientSide() && player instanceof ServerPlayer serverPlayer){
+    protected InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof DissolvinatorBlockEntity dissolvinatorBlockEntity){
+            if (blockEntity instanceof DissolvinatorBlockEntity dissolvinatorBlockEntity) {
                 serverPlayer.openMenu(dissolvinatorBlockEntity, blockPos);
             } else {
                 throw new IllegalStateException("The container provider is missing!");
@@ -91,9 +112,9 @@ public class DissolvinatorBlock extends BaseEntityBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos blockPos, BlockState newState, boolean isMoving) {
-        if(state.getBlock() != newState.getBlock()){
+        if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof DissolvinatorBlockEntity dissolvinatorEntity){
+            if (blockEntity instanceof DissolvinatorBlockEntity dissolvinatorEntity) {
                 dissolvinatorEntity.drops();
             }
         }
@@ -103,10 +124,11 @@ public class DissolvinatorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if(level.isClientSide){
+        if (level.isClientSide) {
             return null;
         }
         return createTickerHelper(type, ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
-                (level1, pos, state1, blockEntity) -> blockEntity.tick(level1, pos, state1));
+
+                (level1, pos, state1, blockEntity) -> state1.tick((ServerLevel) level1, pos, level1.random));
     }
 }

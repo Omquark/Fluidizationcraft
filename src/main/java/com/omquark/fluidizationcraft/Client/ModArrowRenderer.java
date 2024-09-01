@@ -8,11 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.FileNotFoundException;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ModArrowRenderer extends ArrowRenderer<AbstractArrow> {
     private final String resourceLocation;
+
     public ModArrowRenderer(EntityRendererProvider.Context context, String resourceLocation) {
         super(context);
         this.resourceLocation = resourceLocation;
@@ -20,6 +22,8 @@ public class ModArrowRenderer extends ArrowRenderer<AbstractArrow> {
 
     @Override
     public ResourceLocation getTextureLocation(AbstractArrow renderer) {
-        return new ResourceLocation(FluidizationCraft.MODID, resourceLocation);
+        ResourceLocation textureLocation = ResourceLocation.tryBuild(FluidizationCraft.MODID, resourceLocation);
+        assert textureLocation != null;
+        return textureLocation;
     }
 }

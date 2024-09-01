@@ -2,8 +2,8 @@ package com.omquark.fluidizationcraft.data;
 
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class FluidizationItemProvider extends ItemModelProvider {
     public FluidizationItemProvider(PackOutput output, String modid, ExistingFileHelper existingFileHelper) {

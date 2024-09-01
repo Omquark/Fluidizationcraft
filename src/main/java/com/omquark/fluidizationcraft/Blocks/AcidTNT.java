@@ -26,7 +26,5 @@ public class AcidTNT extends Block {
     @Override
     protected void onPlace(BlockState state1, Level level, BlockPos pos, BlockState state2, boolean bool) {
         super.onPlace(state1, level, pos, state2, bool);
-        FluidizationCraft.LOGGER.debug("state1 {}", state1.getBlock().toString());
-        FluidizationCraft.LOGGER.debug("state2 {}", state2.getBlock().toString());
     }
 }

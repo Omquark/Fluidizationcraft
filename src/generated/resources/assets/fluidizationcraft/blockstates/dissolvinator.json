@@ -1,7 +1,46 @@
 {
   "variants": {
-    "": {
+    "active=false,facing=down": {
       "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=false,facing=east": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=false,facing=south": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=false,facing=west": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=true,facing=east": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=true,facing=south": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "fluidizationcraft:block/dissolvinator"
+    },
+    "active=true,facing=west": {
+      "model": "fluidizationcraft:block/dissolvinator",
+      "y": 270
     }
   }
 }

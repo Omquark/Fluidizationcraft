@@ -20,7 +20,9 @@ public class FluidizationDamageTypes {
     public static final ResourceKey<DamageType> URANIUM_DAMAGE = register("uranium");
 
     private static ResourceKey<DamageType> register(String name){
-        return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(FluidizationCraft.MODID, name));
+        ResourceLocation resourceLocation = ResourceLocation.tryBuild(FluidizationCraft.MODID, name);
+        assert resourceLocation != null;
+        return ResourceKey.create(Registries.DAMAGE_TYPE, resourceLocation);
     }
 
     public static void bootstrap(BootstrapContext<DamageType> context){

@@ -19,7 +19,7 @@ abstract public class ModScreen<T extends AbstractContainerMenu> extends Abstrac
     }
 
     public void texture(String textureLocation){
-        texture = new ResourceLocation(FluidizationCraft.MODID, textureLocation);
+        texture = ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, textureLocation);
     }
 
     @Override

@@ -9,8 +9,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -24,7 +23,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
-        //oreSmelting(RecipeOutput, List<ItemLike> input, RecipeCategory, ItemLike output, float xp, float time, string recipe_name)
         oreSmelting(consumer, List.of(FluidizationItems.RAW_ALUMINUM.get()), RecipeCategory.MISC,
                 FluidizationItems.INGOT_ALUMINUM.get(), 0.7f, 200, "raw_aluminum");
         oreSmelting(consumer, List.of(FluidizationItems.RAW_LEAD.get()), RecipeCategory.MISC,

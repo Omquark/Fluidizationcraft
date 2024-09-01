@@ -1,41 +1,52 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
+import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
-import com.omquark.fluidizationcraft.data.DataGeneratorHandler;
 import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
+
+import java.util.List;
+import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FluidizationCraft.MODID)
@@ -45,7 +56,7 @@ public class FluidizationCraft
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final RegistryObject<CreativeModeTab> FLUIDIZATION_CRAFT_TAB = CREATIVE_MODE_TABS_REGISTER.register("example_tab", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FLUIDIZATION_CRAFT_TAB = CREATIVE_MODE_TABS_REGISTER.register("example_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
@@ -101,15 +112,17 @@ public class FluidizationCraft
             .title(Component.literal("Fluidization Craft"))
             .build());
 
-    public FluidizationCraft()
+    public FluidizationCraft(IEventBus modEventBus, ModContainer modContainer)
     {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.register(DataGeneratorHandler.class);
+
+//        IEventBus modEventBus = NeoForge.EVENT_BUS;
+//        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+//        modEventBus.register(DataGeneratorHandler.class);
 
         modEventBus.addListener(this::commonSetup);
 
-        FluidizationItems.register(modEventBus);
         FluidizationBlocks.register(modEventBus);
+        FluidizationItems.register(modEventBus);
         FluidizationFluidTypes.registerWithWaterRL(modEventBus);
         FluidizationFluids.register(modEventBus);
         ModEntities.register(modEventBus);
@@ -119,14 +132,15 @@ public class FluidizationCraft
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -135,7 +149,7 @@ public class FluidizationCraft
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
 
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
@@ -157,9 +171,19 @@ public class FluidizationCraft
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+
+        @SubscribeEvent
+        public static void registerCapabilities(RegisterCapabilitiesEvent event){
+            event.registerBlockEntity(
+                    DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
+                    ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
+                    (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
+            );
+        }
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
@@ -183,9 +207,13 @@ public class FluidizationCraft
                     context -> new ModArrowRenderer(context, "textures/entity/plasmaball.png"));
             EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(),
                     context -> new ModArrowRenderer(context, "textures/entity/railgunbolt.png"));
-            MenuScreens.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
-            MenuScreens.register(ModMenuTypes.FLUID_SHOOTER_MENU.get(), FluidShooterScreen::new);
             FluidizationFluids.createInteractions();
+        }
+
+        @SubscribeEvent
+        public static void registerScreen(RegisterMenuScreensEvent event){
+            event.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
+            event.register(ModMenuTypes.FLUID_SHOOTER_MENU.get(), FluidShooterScreen::new);
         }
     }
 }

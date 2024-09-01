@@ -4,6 +4,7 @@ import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
@@ -22,17 +24,12 @@ public class AcidShotProjectile extends AbstractArrow {
         super(abstractArrow, level);
     }
 
-    public AcidShotProjectile(Level level) {
-        super(ModEntities.ACID_PROJECTILE.get(), level);
-    }
-
-    public AcidShotProjectile(Level level, LivingEntity livingEntity, ItemStack stack) {
-        super(ModEntities.ACID_PROJECTILE.get(), livingEntity, level, stack);
+    public AcidShotProjectile(Level level, LivingEntity livingEntity, ItemStack stack, @Nullable ItemStack firedFrom) {
+        super(ModEntities.ACID_PROJECTILE.get(), livingEntity, level, stack, firedFrom);
     }
 
     @Override
     protected void onHitBlock(BlockHitResult hitResult) {
-        FluidizationCraft.LOGGER.debug(hitResult.getBlockPos().relative(hitResult.getDirection()).toString());
         spawnAcid(hitResult.getBlockPos().relative(hitResult.getDirection()));
     }
 

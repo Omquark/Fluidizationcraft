@@ -1,18 +1,25 @@
 package com.omquark.fluidizationcraft.fluids;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidType;
+import com.mojang.blaze3d.shaders.FogShape;
+//import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+//import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class ModFluidType extends FluidType {
 
     private final ResourceLocation stillTexture;
@@ -82,7 +89,7 @@ public class ModFluidType extends FluidType {
 
             @Override
             public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
-                                        float nearDistance, float farDistance, com.mojang.blaze3d.shaders.FogShape shape) {
+                                        float nearDistance, float farDistance, FogShape shape) {
                 RenderSystem.setShaderFogStart(6f);
                 RenderSystem.setShaderFogEnd(10f);
             }

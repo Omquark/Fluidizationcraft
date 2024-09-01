@@ -10,7 +10,7 @@ public class ModTags {
     public static class Blocks{
         public static final TagKey<Block> ALUMINUM_ORE = tag("aluminum_ore");
         private static TagKey<Block> tag(String name){
-            return BlockTags.create(new ResourceLocation(FluidizationCraft.MODID, name));
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, name));
         }
     }
 

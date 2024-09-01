@@ -3,17 +3,24 @@ package com.omquark.fluidizationcraft.data.loot;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @MethodsReturnNonnullByDefault
 public class ModBlockLootTables extends BlockLootSubProvider {
-    public ModBlockLootTables() {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+
+    List<Block> blocks = new ArrayList<>();
+
+    public ModBlockLootTables(HolderLookup.Provider provider) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
     }
 
     @Override
@@ -41,7 +48,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     }
 
     @Override
+    protected void add(Block pBlock, LootTable.Builder pBuilder) {
+        super.add(pBlock, pBuilder);
+        blocks.add(pBlock);
+    }
+
+    @Override
     protected Iterable<Block> getKnownBlocks() {
-        return FluidizationBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+        return blocks;
     }
 }

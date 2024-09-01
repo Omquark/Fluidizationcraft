@@ -26,7 +26,6 @@ public class DissolvinatorScreen extends ModScreen<DissolvinatorMenu> {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-
         renderProgressArrow(graphics, x, y);
     }
 

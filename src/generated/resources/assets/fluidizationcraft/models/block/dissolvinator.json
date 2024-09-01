@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "all": "fluidizationcraft:block/dissolvinator"
+    "front": "fluidizationcraft:block/dissolvinator_front",
+    "side": "fluidizationcraft:block/dissolvinator_side",
+    "top": "fluidizationcraft:block/dissolvinator_top"
   }
 }

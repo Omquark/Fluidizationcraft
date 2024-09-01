@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -23,12 +24,8 @@ public class CryoShotProjectile extends AbstractArrow {
         super(abstractArrow, level);
     }
 
-    public CryoShotProjectile(Level level){
-        super(ModEntities.CRYO_PROJECTILE.get(), level);
-    }
-
-    public CryoShotProjectile(Level level, LivingEntity livingEntity, ItemStack stack){
-        super(ModEntities.CRYO_PROJECTILE.get(), livingEntity, level, stack);
+    public CryoShotProjectile(Level level, LivingEntity livingEntity, ItemStack stack, @Nullable ItemStack firedFrom){
+        super(ModEntities.CRYO_PROJECTILE.get(), livingEntity, level, stack, firedFrom);
     }
 
     @Override

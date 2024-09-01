@@ -1,6 +1,7 @@
 package com.omquark.fluidizationcraft.screen.FluidShooter;
 
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,9 +11,15 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+//import net.minecraftforge.items.ItemStackHandler;
+//import net.minecraftforge.items.SlotItemHandler;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class FluidShooterMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;

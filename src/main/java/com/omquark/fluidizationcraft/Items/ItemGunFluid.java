@@ -14,7 +14,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -75,7 +75,7 @@ public class ItemGunFluid extends Item implements MenuProvider {
             if (!player.hasInfiniteMaterials()) currentGun.setDamageValue(currentGun.getDamageValue() + 1);
             if (!level.isClientSide) {
                 //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun
-                AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand));
+                AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
                 //shootFromRotation(player, xRot, yRot, gravity effect?, power <- setting this high will glitch, inaccuracy
                 acidShot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
                 level.addFreshEntity(acidShot);
@@ -102,7 +102,6 @@ public class ItemGunFluid extends Item implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        FluidizationCraft.LOGGER.debug("Creating FluidShooterMenu");
         return new FluidShooterMenu(containerId, playerInventory, this.data);
     }
 

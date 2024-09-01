@@ -22,17 +22,18 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ModVial extends BucketItem implements FluidizationBaseItem {
+public class ModVial extends BucketItem {
     private final Supplier<? extends Fluid> fluidSupplier;
 
     public ModVial(Supplier<? extends Fluid> supplier, Properties builder) {
-        super(supplier, builder);
+        super(supplier.get(), builder);
         this.fluidSupplier = supplier;
     }
 
@@ -40,8 +41,8 @@ public class ModVial extends BucketItem implements FluidizationBaseItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         BlockHitResult blockhitresult = getPlayerPOVHitResult(level, player, this.fluidSupplier.get() == Fluids.EMPTY ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
-        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(player, level, itemstack, blockhitresult);
-        if (ret != null) return ret;
+//        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(player, level, itemstack, blockhitresult);
+//        if (ret != null) return ret;
         if (blockhitresult.getType() == HitResult.Type.MISS) {
             return InteractionResultHolder.pass(itemstack);
         } else if (blockhitresult.getType() != HitResult.Type.BLOCK) {
@@ -73,7 +74,7 @@ public class ModVial extends BucketItem implements FluidizationBaseItem {
                 return InteractionResultHolder.fail(itemstack);
             } else {
                 BlockState blockstate = level.getBlockState(blockpos);
-                BlockPos blockpos2 = canBlockContainFluid(level, blockpos, blockstate) ? blockpos : blockpos1;
+                BlockPos blockpos2 = canBlockContainFluid(player, level, blockpos, blockstate) ? blockpos : blockpos1;
                 if (this.emptyContents(player, level, blockpos2, blockhitresult, itemstack)) {
                     this.checkExtraContent(player, level, itemstack, blockpos2);
                     if (player instanceof ServerPlayer) {
@@ -104,7 +105,7 @@ public class ModVial extends BucketItem implements FluidizationBaseItem {
     }
 
     @Override
-    protected boolean canBlockContainFluid(Level worldIn, BlockPos posIn, BlockState blockstate) {
+    protected boolean canBlockContainFluid(@Nullable Player player, Level worldIn, BlockPos posIn, BlockState blockstate) {
         if (blockstate.getBlock() instanceof LiquidBlockContainer liquid) {
             if (liquid.canPlaceLiquid(null, worldIn, posIn, blockstate, this.fluidSupplier.get())) {
                 return true;

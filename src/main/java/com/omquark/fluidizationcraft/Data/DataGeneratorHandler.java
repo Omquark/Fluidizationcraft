@@ -1,26 +1,22 @@
 package com.omquark.fluidizationcraft.data;
 
-import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import net.minecraft.core.Cloner;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistryAccess;
+import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.registries.RegistriesDatapackGenerator;
-import net.minecraft.resources.RegistryDataLoader;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = FluidizationCraft.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = FluidizationCraft.MODID)
 public class DataGeneratorHandler {
 
     @SubscribeEvent
@@ -36,28 +32,9 @@ public class DataGeneratorHandler {
         generator.addProvider(true, new ModBlockDataGenerator(packOutput, event.getLookupProvider(), existingFileHelper));
 
         generator.addProvider(event.includeServer(),
-                new RegistriesDatapackGenerator(packOutput,
-                        event
-                                .getLookupProvider()
-                                .thenApply(r -> constructRegistries(r, BUILDER)),
+                (DataProvider.Factory<DatapackBuiltinEntriesProvider>) (output) -> new DatapackBuiltinEntriesProvider
+                        (output, event.getLookupProvider(), new RegistrySetBuilder()
+                                .add(Registries.DAMAGE_TYPE, FluidizationDamageTypes::bootstrap),
                         Set.of(FluidizationCraft.MODID)));
-    }
-
-    private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.DAMAGE_TYPE, FluidizationDamageTypes::bootstrap);
-//            .add(Registries.DAMAGE_TYPE, (context) -> bootstrap("cryonite", CRYONITE_DAMAGE, context));
-
-    private static HolderLookup.Provider constructRegistries(HolderLookup.Provider original, RegistrySetBuilder datapackEntriesBuilder) {
-        Cloner.Factory clonerFactory = new Cloner.Factory();
-        var builderKeys = new HashSet<>(datapackEntriesBuilder.getEntryKeys());
-        RegistryDataLoader.WORLDGEN_REGISTRIES.forEach(data -> {
-            if (!builderKeys.contains(data.key()))
-                datapackEntriesBuilder.add(data.key(), context -> {
-                });
-
-            data.runWithArguments(clonerFactory::addCodec);
-        });
-
-        return datapackEntriesBuilder.buildPatch(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), original, clonerFactory).patches();
     }
 }

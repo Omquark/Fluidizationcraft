@@ -1,8 +1,9 @@
 package com.omquark.fluidizationcraft.screen.Dissolvinator;
 
+import com.ibm.icu.text.RelativeDateTimeFormatter;
+import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,8 +13,12 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.ItemCapability;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraft.core.Direction;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -29,11 +34,11 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
     Slot inputSlot, outputSlot, inFuelSlot, outFuelSlot;
 
 
-    public DissolvinatorMenu(int containerId, Inventory inv, FriendlyByteBuf extraData){
+    public DissolvinatorMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
         this(containerId, inv, Objects.requireNonNull(inv.player.level().getBlockEntity(extraData.readBlockPos())), new SimpleContainerData(4));
     }
 
-    public DissolvinatorMenu(int containerId, Inventory inv, BlockEntity entity, ContainerData data){
+    public DissolvinatorMenu(int containerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.DISSOLVINATOR_MENU.get(), containerId);
         checkContainerSize(inv, 4);
         blockEntity = ((DissolvinatorBlockEntity) entity);
@@ -43,21 +48,26 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotBar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            inputSlot = new SlotItemHandler(iItemHandler, 0, 55, 24);
-            outputSlot = new SlotItemHandler(iItemHandler, 1, 114, 24);
-            inFuelSlot = new SlotItemHandler(iItemHandler, 2, 63, 57);
-            outFuelSlot = new SlotItemHandler(iItemHandler, 3, 99, 57);
-            this.addSlot(inputSlot);
-            this.addSlot(outputSlot);
-            this.addSlot(inFuelSlot);
-            this.addSlot(outFuelSlot);
-        });
+//        IItemHandler iItemHandler = level.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK, blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity);
+//                DissolvinatorBlockEntity.getCapability().getCapability(level, blockEntity.getBlockPos(), null, null, null);
+        IItemHandler iItemHandler = level.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK, blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity);
+        if(iItemHandler == null) return;
+
+//        this.blockEntity.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK).ifPresent(iItemHandler -> {
+        inputSlot = new SlotItemHandler(iItemHandler, 0, 55, 24);
+        outputSlot = new SlotItemHandler(iItemHandler, 1, 114, 24);
+        inFuelSlot = new SlotItemHandler(iItemHandler, 2, 63, 57);
+        outFuelSlot = new SlotItemHandler(iItemHandler, 3, 99, 57);
+        this.addSlot(inputSlot);
+        this.addSlot(outputSlot);
+        this.addSlot(inFuelSlot);
+        this.addSlot(outFuelSlot);
+//        });
 
         addDataSlots(data);
     }
 
-    public boolean isCrafting(){
+    public boolean isCrafting() {
         return data.get(0) > 0;
     }
 
@@ -86,6 +96,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
 
     // THIS YOU HAVE TO DEFINE!
     private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
@@ -125,19 +136,18 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
                 player, FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
     }
 
-    private void addPlayerInventory(Inventory playerInventory){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 9; j++){
-                FluidizationCraft.LOGGER.debug("Adding player inventory");
+    private void addPlayerInventory(Inventory playerInventory) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 9 + j * 18, 85 + i * 18));
 //                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
     }
 
-    private void addPlayerHotBar(Inventory playerInventory){
-        for(int i = 0; i < 9; i++){
-                this.addSlot(new Slot(playerInventory, i, 9 + i * 18, 142));
+    private void addPlayerHotBar(Inventory playerInventory) {
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(playerInventory, i, 9 + i * 18, 142));
 //                this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
