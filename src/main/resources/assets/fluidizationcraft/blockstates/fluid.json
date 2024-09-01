@@ -1,0 +1,41 @@
+{
+    "forge_marker": 1,
+    "variants": {
+        "acid": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "acid" }
+        },
+        "cryonite": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "cryonite" }
+        },
+        "neptunium": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "neptunium" }
+        },
+        "netherflow": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "netherflow" }
+        },
+        "obsidium": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "obsidium" }
+        },
+        "plutonium": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "plutonium" }
+        },
+        "pyronite": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "pyronite" }
+        },
+        "radionite": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "radionite" }
+        },
+        "uranium": {
+            "model": "forge:fluid",
+            "custom": { "fluid": "uranium" }
+        }
+    }
+}

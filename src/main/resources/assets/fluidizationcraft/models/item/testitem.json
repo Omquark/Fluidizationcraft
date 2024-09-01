@@ -1,0 +1,6 @@
+{
+    "parent": "fluidizationcraft:item/simple_model",
+    "textures": {
+        "layer0": "fluidizationcraft:items/test_item"
+    }
+}

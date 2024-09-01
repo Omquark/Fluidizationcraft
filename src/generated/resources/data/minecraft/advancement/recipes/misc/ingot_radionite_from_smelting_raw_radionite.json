@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_radionite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:raw_radionite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ingot_radionite_from_smelting_raw_radionite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_radionite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ingot_radionite_from_smelting_raw_radionite"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "fluidizationcraft:block/acid_tnt_bottom",
+    "side": "fluidizationcraft:block/acid_tnt",
+    "top": "fluidizationcraft:block/acid_tnt_top"
+  }
+}
