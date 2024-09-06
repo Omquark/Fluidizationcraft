@@ -16,6 +16,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.omquark.fluidizationcraft.blocks.ModLiquidBlock;
 
 import java.util.function.Supplier;
 

@@ -99,7 +99,7 @@ public abstract class ModFluid extends BaseFlowingFluid {
                 FluidState otherState = level.getFluidState(pos.relative(dir));
                 if(otherState != Fluids.EMPTY.defaultFluidState() &&
                         fluidInteractions.containsKey(otherState.getFluidType())){
-                    level.setBlock(pos.relative(dir), fluidInteractions.get(otherState.getFluidType()), 255);
+                    level.setBlockAndUpdate(pos.relative(dir), fluidInteractions.get(otherState.getFluidType()));
                 }
             }
         });
@@ -111,7 +111,7 @@ public abstract class ModFluid extends BaseFlowingFluid {
             if (dir != Direction.UP) {
                 Block otherBlock = level.getBlockState(pos.relative(dir)).getBlock();
                 if (blockInteractions.containsKey(otherBlock) && random.nextInt(0, 99) < BLOCK_INTERACTION_CHANCE) {
-                    level.setBlock(pos.relative(dir), blockInteractions.get(otherBlock), 255); //Setting 2 updates the block immediately and visually
+                    level.setBlockAndUpdate(pos.relative(dir), blockInteractions.get(otherBlock)); //Setting 2 updates the block immediately and visually
                     //Setting to 3 updates the block visually AND forces the fluid to update, i.e. when vanishing a block into air, forces the fluid to update as well
                 }
             }
