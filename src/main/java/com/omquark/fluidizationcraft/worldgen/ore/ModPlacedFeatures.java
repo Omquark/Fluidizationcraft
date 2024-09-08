@@ -63,14 +63,14 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20))
+                                VerticalAnchor.absolute(384))
                 ));
         register(context, LEAD_ORE, leadHolder,
                 List.of(
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
 
@@ -79,7 +79,7 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
         register(context, PLUTONIUM_ORE, plutoniumHolder,
@@ -87,7 +87,7 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
         register(context, RADIONITE_ORE, radioniteHolder,
@@ -95,7 +95,7 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
         register(context, TIN_ORE, tinHolder,
@@ -103,7 +103,7 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
         register(context, URANIUM_ORE, uraniumHolder,
@@ -111,7 +111,7 @@ public class ModPlacedFeatures {
                         CountPlacement.of(10),
                         HeightRangePlacement.uniform(
                                 VerticalAnchor.absolute(-64),
-                                VerticalAnchor.absolute(20)
+                                VerticalAnchor.absolute(384)
                         )
                 ));
         register(context, LAKE_ACID_SURFACE, overworldLakeAcidHolder,
