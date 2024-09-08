@@ -7,18 +7,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-//import net.minecraftforge.eventbus.api.IEventBus;
-//import net.minecraftforge.fluids.FluidType;
-//import net.minecraftforge.registries.DeferredRegister;
-//import net.minecraftforge.registries.ForgeRegistries;
-//import net.minecraftforge.registries.RegistryObject;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.omquark.fluidizationcraft.fluids.ModFluid;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 
 import java.util.HashMap;
 
@@ -27,7 +23,7 @@ public class FluidizationFluids {
             DeferredRegister.create(BuiltInRegistries.FLUID, FluidizationCraft.MODID);
 
     public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_ACID = FLUIDS.register("acid_fluid",
-            () -> new ModFluid.Source(FluidizationFluids.ACID_FLUID_PROPERTIES));
+            () -> new ModFluidSourceAcid(FluidizationFluids.ACID_FLUID_PROPERTIES));
     public static final DeferredHolder<Fluid, ? extends ModFluid> FLOWING_ACID = FLUIDS.register("acid_flowing",
             () -> new ModFluid.Flowing(FluidizationFluids.ACID_FLUID_PROPERTIES));
     public static final DeferredHolder<Fluid, ? extends ModFluid> SOURCE_CRYONITE = FLUIDS.register("cryonite_fluid",

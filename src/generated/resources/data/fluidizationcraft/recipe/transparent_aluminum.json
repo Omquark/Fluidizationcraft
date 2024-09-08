@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "misc",
+  "key": {
+    "A": {
+      "item": "fluidizationcraft:ingot_aluminum"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    " A ",
+    "AGA",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:transparent_aluminum"
+  }
+}

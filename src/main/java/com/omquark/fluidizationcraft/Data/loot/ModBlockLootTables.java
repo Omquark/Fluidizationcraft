@@ -8,7 +8,6 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
         dropSelf(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
         dropSelf(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
-        dropSelf(FluidizationBlocks.REINFORCED_GLASS.get());
+        dropSelf(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
+        dropSelf(FluidizationBlocks.ACID_BARRIER.get());
         dropSelf(FluidizationBlocks.ACID_TNT.get());
     }
 

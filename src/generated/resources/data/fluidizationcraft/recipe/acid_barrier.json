@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "fluidizationcraft:transparent_aluminum"
+    },
+    "V": {
+      "item": "fluidizationcraft:vial_acid"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RVR",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:acid_barrier"
+  }
+}

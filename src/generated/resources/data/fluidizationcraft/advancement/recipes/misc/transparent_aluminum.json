@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aluminum_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:ingot_aluminum"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:glass_pane"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "fluidizationcraft:transparent_aluminum"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glass",
+      "has_aluminum_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fluidizationcraft:transparent_aluminum"
+    ]
+  }
+}

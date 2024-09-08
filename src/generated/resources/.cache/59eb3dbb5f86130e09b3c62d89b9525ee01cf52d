@@ -1,4 +1,5 @@
-// 1.21	2024-08-31T23:50:38.4373949	Loot Tables
+// 1.21	2024-09-07T22:29:10.8228297	Loot Tables
+2884a2b495ff92b70a75d01034041606bc40f61c data/fluidizationcraft/loot_table/blocks/acid_barrier.json
 a05bbc5aa2780e04d3d5da72b4b9a57e756259c0 data/fluidizationcraft/loot_table/blocks/acid_frozen.json
 36b1c263059d471054f0a8841b2ff977f1fe059d data/fluidizationcraft/loot_table/blocks/acid_tnt.json
 1d5a9ed215b94ba6a337dd599c2879c961417c19 data/fluidizationcraft/loot_table/blocks/aluminum_ore.json
@@ -8,6 +9,6 @@ f7c0e4dd9397ab0dbc917e780904284cc1b71e89 data/fluidizationcraft/loot_table/block
 035f40c988f1c0fa4f5a97742b2bfb497b8e6862 data/fluidizationcraft/loot_table/blocks/neptunium_ore.json
 79d84e4684e6b855494ba6cc582593601961e804 data/fluidizationcraft/loot_table/blocks/plutonium_ore.json
 7c0d02949b9693de0079b548f90562ac1bf3c4f5 data/fluidizationcraft/loot_table/blocks/radionite_ore.json
-d469e3593e35f2b307e5ebfe0253f420c5c61e5a data/fluidizationcraft/loot_table/blocks/reinforced_glass.json
 1bd56dc2a399cd9f911bd7cbfab8e1b983d36e75 data/fluidizationcraft/loot_table/blocks/tin_ore.json
+a7e9396da9d059cf937785b2b51c940081722fef data/fluidizationcraft/loot_table/blocks/transparent_aluminum.json
 c9a7ef4fafbb302831fb2347824c6db41c10afa4 data/fluidizationcraft/loot_table/blocks/uranium_ore.json

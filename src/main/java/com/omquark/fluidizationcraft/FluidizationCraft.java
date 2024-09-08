@@ -1,7 +1,6 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
-import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -10,12 +9,9 @@ import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
-import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
@@ -33,20 +29,14 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
-
-import java.util.List;
-import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FluidizationCraft.MODID)
@@ -62,6 +52,7 @@ public class FluidizationCraft
             .displayItems((parameters, output) -> {
                 output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
                 output.accept(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
+                output.accept(FluidizationBlocks.ACID_BARRIER.get());
                 output.accept(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
@@ -91,7 +82,7 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TIN_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.REINFORCED_GLASS.get());
+                output.accept(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
                 output.accept(FluidizationBlocks.ACID_TNT.get());
                 output.accept(FluidizationItems.RAW_ALUMINUM.get());
                 output.accept(FluidizationItems.RAW_LEAD.get());

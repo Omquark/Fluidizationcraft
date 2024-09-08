@@ -7,6 +7,7 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 

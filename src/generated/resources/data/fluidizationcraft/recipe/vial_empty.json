@@ -3,17 +3,17 @@
   "category": "misc",
   "group": "vial",
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "A": {
+      "item": "fluidizationcraft:ingot_aluminum"
     },
     "R": {
-      "item": "fluidizationcraft:reinforced_glass"
+      "item": "fluidizationcraft:transparent_aluminum"
     }
   },
   "pattern": [
-    "III",
-    "IRI",
-    "III"
+    "AAA",
+    "ARA",
+    "AAA"
   ],
   "result": {
     "count": 1,
