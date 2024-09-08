@@ -1,7 +1,5 @@
 package com.omquark.fluidizationcraft.blocks.blockEntity;
 
-import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -19,11 +17,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.ItemCapability;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -37,20 +31,9 @@ import java.util.Optional;
 public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvider {
     private static final int SLOT_COUNT = 4;
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
-//    public static final BlockCapability<IItemHandler, Void> ITEM_HANDLER_BLOCK = BlockCapability.createVoid(
-//            ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, "test_item_handler"),
-//            IItemHandler.class
-//    );
 
     public static final BlockCapability<IItemHandler, Void> ITEM_HANDLER_BLOCK = BlockCapability.createVoid(
             ResourceLocation.parse("dissolvinator_item_handler"), IItemHandler.class);
-
-    private final static int INPUT_SLOT = 0;
-    private final static int OUTPUT_SLOT = 1;
-    private final static int INPUT_FUEL_SLOT = 2;
-    private final static int OUTPUT_FUEL_SLOT = 3;
-
-//    private Optional<IItemHandler> lazyItemHandler = Optional.empty();
 
     protected final ContainerData data;
     private int progress = 0;
@@ -88,20 +71,6 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
             }
         };
     }
-
-//
-//    @Override
-//    public void onLoad() {
-//        super.onLoad();
-//        lazyItemHandler = LazyOptional.of(() -> itemStackHandler);
-//
-//    }
-
-//    @Override
-//    public void invalidateCaps() {
-//        super.invalidateCaps();
-//        lazyItemHandler.invalidate();
-//    }
 
     @Override
     public Component getDisplayName() {

@@ -1,7 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_ingots": {
+    "has_empty_vial": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:vial_empty"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gunpowder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:gunpowder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_ingot": {
       "conditions": {
         "items": [
           {
@@ -13,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "fluidizationcraft:vial_empty"
+        "recipe": "fluidizationcraft:gun_acid"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -31,13 +51,15 @@
   "requirements": [
     [
       "has_the_recipe",
+      "has_iron_ingot",
+      "has_gunpowder",
       "has_transparent_aluminum",
-      "has_iron_ingots"
+      "has_empty_vial"
     ]
   ],
   "rewards": {
     "recipes": [
-      "fluidizationcraft:vial_empty"
+      "fluidizationcraft:gun_acid"
     ]
   }
 }

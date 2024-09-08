@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_cold",
+  "features": "fluidizationcraft:lake_cryonite_underground",
+  "step": "lakes"
+}

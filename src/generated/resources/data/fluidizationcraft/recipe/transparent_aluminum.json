@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "vial",
+  "group": "misc",
   "key": {
     "A": {
       "item": "fluidizationcraft:ingot_aluminum"
     },
-    "R": {
-      "item": "fluidizationcraft:transparent_aluminum"
+    "G": {
+      "item": "minecraft:glass_pane"
     }
   },
   "pattern": [
-    "AAA",
-    "ARA",
-    "AAA"
+    " A ",
+    "AGA",
+    " A "
   ],
   "result": {
     "count": 1,
-    "id": "fluidizationcraft:vial_empty"
+    "id": "fluidizationcraft:transparent_aluminum"
   }
 }

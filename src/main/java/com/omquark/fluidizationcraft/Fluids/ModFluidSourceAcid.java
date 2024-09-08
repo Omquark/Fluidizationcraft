@@ -1,10 +1,13 @@
 package com.omquark.fluidizationcraft.fluids;
 
+import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
 
@@ -21,10 +24,19 @@ public class ModFluidSourceAcid extends ModFluid.Source {
     }
 
     @Override
-    public void tick(Level level, BlockPos blockPos, FluidState state) {
+    public void randomTick(Level level, BlockPos blockPos, FluidState state, RandomSource random) {
         Holder<Biome> currentBiome = level.getBiome(blockPos);
+        int y = blockPos.getY() + 1;
+        boolean canSeeSky = true;
 
-        if (currentBiome.value().coldEnoughToSnow(blockPos) && level.canSeeSky(blockPos)) {
+        for( ; y < 320; y++){
+            if(level.getBlockState(blockPos.atY(y)).canOcclude()){
+                canSeeSky = false;
+                break;
+            }
+        }
+
+        if (currentBiome.value().coldEnoughToSnow(blockPos) && canSeeSky) {
             level.setBlockAndUpdate(blockPos, FluidizationBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState());
             return;
         }

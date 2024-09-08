@@ -1,22 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "vial",
   "key": {
-    "A": {
-      "item": "fluidizationcraft:ingot_aluminum"
-    },
     "R": {
       "item": "fluidizationcraft:transparent_aluminum"
+    },
+    "V": {
+      "item": "fluidizationcraft:vial_acid"
     }
   },
   "pattern": [
-    "AAA",
-    "ARA",
-    "AAA"
+    " R ",
+    "RVR",
+    " R "
   ],
   "result": {
     "count": 1,
-    "id": "fluidizationcraft:vial_empty"
+    "id": "fluidizationcraft:acid_barrier"
   }
 }

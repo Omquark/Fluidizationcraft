@@ -1,9 +1,9 @@
 {
-  "feature": "fluidizationcraft:lake_acid",
+  "feature": "fluidizationcraft:lake_cryonite",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 9
+      "chance": 7
     },
     {
       "type": "minecraft:in_square"

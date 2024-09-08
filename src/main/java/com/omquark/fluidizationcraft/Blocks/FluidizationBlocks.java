@@ -10,13 +10,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.omquark.fluidizationcraft.blocks.ModLiquidBlock;
 
 import java.util.function.Supplier;
 
@@ -26,10 +24,11 @@ public class FluidizationBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, FluidizationCraft.MODID);
     public static final DeferredHolder<Block, Block> FROZEN_ACID_BLOCK = registerBlock("acid_frozen", AcidFrozen::new);
     public static final DeferredHolder<Block, Block> FROZEN_CRYONITE_BLOCK = registerBlock("cryonite_frozen", CryoniteFrozen::new);
-    public static final DeferredHolder<Block, Block> REINFORCED_GLASS = registerBlock("reinforced_glass",
+    public static final DeferredHolder<Block, Block> TRANSPARENT_ALUMINUM = registerBlock("transparent_aluminum",
             () -> new Block(BlockBehaviour.Properties.of().strength(10f)
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).mapColor(MapColor.COLOR_GRAY)
                     .noOcclusion()));
+    public static final DeferredHolder<Block, Block> ACID_BARRIER = registerBlock("acid_barrier", AcidBarrier::new);
     public static final DeferredHolder<Block, Block> DISSOLVINATOR_BLOCK = registerBlock("dissolvinator", DissolvinatorBlock::new);
     public static final DeferredHolder<Block, ModLiquidBlock> ACID_BLOCK = registerBlock("acid_block",
             () -> new ModLiquidBlock(FluidizationFluids.SOURCE_ACID.get(), BlockBehaviour.Properties.of()

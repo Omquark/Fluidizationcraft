@@ -1,9 +1,9 @@
 {
-  "feature": "fluidizationcraft:lake_acid",
+  "feature": "fluidizationcraft:lake_netherflow",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 9
+      "chance": 15
     },
     {
       "type": "minecraft:in_square"
