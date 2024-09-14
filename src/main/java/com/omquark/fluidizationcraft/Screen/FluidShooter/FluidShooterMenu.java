@@ -1,7 +1,9 @@
 package com.omquark.fluidizationcraft.screen.FluidShooter;
 
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
+import com.omquark.fluidizationcraft.util.ModInputSlot;
+import com.omquark.fluidizationcraft.util.ModOutputSlotItemHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,15 +13,14 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.capabilities.ItemCapability;
+import net.neoforged.neoforge.common.extensions.IItemStackExtension;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-//import net.minecraftforge.items.ItemStackHandler;
-//import net.minecraftforge.items.SlotItemHandler;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class FluidShooterMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
@@ -42,8 +43,8 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotBar(inv);
 
-        Slot inputSlot = new SlotItemHandler(itemStackHandler, INPUT_SLOT, 47, 37);
-        Slot outputSlot = new SlotItemHandler(itemStackHandler, OUTPUT_SLOT, 115, 37);
+        Slot inputSlot = new ModInputSlot(itemStackHandler, INPUT_SLOT, 47, 37);
+        Slot outputSlot = new ModOutputSlotItemHandler(itemStackHandler, OUTPUT_SLOT, 115, 37);
 
         this.addSlot(inputSlot);
         this.addSlot(outputSlot);
@@ -68,13 +69,12 @@ public class FluidShooterMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player p_38941_, int p_38942_) {
-        return null;
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean stillValid(Player p_38874_) {
+    public boolean stillValid(Player pPlayer) {
         return true;
     }
-
 }

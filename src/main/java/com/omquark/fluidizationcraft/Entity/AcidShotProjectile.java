@@ -1,10 +1,8 @@
 package com.omquark.fluidizationcraft.entity;
 
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.FluidizationCraft;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -15,10 +13,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class AcidShotProjectile extends AbstractArrow {
     public AcidShotProjectile(EntityType<? extends AbstractArrow> abstractArrow, Level level) {
         super(abstractArrow, level);

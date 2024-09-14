@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "raw_lead",
+  "ingredient": {
+    "item": "fluidizationcraft:dust_lead"
+  },
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:ingot_lead"
+  }
+}

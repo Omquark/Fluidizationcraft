@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.entity;
 
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,11 +14,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class CryoShotProjectile extends AbstractArrow {
     public CryoShotProjectile(EntityType<? extends AbstractArrow> abstractArrow, Level level) {
         super(abstractArrow, level);

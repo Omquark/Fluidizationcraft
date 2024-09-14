@@ -2,7 +2,7 @@ package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
 import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -20,10 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class AcidFrozen extends IceBlock {
     public static final MapCodec<AcidFrozen> CODEC = simpleCodec(block -> new AcidFrozen());
 

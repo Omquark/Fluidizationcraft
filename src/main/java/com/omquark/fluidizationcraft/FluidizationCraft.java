@@ -1,10 +1,13 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.Items.ItemGunFluid;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
+import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
+import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
@@ -53,6 +56,7 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
                 output.accept(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
                 output.accept(FluidizationBlocks.ACID_BARRIER.get());
+                output.accept(FluidizationBlocks.ACID_TANK.get());
                 output.accept(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
@@ -84,6 +88,9 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
                 output.accept(FluidizationBlocks.ACID_TNT.get());
+                output.accept(FluidizationItems.DUST_IRON.get());
+                output.accept(FluidizationItems.DUST_GOLD.get());
+                output.accept(FluidizationItems.DUST_COPPER.get());
                 output.accept(FluidizationItems.RAW_ALUMINUM.get());
                 output.accept(FluidizationItems.RAW_LEAD.get());
                 output.accept(FluidizationItems.RAW_NEPTUNIUM.get());
@@ -91,6 +98,13 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.RAW_RADIONITE.get());
                 output.accept(FluidizationItems.RAW_TIN.get());
                 output.accept(FluidizationItems.RAW_URANIUM.get());
+                output.accept(FluidizationItems.DUST_ALUMINUM.get());
+                output.accept(FluidizationItems.DUST_LEAD.get());
+                output.accept(FluidizationItems.DUST_NEPTUNIUM.get());
+                output.accept(FluidizationItems.DUST_PLUTONIUM.get());
+                output.accept(FluidizationItems.DUST_RADIONITE.get());
+                output.accept(FluidizationItems.DUST_TIN.get());
+                output.accept(FluidizationItems.DUST_URANIUM.get());
                 output.accept(FluidizationItems.INGOT_ALUMINUM.get());
                 output.accept(FluidizationItems.INGOT_LEAD.get());
                 output.accept(FluidizationItems.INGOT_NEPTUNIUM.get());
@@ -119,6 +133,8 @@ public class FluidizationCraft
         ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipeDataProvider.register(modEventBus);
+        ModRecipeSerializerProvider.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -172,6 +188,11 @@ public class FluidizationCraft
                     DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
                     ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
                     (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
+            );
+            event.registerItem(
+                    ItemGunFluid.ITEM_HANDLER_ITEM,
+                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).getItemStackHandler(),
+                    FluidizationItems.GUN_ACID.get()
             );
         }
 

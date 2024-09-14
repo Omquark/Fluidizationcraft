@@ -36,7 +36,7 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
         blockWithItem(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
         blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK.get());
         blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
-//        blockWithItem(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
+        blockWithItem(FluidizationBlocks.ACID_TANK.get());
 
         cubeBottomTop(FluidizationBlocks.ACID_TNT.get(), "acid_tnt");
 

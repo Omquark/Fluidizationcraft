@@ -1,13 +1,12 @@
 package com.omquark.fluidizationcraft.screen.FluidShooter;
 
 import com.omquark.fluidizationcraft.screen.ModScreen;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
 
     public FluidShooterScreen(FluidShooterMenu menu, Inventory inventory, Component component) {

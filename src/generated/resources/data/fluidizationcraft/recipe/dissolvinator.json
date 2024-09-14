@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "fluidizationcraft:ingot_aluminum"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "fluidizationcraft:tank_acid"
+    },
+    "V": {
+      "item": "fluidizationcraft:vial_empty"
+    }
+  },
+  "pattern": [
+    "IAI",
+    "VTV",
+    "IAI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:dissolvinator"
+  }
+}

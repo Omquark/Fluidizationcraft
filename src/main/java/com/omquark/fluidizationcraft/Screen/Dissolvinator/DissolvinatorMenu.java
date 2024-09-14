@@ -1,35 +1,41 @@
 package com.omquark.fluidizationcraft.screen.Dissolvinator;
 
-import com.ibm.icu.text.RelativeDateTimeFormatter;
-import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
+import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
+import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipe;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
+import com.omquark.fluidizationcraft.util.ModInputSlot;
+import com.omquark.fluidizationcraft.util.ModOutputSlotItemHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.ItemCapability;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.minecraft.core.Direction;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class DissolvinatorMenu extends AbstractContainerMenu {
 
     public final DissolvinatorBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
+
+    private final int INPUT_SLOT = 0;
+    private final int OUTPUT_SLOT = 1;
+    private final int INPUT_FUEL_SLOT = 2;
+    private final int OUT_FUEL_SLOT = 3;
 
     Slot inputSlot, outputSlot, inFuelSlot, outFuelSlot;
 
@@ -44,27 +50,36 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
         blockEntity = ((DissolvinatorBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
-
         addPlayerInventory(inv);
         addPlayerHotBar(inv);
 
-//        IItemHandler iItemHandler = level.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK, blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity);
-//                DissolvinatorBlockEntity.getCapability().getCapability(level, blockEntity.getBlockPos(), null, null, null);
         IItemHandler iItemHandler = level.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK, blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity);
-        if(iItemHandler == null) return;
+        if (iItemHandler == null) return;
 
-//        this.blockEntity.getCapability(DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK).ifPresent(iItemHandler -> {
-        inputSlot = new SlotItemHandler(iItemHandler, 0, 55, 24);
-        outputSlot = new SlotItemHandler(iItemHandler, 1, 114, 24);
-        inFuelSlot = new SlotItemHandler(iItemHandler, 2, 63, 57);
-        outFuelSlot = new SlotItemHandler(iItemHandler, 3, 99, 57);
+        inputSlot = new ModInputSlot(iItemHandler, 0, 55, 24);
+        outputSlot = new ModOutputSlotItemHandler(iItemHandler, 1, 114, 24);
+        inFuelSlot = new ModInputSlot(iItemHandler, 2, 63, 57);
+        outFuelSlot = new ModOutputSlotItemHandler(iItemHandler, 3, 99, 57);
+
+        ((ModInputSlot) inFuelSlot).addAllowableItem(FluidizationItems.VIAL_ACID.get());
+        List<Item> items = this.level.getRecipeManager().getAllRecipesFor(ModRecipeDataProvider.DISSOLVINATOR_RECIPE.get()).stream().map(
+                recipeHolder -> recipeHolder.value().getInputItem().getItems()[0].getItem()
+        ).toList();
+
+        ((ModInputSlot) inputSlot).addAllowableItems(items);
+
+
         this.addSlot(inputSlot);
         this.addSlot(outputSlot);
         this.addSlot(inFuelSlot);
         this.addSlot(outFuelSlot);
-//        });
 
         addDataSlots(data);
+    }
+
+    public int getDataFrom(int pIndex){
+        if(pIndex < 0 || pIndex > data.getCount()) return 0;
+        return data.get(pIndex);
     }
 
     public boolean isCrafting() {
@@ -74,60 +89,57 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 26;
+        int progressArrowSize = 18;
 
         return maxProgress != 9 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
-    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
-    // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
-    private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+    public int getScaledFuel(){
+        int fuel = this.data.get(2);
+        int maxFuel = this.data.get(3);
+        int tankSize = 50;
 
-    // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+        return fuel != 0 ? fuel * tankSize / maxFuel : 0;
+    }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
-        Slot sourceSlot = slots.get(pIndex);
-        if (!sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
-        ItemStack sourceStack = sourceSlot.getItem();
-        ItemStack copyOfSourceStack = sourceStack.copy();
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        final int INVENTORY_SIZE = 27;
+        final int HOTBAR_SIZE = 9;
+        final int PLAYER_INVENTORY_COUNT = INVENTORY_SIZE + HOTBAR_SIZE;
+        final int TILE_ENTITY_INVENTORY_SIZE = data.getCount();
 
-        // Check if the slot clicked is one of the vanilla container slots
-        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
-            // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;  // EMPTY_ITEM
-            }
-        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
-            // This is a TE slot so merge the stack into the players inventory
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+        Slot sourceSlot = slots.get(pIndex);
+        ItemStack sourceStack = sourceSlot.getItem();
+        ItemStack sourceCopy = sourceStack.copy();
+
+        if (pIndex >= PLAYER_INVENTORY_COUNT && pIndex <= PLAYER_INVENTORY_COUNT + TILE_ENTITY_INVENTORY_SIZE) { //Moving from entity to player
+            if (!moveItemStackTo(sourceStack, 0, PLAYER_INVENTORY_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
-        } else {
-//            System.out.println("Invalid slotIndex:" + pIndex);
+        } else if (pIndex < PLAYER_INVENTORY_COUNT) { //Moving from the player to entity
+            if (blockEntity.acceptsInput(sourceStack.getItem())) { //Moving a recipe item
+                if (!moveItemStackTo(sourceStack, PLAYER_INVENTORY_COUNT + INPUT_SLOT, PLAYER_INVENTORY_COUNT + INPUT_SLOT + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (blockEntity.acceptsFuel(sourceStack.getItem())) { //Moving a fuel item
+                if (!moveItemStackTo(sourceStack, PLAYER_INVENTORY_COUNT + INPUT_FUEL_SLOT, PLAYER_INVENTORY_COUNT + INPUT_FUEL_SLOT + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                return ItemStack.EMPTY;
+            }
+        } else { //INVALID SLOT
             return ItemStack.EMPTY;
         }
-        // If stack size == 0 (the entire stack was moved) set slot contents to null
+
         if (sourceStack.getCount() == 0) {
             sourceSlot.set(ItemStack.EMPTY);
         } else {
             sourceSlot.setChanged();
         }
-        sourceSlot.onTake(playerIn, sourceStack);
-        return copyOfSourceStack;
+        sourceSlot.onTake(pPlayer, sourceStack);
+        return sourceCopy;
     }
 
     @Override
@@ -135,6 +147,8 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
                 player, FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
     }
+
+
 
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; i++) {

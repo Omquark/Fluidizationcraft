@@ -1,26 +1,27 @@
 package com.omquark.fluidizationcraft.Items;
 
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
-import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.capabilities.ItemCapability;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class ItemGunFluid extends Item implements MenuProvider {
 
     protected final ContainerData data;
@@ -30,6 +31,9 @@ public class ItemGunFluid extends Item implements MenuProvider {
     private int fuelMb = 0;
     private int fuelMaxMb = 16000;
     ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
+
+    public static final ItemCapability<IItemHandler, Void> ITEM_HANDLER_ITEM = ItemCapability.createVoid(
+            ResourceLocation.parse("fluid_shooter_item_handler"), IItemHandler.class);
 
     public ItemGunFluid(Properties properties) {
         super(properties);
@@ -58,9 +62,13 @@ public class ItemGunFluid extends Item implements MenuProvider {
         };
     }
 
+    public ItemStackHandler getItemStackHandler(){
+        return itemStackHandler;
+    }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if(player.isShiftKeyDown()) {
+        if (player.isShiftKeyDown()) {
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.openMenu(new SimpleMenuProvider((id, inv, p) -> createMenu(id, player.getInventory(), player), getDisplayName()));
             }
@@ -103,6 +111,20 @@ public class ItemGunFluid extends Item implements MenuProvider {
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
         return new FluidShooterMenu(containerId, playerInventory, this.data);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        addFuel();
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    }
+
+    private void addFuel() {
+        if (itemStackHandler.getStackInSlot(INPUT_SLOT).isEmpty()) return;
+        if (itemStackHandler.getStackInSlot(INPUT_SLOT).is(FluidizationItems.VIAL_ACID.get())) {
+            itemStackHandler.extractItem(INPUT_SLOT, 1, false);
+            fuelMb += 1000;
+        }
     }
 
     //    @Override
