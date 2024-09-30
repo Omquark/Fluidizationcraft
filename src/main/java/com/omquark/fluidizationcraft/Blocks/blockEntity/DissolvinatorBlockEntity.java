@@ -162,7 +162,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
         ItemStack fuel = itemStackHandler.getStackInSlot(INPUT_FUEL_SLOT).copy();
         ItemStack outFuel = itemStackHandler.getStackInSlot(OUTPUT_FUEL_SLOT).copy();
 
-        if (!fuel.is(FluidizationItems.VIAL_ACID.get()) || //Do not ad if not acid
+        if (!fuel.is(FluidizationItems.VIAL_ACID.get()) || //Do not add if not acid
                 (!outFuel.is(FluidizationItems.VIAL_EMPTY.get()) && !outFuel.isEmpty()) || //Do not add if output is NOT an empty vial
                 (!outFuel.isEmpty() && outFuel.getCount() == outFuel.getMaxStackSize()) || //Do not add if output slot is full
                 fuelMb + 1000 > maxFuelMb) { //Do not add if it will go beyond max fuel

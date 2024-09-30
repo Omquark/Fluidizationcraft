@@ -107,7 +107,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
         final int INVENTORY_SIZE = 27;
         final int HOTBAR_SIZE = 9;
         final int PLAYER_INVENTORY_COUNT = INVENTORY_SIZE + HOTBAR_SIZE;
-        final int TILE_ENTITY_INVENTORY_SIZE = data.getCount();
+        final int TILE_ENTITY_INVENTORY_SIZE = 4;
 
         Slot sourceSlot = slots.get(pIndex);
         ItemStack sourceStack = sourceSlot.getItem();

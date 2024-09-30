@@ -19,6 +19,7 @@ public class ModInputSlot extends SlotItemHandler {
     }
 
     public void addAllowableItem(Item allowedItem){
+
         allowedItems.add(allowedItem);
     }
 
@@ -30,4 +31,6 @@ public class ModInputSlot extends SlotItemHandler {
     public boolean mayPlace(ItemStack stack) {
         return allowedItems.contains(stack.getItem());
     }
+
+
 }

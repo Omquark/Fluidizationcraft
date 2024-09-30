@@ -18,7 +18,7 @@ public class FluidizationItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(BuiltInRegistries.ITEM, FluidizationCraft.MODID);
     public static final DeferredHolder<Item, ? extends Item> BUCKET_ACID = ITEMS.register("bucket_acid",
-            () -> new BucketItem(FluidizationFluids.SOURCE_ACID.get(), new Item.Properties().stacksTo(1)));
+            () -> new FluidizationBucket(FluidizationFluids.SOURCE_ACID.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, ? extends Item> BUCKET_CRYONITE = ITEMS.register("bucket_cryonite",
             () -> new FluidizationBucket(FluidizationFluids.SOURCE_CRYONITE.get(), new Item.Properties().stacksTo(1)));
     public static final DeferredHolder<Item, ? extends Item> BUCKET_NEPTUNIUM = ITEMS.register("bucket_neptunium",

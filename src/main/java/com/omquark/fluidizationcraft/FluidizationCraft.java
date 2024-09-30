@@ -6,6 +6,8 @@ import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
+import com.omquark.fluidizationcraft.data.Capability;
+import com.omquark.fluidizationcraft.data.DataComponent;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.entity.ModEntities;
@@ -15,12 +17,14 @@ import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
+import com.omquark.fluidizationcraft.util.ModInputSlot;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -36,6 +40,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -135,6 +140,7 @@ public class FluidizationCraft
         ModMenuTypes.register(modEventBus);
         ModRecipeDataProvider.register(modEventBus);
         ModRecipeSerializerProvider.register(modEventBus);
+        DataComponent.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -190,10 +196,15 @@ public class FluidizationCraft
                     (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
             );
             event.registerItem(
-                    ItemGunFluid.ITEM_HANDLER_ITEM,
-                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).getItemStackHandler(),
+                    Capability.FLUID_SHOOTER_HANDLER,
+                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).inventory,
                     FluidizationItems.GUN_ACID.get()
             );
+//            event.registerItem(
+//                    ItemGunFluid.ITEM_HANDLER_ITEM,
+//                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).getItemStackHandler(),
+//                    FluidizationItems.GUN_ACID.get()
+//            );
         }
 
         @SubscribeEvent
