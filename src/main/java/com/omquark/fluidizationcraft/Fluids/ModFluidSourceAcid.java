@@ -1,20 +1,16 @@
 package com.omquark.fluidizationcraft.fluids;
 
-import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class ModFluidSourceAcid extends ModFluid.Source {
 
     private static final float FREEZING_TEMPERATURE = 100f;

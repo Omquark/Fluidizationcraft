@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_acid_tank": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:tank_acid"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_aluminum_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:ingot_aluminum"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_empty_vial": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:vial_empty"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "fluidizationcraft:dissolvinator"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_iron_ingot",
+      "has_aluminum_ingot",
+      "has_empty_vial",
+      "has_acid_tank"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "fluidizationcraft:dissolvinator"
+    ]
+  }
+}

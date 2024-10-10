@@ -56,20 +56,39 @@ public class FluidizationItems {
             () -> new ItemGunFluid(new Item.Properties().durability(16).stacksTo(1)));
     public static final DeferredHolder<Item, ? extends Item> GUN_CRYO = ITEMS.register("gun_cryo",
             () -> new ItemGunCryo(new Item.Properties().durability(16).stacksTo(1)));
-
+    public static final DeferredHolder<Item, ? extends Item> DUST_IRON = ITEMS.register("dust_iron",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_GOLD = ITEMS.register("dust_gold",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_COPPER = ITEMS.register("dust_copper",
+            () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_ALUMINUM = ITEMS.register("raw_aluminum",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_ALUMINUM = ITEMS.register("dust_aluminum",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_LEAD = ITEMS.register("raw_lead",
             () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_LEAD = ITEMS.register("dust_lead",
+            () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_NEPTUNIUM = ITEMS.register("raw_neptunium",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_NEPTUNIUM = ITEMS.register("dust_neptunium",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_PLUTONIUM = ITEMS.register("raw_plutonium",
             () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_PLUTONIUM = ITEMS.register("dust_plutonium",
+            () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_RADIONITE = ITEMS.register("raw_radionite",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_RADIONITE = ITEMS.register("dust_radionite",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_TIN = ITEMS.register("raw_tin",
             () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_TIN = ITEMS.register("dust_tin",
+            () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> RAW_URANIUM = ITEMS.register("raw_uranium",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> DUST_URANIUM = ITEMS.register("dust_uranium",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> INGOT_ALUMINUM = ITEMS.register("ingot_aluminum",
             () -> new Item(new Item.Properties()));
@@ -84,6 +103,8 @@ public class FluidizationItems {
     public static final DeferredHolder<Item, ? extends Item> INGOT_TIN = ITEMS.register("ingot_tin",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> INGOT_URANIUM = ITEMS.register("ingot_uranium",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> GOOP_ACID = ITEMS.register("goop_acid",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

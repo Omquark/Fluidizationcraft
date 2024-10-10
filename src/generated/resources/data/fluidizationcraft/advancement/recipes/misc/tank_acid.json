@@ -1,31 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_empty_vial": {
+    "has_copper_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "fluidizationcraft:vial_empty"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_gunpowder": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:gunpowder"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_iron_ingot": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:iron_ingot"
+            "items": "minecraft:copper_ingot"
           }
         ]
       },
@@ -33,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "fluidizationcraft:gun_acid"
+        "recipe": "fluidizationcraft:tank_acid"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -51,15 +31,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_ingot",
-      "has_gunpowder",
       "has_transparent_aluminum",
-      "has_empty_vial"
+      "has_copper_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "fluidizationcraft:gun_acid"
+      "fluidizationcraft:tank_acid"
     ]
   }
 }

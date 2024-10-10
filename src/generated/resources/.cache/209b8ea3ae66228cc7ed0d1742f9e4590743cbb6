@@ -1,4 +1,4 @@
-// 1.21	2024-09-07T22:29:10.8178331	Block States: fluidizationcraft
+// 1.21	2024-09-14T19:30:15.1301292	Block States: fluidizationcraft
 e59964d30f6d91d4befed6ea97b048d9762a37ba assets/fluidizationcraft/blockstates/acid_barrier.json
 86a3157a748b1cb0e9dc0ca724d687b843c4238f assets/fluidizationcraft/blockstates/acid_frozen.json
 2a22abbd55678b602adf74496f5d03eed5208940 assets/fluidizationcraft/blockstates/acid_tnt.json
@@ -9,6 +9,7 @@ d62f43990cec241adf23f8342c74b6ba91613678 assets/fluidizationcraft/blockstates/le
 5f689d74fa8f0462ac8ab75e6d338d750b77cc99 assets/fluidizationcraft/blockstates/neptunium_ore.json
 39c2d8856ae30d2475d5e7a977b18196293b7ec6 assets/fluidizationcraft/blockstates/plutonium_ore.json
 57d17ce0da7a456bdf53711b8924d30799dbfc6f assets/fluidizationcraft/blockstates/radionite_ore.json
+4c0498a50e0e7b1c980e5ed23217a3e655925238 assets/fluidizationcraft/blockstates/tank_acid.json
 1005ce5c99a9931d55549641c0bda645693bf873 assets/fluidizationcraft/blockstates/tin_ore.json
 74eee1a1cab928f56ac88821ad1399c245994375 assets/fluidizationcraft/blockstates/transparent_aluminum.json
 596d5d54462ffa13ab196b8e5ea7c34b6fc7b47c assets/fluidizationcraft/blockstates/uranium_ore.json
@@ -22,6 +23,7 @@ e791d7cd80cb97f541b471e82c71aa4fc91e72df assets/fluidizationcraft/models/block/l
 ae0335254ba3dc725f50af854dc573e9d80d575d assets/fluidizationcraft/models/block/neptunium_ore.json
 5da3e996bb500b1a9663a9c4e6fa94b7a8ad2e45 assets/fluidizationcraft/models/block/plutonium_ore.json
 13cf18b1ee573d142e77259dc881aaff8feb63f8 assets/fluidizationcraft/models/block/radionite_ore.json
+77fdd8a49cd55efd49d0863fd438f7e041acefee assets/fluidizationcraft/models/block/tank_acid.json
 844277631945659aa6656ab55efd4e5346847b54 assets/fluidizationcraft/models/block/tin_ore.json
 9d22f23deb4969678eab18b5cf05bee44fcbc7a0 assets/fluidizationcraft/models/block/transparent_aluminum.json
 473b2d06b8477962fd1cff2b83f7585d6dd4c4e5 assets/fluidizationcraft/models/block/uranium_ore.json
@@ -35,6 +37,7 @@ e32609049a24be992c5b25ccd8b6f7209aa99bc9 assets/fluidizationcraft/models/item/cr
 6218e2c050566cb514e4f2286f2ca0265c7a0ae8 assets/fluidizationcraft/models/item/neptunium_ore.json
 f434bc98825741da6ff39619966d82022d2bbac7 assets/fluidizationcraft/models/item/plutonium_ore.json
 0a88de7d7150e4a31a176e3102ed6ec18daa0f54 assets/fluidizationcraft/models/item/radionite_ore.json
+cb0d0e2904caa9a63c50d3f8328698a115808067 assets/fluidizationcraft/models/item/tank_acid.json
 8709c3a9238c0db7f891b9898236759851b1cecd assets/fluidizationcraft/models/item/tin_ore.json
 1995745ce16c0b02ea0d1fa9cd5d52593e14ee4b assets/fluidizationcraft/models/item/transparent_aluminum.json
 cb0f96b66211ccaab3d62dbf1f8520e1f0c53726 assets/fluidizationcraft/models/item/uranium_ore.json

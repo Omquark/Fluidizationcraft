@@ -2,26 +2,26 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "item": "minecraft:gunpowder"
+    "A": {
+      "item": "fluidizationcraft:ingot_aluminum"
     },
     "I": {
       "item": "minecraft:iron_ingot"
     },
     "T": {
-      "item": "fluidizationcraft:transparent_aluminum"
+      "item": "fluidizationcraft:tank_acid"
     },
     "V": {
       "item": "fluidizationcraft:vial_empty"
     }
   },
   "pattern": [
-    "VT ",
-    "TGI",
-    "II "
+    "IAI",
+    "VTV",
+    "IAI"
   ],
   "result": {
     "count": 1,
-    "id": "fluidizationcraft:gun_acid"
+    "id": "fluidizationcraft:dissolvinator"
   }
 }

@@ -1,21 +1,14 @@
 package com.omquark.fluidizationcraft.blocks;
 
-import com.mojang.serialization.MapCodec;
-import com.omquark.fluidizationcraft.FluidizationCraft;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
-import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class AcidTNT extends Block {
     public AcidTNT() {
         super(BlockBehaviour.Properties.of()

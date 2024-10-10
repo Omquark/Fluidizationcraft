@@ -1,0 +1,11 @@
+{
+  "type": "fluidizationcraft:dissolvinator_recipe",
+  "ingredient": {
+    "count": 3,
+    "item": "minecraft:raw_copper"
+  },
+  "result": {
+    "count": 4,
+    "id": "fluidizationcraft:dust_copper"
+  }
+}

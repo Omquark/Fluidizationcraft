@@ -1,25 +1,21 @@
 package com.omquark.fluidizationcraft.fluids;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.blaze3d.shaders.FogShape;
-//import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-//import net.minecraftforge.fluids.FluidType;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class ModFluidType extends FluidType {
 
     private final ResourceLocation stillTexture;

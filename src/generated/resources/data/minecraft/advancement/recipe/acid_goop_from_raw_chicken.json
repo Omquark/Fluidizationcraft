@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_acid_vial": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:vial_acid"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_chicken": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:chicken"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:acid_goop_from_raw_chicken"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_chicken",
+      "has_acid_vial"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:acid_goop_from_raw_chicken"
+    ]
+  }
+}

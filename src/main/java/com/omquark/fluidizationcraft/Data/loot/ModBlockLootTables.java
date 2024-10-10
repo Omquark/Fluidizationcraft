@@ -2,7 +2,7 @@ package com.omquark.fluidizationcraft.data.loot;
 
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class ModBlockLootTables extends BlockLootSubProvider {
 
     List<Block> blocks = new ArrayList<>();
@@ -41,6 +41,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         dropSelf(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
         dropSelf(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
+        dropSelf(FluidizationBlocks.ACID_TANK.get());
         dropSelf(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
         dropSelf(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
         dropSelf(FluidizationBlocks.ACID_BARRIER.get());

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "raw_aluminum",
+  "ingredient": {
+    "item": "fluidizationcraft:aluminum_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:ingot_aluminum"
+  }
+}

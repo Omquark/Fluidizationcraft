@@ -4,6 +4,8 @@
   "block.fluidizationcraft.dissolvinator": "Dissolvinator",
   "block.fluidizationcraft.transparent_aluminum": "Transparent Aluminum",
   "block.fluidizationcraft.acid_tnt": "Acid TNT",
+  "block.fluidizationcraft.acid_barrier": "Acid Barrier",
+  "block.fluidizationcraft.tank_acid": "Caustic Tank",
 
   "block.fluidizationcraft.aluminum_ore": "Aluminum Ore",
   "block.fluidizationcraft.lead_ore": "Lead Ore",
@@ -24,6 +26,19 @@
   "item.fluidizationcraft.raw_radionite": "Raw Radionite",
   "item.fluidizationcraft.raw_tin": "Raw Tin",
   "item.fluidizationcraft.raw_uranium": "Raw Uranium",
+
+  "item.fluidizationcraft.dust_iron": "Dust Iron",
+  "item.fluidizationcraft.dust_gold": "Dust Gold",
+  "item.fluidizationcraft.dust_copper": "Dust Copper",
+  "item.fluidizationcraft.dust_aluminum": "Dust Aluminum",
+  "item.fluidizationcraft.dust_lead": "Dust Lead",
+  "item.fluidizationcraft.dust_neptunium": "Dust Neptunium",
+  "item.fluidizationcraft.dust_plutonium": "Dust Plutonium",
+  "item.fluidizationcraft.dust_radionite": "Dust Radionite",
+  "item.fluidizationcraft.dust_tin": "Dust Tin",
+  "item.fluidizationcraft.dust_uranium": "Dust Uranium",
+
+  "item.fluidizationcraft.goop_acid": "Acid Goop",
 
   "item.fluidizationcraft.ingot_aluminum": "Ingot Aluminum",
   "item.fluidizationcraft.ingot_lead": "Ingot Lead",

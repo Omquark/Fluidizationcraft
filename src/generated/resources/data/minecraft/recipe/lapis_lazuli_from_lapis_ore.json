@@ -1,0 +1,11 @@
+{
+  "type": "fluidizationcraft:dissolvinator_recipe",
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:lapis_ore"
+  },
+  "result": {
+    "count": 12,
+    "id": "minecraft:lapis_lazuli"
+  }
+}

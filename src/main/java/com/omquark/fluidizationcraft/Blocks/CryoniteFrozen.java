@@ -2,6 +2,7 @@ package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
 import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -11,9 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class CryoniteFrozen extends HalfTransparentBlock {
     public static final MapCodec<CryoniteFrozen> CODEC = simpleCodec(block -> new CryoniteFrozen());
 

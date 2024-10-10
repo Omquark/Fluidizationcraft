@@ -4,6 +4,7 @@ import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -28,6 +29,9 @@ public class FluidizationBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(10f)
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).mapColor(MapColor.COLOR_GRAY)
                     .noOcclusion()));
+    public static final DeferredHolder<Block, Block> ACID_TANK = registerBlock("tank_acid",
+            () -> new Block(BlockBehaviour.Properties.of().strength(10f)
+                    .pushReaction(PushReaction.BLOCK).sound(SoundType.METAL).mapColor(MapColor.COLOR_BLACK)));
     public static final DeferredHolder<Block, Block> ACID_BARRIER = registerBlock("acid_barrier", AcidBarrier::new);
     public static final DeferredHolder<Block, Block> DISSOLVINATOR_BLOCK = registerBlock("dissolvinator", DissolvinatorBlock::new);
     public static final DeferredHolder<Block, ModLiquidBlock> ACID_BLOCK = registerBlock("acid_block",

@@ -1,17 +1,13 @@
 package com.omquark.fluidizationcraft.client;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.io.FileNotFoundException;
-
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@EverythingNonNullByDefault
 public class ModArrowRenderer extends ArrowRenderer<AbstractArrow> {
     private final String resourceLocation;
 

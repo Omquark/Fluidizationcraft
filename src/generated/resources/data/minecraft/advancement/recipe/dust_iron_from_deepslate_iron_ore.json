@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_acid_vial": {
+      "conditions": {
+        "items": [
+          {
+            "items": "fluidizationcraft:vial_acid"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_deepslate_iron_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:iron_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:dust_iron_from_deepslate_iron_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_deepslate_iron_ore",
+      "has_acid_vial"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:dust_iron_from_deepslate_iron_ore"
+    ]
+  }
+}

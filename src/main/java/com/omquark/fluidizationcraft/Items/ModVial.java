@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.Items;
 
 import com.omquark.fluidizationcraft.fluids.ModFluid;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,11 +24,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class ModVial extends BucketItem {
     private final Supplier<? extends Fluid> fluidSupplier;
 

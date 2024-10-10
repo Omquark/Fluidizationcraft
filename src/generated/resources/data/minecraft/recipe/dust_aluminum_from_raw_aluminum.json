@@ -1,0 +1,11 @@
+{
+  "type": "fluidizationcraft:dissolvinator_recipe",
+  "ingredient": {
+    "count": 3,
+    "item": "fluidizationcraft:raw_aluminum"
+  },
+  "result": {
+    "count": 4,
+    "id": "fluidizationcraft:dust_aluminum"
+  }
+}

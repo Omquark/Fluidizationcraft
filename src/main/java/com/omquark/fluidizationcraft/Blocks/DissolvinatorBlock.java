@@ -3,7 +3,7 @@ package com.omquark.fluidizationcraft.blocks;
 import com.mojang.serialization.MapCodec;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,11 +29,9 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.Mirror;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@EverythingNonNullByDefault
 public class DissolvinatorBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;//DirectionProperty.create("facing");
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
@@ -121,6 +119,19 @@ public class DissolvinatorBlock extends BaseEntityBlock {
         super.onRemove(state, level, blockPos, newState, isMoving);
     }
 
+//    @Nullable
+//    @Override
+//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+//        if (level.isClientSide) {
+//            return null;
+//        }
+//        return createTickerHelper(type, ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
+//                (level1, pos, state1, blockEntity) -> {
+//                    state1.tick((ServerLevel) level1, pos, level1.random);
+//                }
+//        );
+//    }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
@@ -128,7 +139,12 @@ public class DissolvinatorBlock extends BaseEntityBlock {
             return null;
         }
         return createTickerHelper(type, ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
-
-                (level1, pos, state1, blockEntity) -> state1.tick((ServerLevel) level1, pos, level1.random));
+                DissolvinatorBlockEntity::tick
+//                (level1, pos, state1, blockEntity) -> {
+//                    FluidizationCraft.LOGGER.debug(blockEntity.getType().toString());
+//
+//                    state1.tick((ServerLevel) level1, pos, level1.random);
+//                }
+        );
     }
 }

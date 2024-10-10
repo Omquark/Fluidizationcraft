@@ -1,10 +1,15 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.Items.ItemGunFluid;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
+import com.omquark.fluidizationcraft.data.Capability;
+import com.omquark.fluidizationcraft.data.DataComponent;
+import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
+import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
@@ -12,12 +17,14 @@ import com.omquark.fluidizationcraft.Items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
+import com.omquark.fluidizationcraft.util.ModInputSlot;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -33,6 +40,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -53,6 +61,7 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
                 output.accept(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
                 output.accept(FluidizationBlocks.ACID_BARRIER.get());
+                output.accept(FluidizationBlocks.ACID_TANK.get());
                 output.accept(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
                 output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
                 output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
@@ -84,6 +93,9 @@ public class FluidizationCraft
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
                 output.accept(FluidizationBlocks.ACID_TNT.get());
+                output.accept(FluidizationItems.DUST_IRON.get());
+                output.accept(FluidizationItems.DUST_GOLD.get());
+                output.accept(FluidizationItems.DUST_COPPER.get());
                 output.accept(FluidizationItems.RAW_ALUMINUM.get());
                 output.accept(FluidizationItems.RAW_LEAD.get());
                 output.accept(FluidizationItems.RAW_NEPTUNIUM.get());
@@ -91,6 +103,13 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.RAW_RADIONITE.get());
                 output.accept(FluidizationItems.RAW_TIN.get());
                 output.accept(FluidizationItems.RAW_URANIUM.get());
+                output.accept(FluidizationItems.DUST_ALUMINUM.get());
+                output.accept(FluidizationItems.DUST_LEAD.get());
+                output.accept(FluidizationItems.DUST_NEPTUNIUM.get());
+                output.accept(FluidizationItems.DUST_PLUTONIUM.get());
+                output.accept(FluidizationItems.DUST_RADIONITE.get());
+                output.accept(FluidizationItems.DUST_TIN.get());
+                output.accept(FluidizationItems.DUST_URANIUM.get());
                 output.accept(FluidizationItems.INGOT_ALUMINUM.get());
                 output.accept(FluidizationItems.INGOT_LEAD.get());
                 output.accept(FluidizationItems.INGOT_NEPTUNIUM.get());
@@ -98,6 +117,7 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.INGOT_RADIONITE.get());
                 output.accept(FluidizationItems.INGOT_TIN.get());
                 output.accept(FluidizationItems.INGOT_URANIUM.get());
+                output.accept(FluidizationItems.GOOP_ACID.get());
 
             })
             .title(Component.literal("Fluidization Craft"))
@@ -119,6 +139,9 @@ public class FluidizationCraft
         ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipeDataProvider.register(modEventBus);
+        ModRecipeSerializerProvider.register(modEventBus);
+        DataComponent.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -173,6 +196,16 @@ public class FluidizationCraft
                     ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
                     (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
             );
+            event.registerItem(
+                    Capability.FLUID_SHOOTER_HANDLER,
+                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).inventory,
+                    FluidizationItems.GUN_ACID.get()
+            );
+//            event.registerItem(
+//                    ItemGunFluid.ITEM_HANDLER_ITEM,
+//                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).getItemStackHandler(),
+//                    FluidizationItems.GUN_ACID.get()
+//            );
         }
 
         @SubscribeEvent
