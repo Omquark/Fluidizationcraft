@@ -48,5 +48,6 @@ public class FluidizationItemProvider extends ItemModelProvider {
         basicItem(FluidizationItems.INGOT_RADIONITE.get());
         basicItem(FluidizationItems.INGOT_TIN.get());
         basicItem(FluidizationItems.INGOT_URANIUM.get());
+        basicItem(FluidizationItems.GOOP_ACID.get());
     }
 }

@@ -1,4 +1,4 @@
-// 1.21	2024-09-14T19:30:15.1331276	Item Models: fluidizationcraft
+// 1.21	2024-10-09T22:55:41.0962307	Item Models: fluidizationcraft
 3898be66f455efd486f8db5fc04ce600c490cbed assets/fluidizationcraft/models/item/cell_acid.json
 807d2e85dbd554d49c525b17df61015be888bf53 assets/fluidizationcraft/models/item/dust_aluminum.json
 4678ded05c94a74749e7b26253e73620389fbca8 assets/fluidizationcraft/models/item/dust_copper.json
@@ -10,6 +10,7 @@ da29366c0e383dfcd8bbc65c684a68f424c5d93a assets/fluidizationcraft/models/item/du
 f00ec042aa69ab6d231d00510976c3906c411fb2 assets/fluidizationcraft/models/item/dust_radionite.json
 0a275a8cda1f90ee43abc912a94cdb258c6abf24 assets/fluidizationcraft/models/item/dust_tin.json
 a0d2706c14b35937a7803c222d71740b258cc901 assets/fluidizationcraft/models/item/dust_uranium.json
+e7758342514cbd5dac7455c791edd46e46e504b2 assets/fluidizationcraft/models/item/goop_acid.json
 a697cc1a3ca83641b08a0f2d4391fb8d251337cf assets/fluidizationcraft/models/item/gun_acid.json
 b8ca5208d888e98bb719236615b3df9dcb183bc2 assets/fluidizationcraft/models/item/gun_cryo.json
 cbff3c9bbd5ed6533267654dfa3e3d5cd644bb79 assets/fluidizationcraft/models/item/ingot_aluminum.json

@@ -3,7 +3,6 @@ package com.omquark.fluidizationcraft.Items;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
@@ -104,6 +103,8 @@ public class FluidizationItems {
     public static final DeferredHolder<Item, ? extends Item> INGOT_TIN = ITEMS.register("ingot_tin",
             () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, ? extends Item> INGOT_URANIUM = ITEMS.register("ingot_uranium",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ? extends Item> GOOP_ACID = ITEMS.register("goop_acid",
             () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

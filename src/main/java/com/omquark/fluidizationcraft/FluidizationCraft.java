@@ -117,6 +117,7 @@ public class FluidizationCraft
                 output.accept(FluidizationItems.INGOT_RADIONITE.get());
                 output.accept(FluidizationItems.INGOT_TIN.get());
                 output.accept(FluidizationItems.INGOT_URANIUM.get());
+                output.accept(FluidizationItems.GOOP_ACID.get());
 
             })
             .title(Component.literal("Fluidization Craft"))

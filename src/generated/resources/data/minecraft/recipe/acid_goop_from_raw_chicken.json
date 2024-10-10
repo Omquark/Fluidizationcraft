@@ -1,0 +1,11 @@
+{
+  "type": "fluidizationcraft:dissolvinator_recipe",
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:chicken"
+  },
+  "result": {
+    "count": 1,
+    "id": "fluidizationcraft:goop_acid"
+  }
+}

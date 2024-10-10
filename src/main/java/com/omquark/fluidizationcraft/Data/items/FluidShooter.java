@@ -7,6 +7,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public record FluidShooter(ItemStack input, ItemStack output, int amount) {
 
@@ -31,8 +32,10 @@ public record FluidShooter(ItemStack input, ItemStack output, int amount) {
     }
 
     public FluidShooter updateSlot(FluidShooter.Slot slot){
-        ItemStack input = slot.index == 0 ? slot.item : ItemStack.EMPTY;
-        ItemStack output = slot.index == 1 ? slot.item : ItemStack.EMPTY;
+//        ItemStack input = slot.index == 0 ? slot.item : ItemStack.EMPTY;
+//        ItemStack output = slot.index == 1 ? slot.item : ItemStack.EMPTY;
+        ItemStack input = slot.index == 0 ? slot.item : new ItemStack(Items.COBBLESTONE);
+        ItemStack output = slot.index == 1 ? slot.item : new ItemStack(Items.COBBLESTONE);
         int amount = 0;
 
         return new FluidShooter(input, output, amount);

@@ -11,8 +11,11 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Nullable;
 
 @EverythingNonNullByDefault
@@ -57,14 +60,28 @@ public class FluidShooterInventory implements MenuProvider {
     }
 
     private void loadData() {
-        FluidShooter fluidShooter = this.stack.getOrDefault(DataComponent.FLUID_SHOOTER.get(), new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0));
-        this.inventory = new ItemStackHandler(NonNullList.withSize(2, ItemStack.EMPTY)){
+//        FluidShooter fluidShooter = this.stack.getOrDefault(DataComponent.FLUID_SHOOTER.get(), new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0));
+        FluidShooter fluidShooter =
+                this.stack.getOrDefault(
+                        DataComponent.FLUID_SHOOTER.get(),
+                        new FluidShooter(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), 0)
+//                        new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0)
+                );
+
+        NonNullList<ItemStack> stacks = NonNullList.createWithCapacity(2);
+        stacks.add(0, new ItemStack(Items.COBBLESTONE));
+        stacks.add(1, new ItemStack(Items.COBBLESTONE));
+
+//        this.inventory = new ItemStackHandler(NonNullList.withSize(2, ItemStack.EMPTY)){
+        this.inventory = new ItemStackHandler(stacks){
             @Override
             protected void onContentsChanged(int slot) {
                 stack.update(DataComponent.FLUID_SHOOTER.get(),
-                        new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0),
-                        (a) -> a.updateSlot(new FluidShooter.Slot(slot, inventory.getStackInSlot(slot))));
+//                        new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0),
+                        new FluidShooter(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.COBBLESTONE), 0),
+                        (fluidShooter) -> fluidShooter.updateSlot(new FluidShooter.Slot(slot, inventory.getStackInSlot(slot))));
                 saveData();
+//                super.onContentsChanged(slot);
             }
         };
         this.inventory.setStackInSlot(0, fluidShooter.input());

@@ -1,5 +1,6 @@
 package com.omquark.fluidizationcraft.Items;
 
+import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.data.items.FluidShooter;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.inventory.FluidShooterInventory;
@@ -23,7 +24,10 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-
+/**
+ * TODO: This item doesn't work, the menu does not display the inventory correctly, thus the recipe is removed
+ * Add this recipe when the menu is fixed to add the item back in to be crafted
+ */
 @EverythingNonNullByDefault
 public class ItemGunFluid extends Item {
 
@@ -77,6 +81,7 @@ public class ItemGunFluid extends Item {
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 //                serverPlayer.openMenu(new SimpleMenuProvider((id, inv, p) -> createMenu(id, player.getInventory(), player), getDisplayName()));
 //                serverPlayer.openMenu(new FluidShooterInventory());
+                FluidizationCraft.LOGGER.debug(player.getInventory().getSelected().toString());
                 FluidShooterInventory.openGUI(serverPlayer, player.getInventory().getSelected());
 
             }

@@ -66,6 +66,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 FluidizationItems.INGOT_TIN.get(), .7f, 200, "raw_tin");
         oreSmelting(consumer, List.of(FluidizationItems.DUST_URANIUM.get()), RecipeCategory.MISC,
                 FluidizationItems.INGOT_URANIUM.get(), .7f, 200, "raw_uranium");
+        oreSmelting(consumer, List.of(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_ALUMINUM.get(), 0.7f, 200, "raw_aluminum");
+        oreSmelting(consumer, List.of(FluidizationBlocks.LEAD_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_LEAD.get(), .7f, 200, "raw_lead");
+        oreSmelting(consumer, List.of(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_NEPTUNIUM.get(), .7f, 200, "raw_neptunium");
+        oreSmelting(consumer, List.of(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_PLUTONIUM.get(), .7f, 200, "raw_plutonium");
+        oreSmelting(consumer, List.of(FluidizationBlocks.RADIONITE_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_RADIONITE.get(), .7f, 200, "raw_radionite");
+        oreSmelting(consumer, List.of(FluidizationBlocks.TIN_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_TIN.get(), .7f, 200, "raw_tin");
+        oreSmelting(consumer, List.of(FluidizationBlocks.URANIUM_ORE_BLOCK.get()), RecipeCategory.MISC,
+                FluidizationItems.INGOT_URANIUM.get(), .7f, 200, "raw_uranium");
     }
 
     private void buildShaped(RecipeOutput consumer){
@@ -100,20 +114,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer);
+//TODO: Add this back when the Acid gun menu is fixed
+//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_ACID.get())
+//                .define('V', FluidizationItems.VIAL_EMPTY.get())
+//                .define('I', Items.IRON_INGOT)
+//                .define('T', FluidizationBlocks.TRANSPARENT_ALUMINUM.get())
+//                .define('G', Items.GUNPOWDER)
+//                .pattern("VT ")
+//                .pattern("TGI")
+//                .pattern("II ")
+//                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+//                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+//                .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
+//                .unlockedBy("has_empty_vial", has(FluidizationItems.VIAL_EMPTY.get()))
+//                .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_ACID.get())
-                .define('V', FluidizationItems.VIAL_EMPTY.get())
-                .define('I', Items.IRON_INGOT)
-                .define('T', FluidizationBlocks.TRANSPARENT_ALUMINUM.get())
-                .define('G', Items.GUNPOWDER)
-                .pattern("VT ")
-                .pattern("TGI")
-                .pattern("II ")
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
-                .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
-                .unlockedBy("has_empty_vial", has(FluidizationItems.VIAL_EMPTY.get()))
-                .save(consumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_CRYO.get())
                 .define('C', FluidizationItems.VIAL_CRYONITE.get())
@@ -156,6 +171,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     private void buildDissolvinator(RecipeOutput consumer){
 
+        //Iron
         new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Items.RAW_IRON), 3),
                 new ItemStack(FluidizationItems.DUST_IRON.get(), 4)
@@ -171,6 +187,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_iron_ore", has(Blocks.IRON_ORE))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer, "dust_iron_from_iron_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_IRON_ORE), 1),
+                new ItemStack(FluidizationItems.DUST_IRON.get(), 2)
+        )
+                .unlockedBy("has_deepslate_iron_ore", has(Blocks.IRON_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "dust_iron_from_deepslate_iron_ore");
 
         new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Items.RAW_GOLD), 3),
@@ -189,6 +213,22 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(consumer, "dust_gold_from_gold_ore");
 
         new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_GOLD_ORE), 1),
+                new ItemStack(FluidizationItems.DUST_GOLD.get(), 2)
+        )
+                .unlockedBy("has_deepslate_gold_ore", has(Blocks.DEEPSLATE_GOLD_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "dust_gold_from_deepslate_gold_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.NETHER_GOLD_ORE), 1),
+                new ItemStack(FluidizationItems.DUST_GOLD.get(), 2)
+        )
+                .unlockedBy("has_nether_gold_ore", has(Blocks.NETHER_GOLD_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "dust_gold_from_nether_gold_ore");
+
+        new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Items.RAW_COPPER), 3),
                 new ItemStack(FluidizationItems.DUST_COPPER.get(), 4)
         )
@@ -205,12 +245,28 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(consumer, "dust_copper_from_copper_ore");
 
         new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_COPPER_ORE), 1),
+                new ItemStack(FluidizationItems.DUST_COPPER.get(), 2)
+        )
+                .unlockedBy("has_deepslate_copper_ore", has(Blocks.DEEPSLATE_COPPER_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "dust_copper_from_deepslate_copper_ore");
+
+        new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Blocks.REDSTONE_ORE), 1),
                 new ItemStack(Blocks.REDSTONE_WIRE, 12)
         )
                 .unlockedBy("has_redstone_ore", has(Blocks.REDSTONE_ORE))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer, "dust_redstone_from_redstone_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_REDSTONE_ORE), 1),
+                new ItemStack(Blocks.REDSTONE_WIRE, 12)
+        )
+                .unlockedBy("has_deepslate_redstone_ore", has(Blocks.DEEPSLATE_REDSTONE_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "dust_redstone_from_deepslate_redstone_ore");
 
         new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Blocks.DIAMOND_ORE), 1),
@@ -221,12 +277,36 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(consumer, "diamond_from_diamond_ore");
 
         new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_DIAMOND_ORE), 1),
+                new ItemStack(Items.DIAMOND, 2)
+        )
+                .unlockedBy("has_deepslate_diamond_ore", has(Blocks.DEEPSLATE_DIAMOND_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "diamond_from_deespalte_diamond_ore");
+
+        new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(Blocks.LAPIS_ORE), 1),
                 new ItemStack(Items.LAPIS_LAZULI, 12)
         )
                 .unlockedBy("has_lapis_ore", has(Blocks.LAPIS_ORE))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer, "lapis_lazuli_from_lapis_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.DEEPSLATE_LAPIS_ORE), 1),
+                new ItemStack(Items.LAPIS_LAZULI, 12)
+        )
+                .unlockedBy("has_deepslate_lapis_ore", has(Blocks.DEEPSLATE_LAPIS_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "lapis_lazuli_from_deeepslate_lapis_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Blocks.NETHER_QUARTZ_ORE), 1),
+                new ItemStack(Items.QUARTZ, 12)
+        )
+                .unlockedBy("has_nether_quartz_ore", has(Blocks.NETHER_QUARTZ_ORE))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "nether_quartz_from_nether_quartz_ore");
 
         new DissolvinatorRecipeBuilder(
                 new SizedIngredient(Ingredient.of(FluidizationItems.RAW_ALUMINUM.get()), 3),
@@ -339,5 +419,45 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_uranium_ore", has(FluidizationBlocks.URANIUM_ORE_BLOCK.get()))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer, "dust_uranium_from_uranium_ore");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Items.CHICKEN), 1),
+                new ItemStack(FluidizationItems.GOOP_ACID, 1)
+        )
+                .unlockedBy("has_raw_chicken", has(Items.CHICKEN))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "acid_goop_from_raw_chicken");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Items.BEEF), 1),
+                new ItemStack(FluidizationItems.GOOP_ACID, 1)
+        )
+                .unlockedBy("has_raw_beef", has(Items.BEEF))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "acid_goop_from_raw_beef");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Items.PORKCHOP), 1),
+                new ItemStack(FluidizationItems.GOOP_ACID, 1)
+        )
+                .unlockedBy("has_raw_porkchop", has(Items.PORKCHOP))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "acid_goop_from_raw_porkchop");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Items.MUTTON), 1),
+                new ItemStack(FluidizationItems.GOOP_ACID, 1)
+        )
+                .unlockedBy("has_raw_mutton", has(Items.MUTTON))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "acid_goop_from_raw_mutton");
+
+        new DissolvinatorRecipeBuilder(
+                new SizedIngredient(Ingredient.of(Items.RABBIT), 1),
+                new ItemStack(FluidizationItems.GOOP_ACID, 1)
+        )
+                .unlockedBy("has_raw_rabbit", has(Items.RABBIT))
+                .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
+                .save(consumer, "acid_goop_from_raw_rabbit");
     }
 }
