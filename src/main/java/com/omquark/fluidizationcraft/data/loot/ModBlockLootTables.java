@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.data.loot;
 
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;

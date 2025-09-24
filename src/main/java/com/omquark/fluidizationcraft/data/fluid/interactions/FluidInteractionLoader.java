@@ -3,6 +3,7 @@ package com.omquark.fluidizationcraft.data.fluid.interactions;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.fluids.ModFluid;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -31,12 +32,16 @@ public class FluidInteractionLoader extends SimpleJsonResourceReloadListener {
                          ResourceManager resourceManager,
                          ProfilerFiller profiler) {
 
-        FluidizationCraft.LOGGER.warn("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!{}{}", resourceManager, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
         for (Map.Entry<ResourceLocation, JsonElement> entry : jsons.entrySet()) {
             FluidInteractionData interactionData = GSON.fromJson(entry.getValue(), FluidInteractionData.class);
-            Fluid fluid = BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, "blocks/" + interactionData.fluid));
-            if (fluid instanceof ModFluid modFluid) {
+            Fluid fluidSource = BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, interactionData.fluid + "_source"));
+            Fluid fluidFlowing = BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(FluidizationCraft.MODID, interactionData.fluid + "_flowing"));
+            BuiltInRegistries.FLUID.forEach(fluid ->
+                    FluidizationCraft.LOGGER.warn("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!{}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", fluid.())
+            );
+            String fluidSourceString = FluidizationCraft.MODID + "/" + interactionData.fluid + "_source";
+            String fluidFlowingString = FluidizationCraft.MODID + "/" + interactionData.fluid + "_flowing";
+            if (fluidSource instanceof ModFluid modFluidSource && fluidFlowing instanceof ModFluid modFluidFlowing) {
                 HashMap<Block, BlockState> blockInteractionMap = new HashMap<>();
                 for (Map.Entry<String, String> e : interactionData.blockInteractions.entrySet()) {
                     Block from = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(e.getKey()));
@@ -51,8 +56,10 @@ public class FluidInteractionLoader extends SimpleJsonResourceReloadListener {
                     fluidInteractionMap.put(other, to.defaultBlockState());
                 }
 
-                modFluid.setBlockInteractions(blockInteractionMap);
-                modFluid.setFluidInteractions(fluidInteractionMap);
+                modFluidSource.setBlockInteractions(blockInteractionMap);
+                modFluidSource.setFluidInteractions(fluidInteractionMap);
+                modFluidFlowing.setBlockInteractions(blockInteractionMap);
+                modFluidFlowing.setFluidInteractions(fluidInteractionMap);
             }
         }
     }

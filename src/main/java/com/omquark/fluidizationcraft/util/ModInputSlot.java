@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.util;
 
-import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;

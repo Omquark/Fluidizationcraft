@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.Items;
+package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;

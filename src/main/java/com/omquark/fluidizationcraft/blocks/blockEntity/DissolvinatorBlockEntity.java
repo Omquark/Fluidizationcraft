@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.blocks.blockEntity;
 
-import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipe;
 import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipeInput;

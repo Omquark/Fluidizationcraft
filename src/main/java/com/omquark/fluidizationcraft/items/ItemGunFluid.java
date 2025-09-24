@@ -1,28 +1,20 @@
-package com.omquark.fluidizationcraft.Items;
+package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.data.items.FluidShooter;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.inventory.FluidShooterInventory;
-import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * TODO: This item doesn't work, the menu does not display the inventory correctly, thus the recipe is removed

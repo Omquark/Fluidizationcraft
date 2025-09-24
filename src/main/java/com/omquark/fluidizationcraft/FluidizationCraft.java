@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
-import com.omquark.fluidizationcraft.Items.ItemGunFluid;
+import com.omquark.fluidizationcraft.items.ItemGunFluid;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -14,7 +14,7 @@ import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionLoa
 import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
-import com.omquark.fluidizationcraft.Items.FluidizationItems;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;

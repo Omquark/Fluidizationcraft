@@ -1,20 +1,13 @@
 package com.omquark.fluidizationcraft.screen.FluidShooter;
 
-import com.omquark.fluidizationcraft.Items.FluidizationItems;
-import com.omquark.fluidizationcraft.data.Capability;
-import com.omquark.fluidizationcraft.data.items.FluidShooter;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
-import com.omquark.fluidizationcraft.util.ModInputSlot;
-import com.omquark.fluidizationcraft.util.ModOutputSlotItemHandler;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
