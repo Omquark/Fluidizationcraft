@@ -10,6 +10,7 @@ import com.omquark.fluidizationcraft.data.Capability;
 import com.omquark.fluidizationcraft.data.DataComponent;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
+import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionLoader;
 import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
@@ -39,6 +40,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -48,8 +50,7 @@ import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FluidizationCraft.MODID)
-public class FluidizationCraft
-{
+public class FluidizationCraft {
     public static final String MODID = "fluidizationcraft";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
@@ -123,12 +124,7 @@ public class FluidizationCraft
             .title(Component.literal("Fluidization Craft"))
             .build());
 
-    public FluidizationCraft(IEventBus modEventBus, ModContainer modContainer)
-    {
-
-//        IEventBus modEventBus = NeoForge.EVENT_BUS;
-//        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-//        modEventBus.register(DataGeneratorHandler.class);
+    public FluidizationCraft(IEventBus modEventBus, ModContainer modContainer) {
 
         modEventBus.addListener(this::commonSetup);
 
@@ -157,40 +153,36 @@ public class FluidizationCraft
 
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         if (Config.logDirtBlock)
             LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
 
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
+        LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
             event.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
+    public void onServerStarting(ServerStartingEvent event) {
 
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
 
         @SubscribeEvent
-        public static void registerCapabilities(RegisterCapabilitiesEvent event){
+        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
             event.registerBlockEntity(
                     DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
                     ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
@@ -198,19 +190,13 @@ public class FluidizationCraft
             );
             event.registerItem(
                     Capability.FLUID_SHOOTER_HANDLER,
-                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).inventory,
+                    (itemStack, context) -> ((ItemGunFluid) itemStack.getItem()).inventory,
                     FluidizationItems.GUN_ACID.get()
             );
-//            event.registerItem(
-//                    ItemGunFluid.ITEM_HANDLER_ITEM,
-//                    (itemStack, context) -> ((ItemGunFluid)itemStack.getItem()).getItemStackHandler(),
-//                    FluidizationItems.GUN_ACID.get()
-//            );
         }
 
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_ACID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_ACID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_CRYONITE.get(), RenderType.translucent());
@@ -235,9 +221,17 @@ public class FluidizationCraft
         }
 
         @SubscribeEvent
-        public static void registerScreen(RegisterMenuScreensEvent event){
+        public static void registerScreen(RegisterMenuScreensEvent event) {
             event.register(ModMenuTypes.DISSOLVINATOR_MENU.get(), DissolvinatorScreen::new);
             event.register(ModMenuTypes.FLUID_SHOOTER_MENU.get(), FluidShooterScreen::new);
+        }
+    }
+
+    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
+    public static class ModReloadListeners {
+        @SubscribeEvent
+        public static void onAddReloadListeners(AddReloadListenerEvent event) {
+            event.addListener(FluidInteractionLoader.INSTANCE);
         }
     }
 }

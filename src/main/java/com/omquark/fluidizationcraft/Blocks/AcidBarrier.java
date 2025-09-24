@@ -4,6 +4,7 @@ import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -22,7 +23,10 @@ public class AcidBarrier extends HalfTransparentBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 10f);
+        if(entity.invulnerableTime > 0 || entity instanceof ItemEntity) {
+            return;
+        }
         super.stepOn(level, pos, state, entity);
+        entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 10f);
     }
 }

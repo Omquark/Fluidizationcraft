@@ -1,0 +1,15 @@
+{
+  "block_interactions": {
+    "minecraft:dirt": "minecraft:coarse_dirt",
+    "minecraft:grass_block": "minecraft:dirt",
+    "minecraft:stone": "minecraft:cobblestone",
+    "minecraft:water": "minecraft:clay"
+  },
+  "fluid": "acid",
+  "fluid_interactions": {
+    "minecraft:dirt": "minecraft:coarse_dirt",
+    "minecraft:grass_block": "minecraft:dirt",
+    "minecraft:stone": "minecraft:cobblestone",
+    "minecraft:water": "minecraft:clay"
+  }
+}

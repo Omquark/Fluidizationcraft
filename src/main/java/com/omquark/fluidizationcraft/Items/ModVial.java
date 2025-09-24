@@ -37,60 +37,67 @@ public class ModVial extends BucketItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
+        ItemStack inHandStack = player.getItemInHand(hand);
         BlockHitResult blockhitresult = getPlayerPOVHitResult(level, player, this.fluidSupplier.get() == Fluids.EMPTY ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
 //        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(player, level, itemstack, blockhitresult);
 //        if (ret != null) return ret;
         if (blockhitresult.getType() == HitResult.Type.MISS) {
-            return InteractionResultHolder.pass(itemstack);
+            return InteractionResultHolder.pass(inHandStack);
         } else if (blockhitresult.getType() != HitResult.Type.BLOCK) {
-            return InteractionResultHolder.pass(itemstack);
+            return InteractionResultHolder.pass(inHandStack);
         } else {
-            BlockPos blockpos = blockhitresult.getBlockPos();
-            net.minecraft.core.Direction direction = blockhitresult.getDirection();
-            BlockPos blockpos1 = blockpos.relative(direction);
-            if (!level.mayInteract(player, blockpos) || !player.mayUseItemAt(blockpos1, direction, itemstack)) {
-                return InteractionResultHolder.fail(itemstack);
+            BlockPos blockHitPos = blockhitresult.getBlockPos();
+            net.minecraft.core.Direction hitDirection = blockhitresult.getDirection();
+            BlockPos blockHitPosRelative = blockHitPos.relative(hitDirection);
+            if (!level.mayInteract(player, blockHitPos) || !player.mayUseItemAt(blockHitPosRelative, hitDirection, inHandStack)) {
+                return InteractionResultHolder.fail(inHandStack);
             } else if (this.fluidSupplier.get() == Fluids.EMPTY) {
-                BlockState blockstate1 = level.getBlockState(blockpos);
-                if (blockstate1.getBlock() instanceof BucketPickup bucketpickup) {
-                    if(blockstate1.getBlock() == Blocks.WATER)
-                        return InteractionResultHolder.fail(itemstack);
-                    ItemStack itemstack2 = bucketpickup.pickupBlock(player, level, blockpos, blockstate1);
+                BlockState blockHitState = level.getBlockState(blockHitPos);
+                if (blockHitState.getBlock() instanceof BucketPickup bucketpickup) {
+                    if (blockHitState.getBlock() == Blocks.WATER)
+                        return InteractionResultHolder.fail(inHandStack);
+                    ItemStack bucketPickupStack = bucketpickup.pickupBlock(player, level, blockHitPos, blockHitState);
 
-                    if (!itemstack2.isEmpty()) {
+                    if (!bucketPickupStack.isEmpty()) {
                         player.awardStat(Stats.ITEM_USED.get(this));
-                        bucketpickup.getPickupSound(blockstate1).ifPresent(p_150709_ -> player.playSound(p_150709_, 1.0F, 1.0F));
-                        itemstack2 = swapBucketForVial(itemstack2);
-                        ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, itemstack2);
-                        itemstack1 = swapBucketForVial(itemstack1);
+                        bucketpickup.getPickupSound(blockHitState).ifPresent(p_150709_ -> player.playSound(p_150709_, 1.0F, 1.0F));
+                        bucketPickupStack = swapBucketForVial(bucketPickupStack);
+                        ItemStack filledBucketStack = ItemUtils.createFilledResult(inHandStack, player, bucketPickupStack);
+                        filledBucketStack = swapBucketForVial(filledBucketStack);
 
-                        return InteractionResultHolder.consume(itemstack1);
+                        int vialSlot = player.getInventory().getSlotWithRemainingSpace(filledBucketStack);
+                        if (vialSlot == -1) {
+                            return InteractionResultHolder.consume(filledBucketStack);
+                        }
+
+                        player.getInventory().getItem(vialSlot).grow(1);
+                        filledBucketStack.shrink(1);
+                        return InteractionResultHolder.success(filledBucketStack);
                     }
                 }
 
-                return InteractionResultHolder.fail(itemstack);
+                return InteractionResultHolder.fail(inHandStack);
             } else {
-                BlockState blockstate = level.getBlockState(blockpos);
-                BlockPos blockpos2 = canBlockContainFluid(player, level, blockpos, blockstate) ? blockpos : blockpos1;
-                if (this.emptyContents(player, level, blockpos2, blockhitresult, itemstack)) {
-                    this.checkExtraContent(player, level, itemstack, blockpos2);
+                BlockState targetBlockState = level.getBlockState(blockHitPos);
+                BlockPos bucketTargetBlock = canBlockContainFluid(player, level, blockHitPos, targetBlockState) ? blockHitPos : blockHitPosRelative;
+                if (this.emptyContents(player, level, bucketTargetBlock, blockhitresult, inHandStack)) {
+                    this.checkExtraContent(player, level, inHandStack, bucketTargetBlock);
                     if (player instanceof ServerPlayer) {
-                        CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, blockpos2, itemstack);
+                        CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, bucketTargetBlock, inHandStack);
                     }
 
                     player.awardStat(Stats.ITEM_USED.get(this));
                     player.addItem(new ItemStack(FluidizationItems.VIAL_EMPTY.get()));
                     player.getMainHandItem().shrink(1);
-                    return InteractionResultHolder.consume(itemstack);
+                    return InteractionResultHolder.consume(inHandStack);
                 } else {
-                    return InteractionResultHolder.fail(itemstack);
+                    return InteractionResultHolder.fail(inHandStack);
                 }
             }
         }
     }
 
-    public static ItemStack swapBucketForVial(ItemStack itemStack){
+    public static ItemStack swapBucketForVial(ItemStack itemStack) {
         ItemStack stack = itemStack;
         if (itemStack.getItem() instanceof FluidizationBucket) {
             if (((FluidizationBucket) itemStack.getItem()).getFluid() instanceof ModFluid) {

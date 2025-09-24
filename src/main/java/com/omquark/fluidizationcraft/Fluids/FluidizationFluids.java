@@ -100,44 +100,44 @@ public class FluidizationFluids {
     }
 
     public static void createInteractions() {
-        HashMap<Block, BlockState> acidBlockInteractions = new HashMap<>();
-        HashMap<FluidType, BlockState> acidFluidInteractions = new HashMap<>();
-        acidFluidInteractions.put(Fluids.WATER.getFluidType(), Blocks.CLAY.defaultBlockState());
-        acidBlockInteractions.put(Blocks.DIRT, Blocks.COARSE_DIRT.defaultBlockState());
-        acidBlockInteractions.put(Blocks.GRASS_BLOCK, Blocks.DIRT.defaultBlockState());
-        acidBlockInteractions.put(Blocks.SANDSTONE, Blocks.SAND.defaultBlockState());
-        acidBlockInteractions.put(Blocks.STONE, Blocks.COBBLESTONE.defaultBlockState());
-        acidBlockInteractions.put(Blocks.COBBLESTONE, Blocks.GRAVEL.defaultBlockState());
-        acidBlockInteractions.put(Blocks.OBSIDIAN, Blocks.COBBLESTONE.defaultBlockState());
-        acidBlockInteractions.put(Blocks.GLOWSTONE, Blocks.NETHERRACK.defaultBlockState());
-
-        acidBlockInteractions.put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG.defaultBlockState());
-        acidBlockInteractions.put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG.defaultBlockState());
-        acidBlockInteractions.put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG.defaultBlockState());
-        acidBlockInteractions.put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG.defaultBlockState());
-        acidBlockInteractions.put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState());
-
-        acidBlockInteractions.put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD.defaultBlockState());
-        acidBlockInteractions.put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState());
-        acidBlockInteractions.put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD.defaultBlockState());
-        acidBlockInteractions.put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState());
-        acidBlockInteractions.put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState());
-
-        acidBlockInteractions.put(Blocks.OAK_PLANKS, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.BIRCH_PLANKS, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.CHERRY_PLANKS, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.ACACIA_PLANKS, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.DARK_OAK_PLANKS, Blocks.AIR.defaultBlockState());
-
-        acidBlockInteractions.put(Blocks.OAK_LEAVES, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.BIRCH_LEAVES, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.CHERRY_LEAVES, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.ACACIA_LEAVES, Blocks.AIR.defaultBlockState());
-        acidBlockInteractions.put(Blocks.DARK_OAK_LEAVES, Blocks.AIR.defaultBlockState());
-
-        SOURCE_ACID.get().setBlockInteractions(acidBlockInteractions);
-        SOURCE_ACID.get().setFluidInteractions(acidFluidInteractions);
-        FLOWING_ACID.get().setBlockInteractions(acidBlockInteractions);
-        FLOWING_ACID.get().setFluidInteractions(acidFluidInteractions);
+//        HashMap<Block, BlockState> acidBlockInteractions = new HashMap<>();
+//        HashMap<FluidType, BlockState> acidFluidInteractions = new HashMap<>();
+//        acidFluidInteractions.put(Fluids.WATER.getFluidType(), Blocks.CLAY.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.DIRT, Blocks.COARSE_DIRT.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.GRASS_BLOCK, Blocks.DIRT.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.SANDSTONE, Blocks.SAND.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.STONE, Blocks.COBBLESTONE.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.COBBLESTONE, Blocks.GRAVEL.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.OBSIDIAN, Blocks.COBBLESTONE.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.GLOWSTONE, Blocks.NETHERRACK.defaultBlockState());
+//
+//        acidBlockInteractions.put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.CHERRY_LOG, Blocks.STRIPPED_CHERRY_LOG.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState());
+//
+//        acidBlockInteractions.put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.CHERRY_WOOD, Blocks.STRIPPED_CHERRY_WOOD.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD.defaultBlockState());
+//
+//        acidBlockInteractions.put(Blocks.OAK_PLANKS, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.BIRCH_PLANKS, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.CHERRY_PLANKS, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.ACACIA_PLANKS, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.DARK_OAK_PLANKS, Blocks.AIR.defaultBlockState());
+//
+//        acidBlockInteractions.put(Blocks.OAK_LEAVES, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.BIRCH_LEAVES, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.CHERRY_LEAVES, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.ACACIA_LEAVES, Blocks.AIR.defaultBlockState());
+//        acidBlockInteractions.put(Blocks.DARK_OAK_LEAVES, Blocks.AIR.defaultBlockState());
+//
+//        SOURCE_ACID.get().setBlockInteractions(acidBlockInteractions);
+//        SOURCE_ACID.get().setFluidInteractions(acidFluidInteractions);
+//        FLOWING_ACID.get().setBlockInteractions(acidBlockInteractions);
+//        FLOWING_ACID.get().setFluidInteractions(acidFluidInteractions);
     }
 }
