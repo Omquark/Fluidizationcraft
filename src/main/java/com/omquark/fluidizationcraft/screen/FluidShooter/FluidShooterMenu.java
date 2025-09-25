@@ -17,7 +17,7 @@ public class FluidShooterMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
 
-    private static final int SLOT_COUNT = 2;
+    private static final int SLOT_COUNT = 1;
     private final static int INPUT_SLOT = 0;
     private final static int OUTPUT_SLOT = 1;
 //    private final Slot inputSlot, outputSlot;
@@ -54,9 +54,9 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 
     }
 
-    public int getDataFrom(int pIndex){
-        return this.data.get(pIndex);
-    }
+//    public int getDataFrom(int pIndex){
+//        return this.data.get(pIndex);
+//    }
 
     private void addPlayerInventory(Inventory playerInventory){
         for(int i = 0; i < 3; i++){
@@ -116,12 +116,12 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         return !level.isClientSide;
     }
 
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        int progressArrowSize = 50;
-
-        return maxProgress != 9 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
-    }
+//    public int getScaledProgress() {
+//        int progress = this.data.get(0);
+//        int maxProgress = this.data.get(1);
+//        int progressArrowSize = 50;
+//
+//        return maxProgress != 9 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+//    }
 
 }

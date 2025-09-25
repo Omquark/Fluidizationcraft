@@ -1,13 +1,13 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.items.ItemGunFluid;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
 import com.omquark.fluidizationcraft.data.Capability;
-import com.omquark.fluidizationcraft.data.DataComponent;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionLoader;
@@ -18,14 +18,12 @@ import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
-import com.omquark.fluidizationcraft.util.ModInputSlot;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -42,7 +40,6 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -137,7 +134,8 @@ public class FluidizationCraft {
         ModMenuTypes.register(modEventBus);
         ModRecipeDataProvider.register(modEventBus);
         ModRecipeSerializerProvider.register(modEventBus);
-        DataComponent.register(modEventBus);
+        ModDataComponents.register(modEventBus);
+
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -180,20 +178,20 @@ public class FluidizationCraft {
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
-
-        @SubscribeEvent
-        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-            event.registerBlockEntity(
-                    DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
-                    ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
-                    (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
-            );
-            event.registerItem(
-                    Capability.FLUID_SHOOTER_HANDLER,
-                    (itemStack, context) -> ((ItemGunFluid) itemStack.getItem()).inventory,
-                    FluidizationItems.GUN_ACID.get()
-            );
-        }
+//
+//        @SubscribeEvent
+//        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+//            event.registerBlockEntity(
+//                    DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
+//                    ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
+//                    (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
+//            );
+//            event.registerItem(
+//                    Capability.FLUID_SHOOTER_HANDLER,
+//                    (itemStack, context) -> ((ItemGunFluid) itemStack.getItem()).inventory,
+//                    FluidizationItems.GUN_ACID.get()
+//            );
+//        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

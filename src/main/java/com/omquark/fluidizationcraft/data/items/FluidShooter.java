@@ -10,8 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public record FluidShooter(ItemStack input, ItemStack output, int amount) {
-
-
     public static final Codec<FluidShooter> CODEC = RecordCodecBuilder.create(inst ->
             inst.group(
                     ItemStack.CODEC.fieldOf("input_item").forGetter(item -> item.input),

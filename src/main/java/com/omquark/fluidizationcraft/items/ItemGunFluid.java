@@ -1,11 +1,16 @@
 package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.data.items.FluidShooter;
+import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.inventory.FluidShooterInventory;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
@@ -14,6 +19,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
@@ -26,52 +33,26 @@ import javax.annotation.Nullable;
 @EverythingNonNullByDefault
 public class ItemGunFluid extends Item {
 
-    protected final ContainerData data;
-    private final static int SLOT_COUNT = 2;
-    private final static int INPUT_SLOT = 0;
-    private final static int OUTPUT_SLOT = 1;
-    private int fuelMb = 0;
-    private int fuelMaxMb = 16000;
-    ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
-
-    public final FluidShooter inventory = new FluidShooter(ItemStack.EMPTY, ItemStack.EMPTY, 0);
-
-//    public static final ItemCapability<FluidShooter, Void> ITEM_HANDLER_ITEM = ItemCapability.createVoid(
-//            ResourceLocation.parse("fluid_shooter_item_handler"), FluidShooter.class);
+    private int maxFuel = 16000;
 
     public ItemGunFluid(Properties properties) {
         super(properties);
-        this.data = new ContainerData() {
-            @Override
-            public int get(int index) {
-                return switch (index) {
-                    case (0) -> ItemGunFluid.this.fuelMb;
-                    case (1) -> ItemGunFluid.this.fuelMaxMb;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch (index) {
-                    case (0) -> ItemGunFluid.this.fuelMb = value;
-                    case (1) -> ItemGunFluid.this.fuelMaxMb = value;
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        };
     }
 
-    public ItemStackHandler getItemStackHandler() {
-        return itemStackHandler;
+    public static FluidShooterState getState(ItemStack stack) {
+        return stack.getOrDefault(ModDataComponents.FLUID_SHOOTER_STATE.get(), FluidShooterState.EMPTY);
+    }
+
+    public static void setState(ItemStack stack, FluidShooterState state) {
+        stack.set(ModDataComponents.FLUID_SHOOTER_STATE, state);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+
+        ItemStack stack = player.getItemInHand(hand);
+        FluidShooterState state = getState(stack);
+
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
 //                serverPlayer.openMenu(new SimpleMenuProvider((id, inv, p) -> createMenu(id, player.getInventory(), player), getDisplayName()));
@@ -98,47 +79,35 @@ public class ItemGunFluid extends Item {
         return InteractionResultHolder.fail(player.getItemInHand(hand));
     }
 
-
-
-//    @Override
-//    public Component getDisplayName() {
-//        return Component.translatable("item.fluidizationcraft.gun_acid");
-//    }
-//
-//    @Nullable
-//    @Override
-//    public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-//        return new FluidShooterMenu(containerId, playerInventory, this.data, this.itemStackHandler);
-//    }
-
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (!pLevel.isClientSide) return;
-        addFuel();
+        addFuel(pStack);
     }
 
-    private void addFuel() {
-        ItemStack fuel = itemStackHandler.getStackInSlot(INPUT_SLOT).copy();
-        ItemStack outFuel = itemStackHandler.getStackInSlot(OUTPUT_SLOT).copy();
+    private void addFuel(ItemStack stack) {
 
-        if (!fuel.is(FluidizationItems.VIAL_ACID.get()) || //Do not add if not acid
-                (!outFuel.is(FluidizationItems.VIAL_EMPTY.get()) && !outFuel.isEmpty()) || //Do not add if output is NOT an empty vial
-                (!outFuel.isEmpty() && outFuel.getCount() == outFuel.getMaxStackSize()) || //Do not add if output slot is full
-                fuelMb + 1000 > fuelMaxMb) { //Do not add if it will go beyond max fuel
-            return;
-        }
+        FluidShooterState state = getState(stack);
+
+        ItemStack fuel = state.input();
+        ItemStack outFuel = state.output();
+        Fluid fuelType = BuiltInRegistries.FLUID.get(state.fluidId());
+        int fuelAmount = state.amount();
+
+        ModVial vial;
+        if(outFuel == null) return;
+        if (outFuel.getCount() >= outFuel.getMaxStackSize()) return;
+        if(fuel == null) return;
+        if (!(fuel.getItem() instanceof ModVial)) return;
+        vial = (ModVial) fuel.getItem();
+        if (!vial.content.isSame(fuelType)) return;
+        if (fuelAmount + 1000 > maxFuel) return;
+        if (fuelType.isSame(Fluids.EMPTY)) fuelType = vial.content;
 
         fuel.shrink(1);
-        if (outFuel.isEmpty()) outFuel = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
-        else outFuel.grow(1);
-        itemStackHandler.setStackInSlot(INPUT_SLOT, fuel);
-        itemStackHandler.setStackInSlot(OUTPUT_SLOT, outFuel);
-        this.fuelMb += 1000;
-    }
+        outFuel.grow(1);
+        fuelAmount += 1000;
 
-    private ItemStackHandler createInventory(int size){
-        return new ItemStackHandler(size){
-
-        };
+        setState(stack, new FluidShooterState(fuel, outFuel, ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount));
     }
 }
