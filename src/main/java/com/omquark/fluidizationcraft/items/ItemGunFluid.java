@@ -14,7 +14,10 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
 
 /**
  * TODO: This item doesn't work, the menu does not display the inventory correctly, thus the recipe is removed
@@ -81,14 +84,14 @@ public class ItemGunFluid extends Item {
         }
 
         if (!level.isClientSide) {
-            if (fuelMb >= 1000) {
-                this.fuelMb -= 1000;
+//            if (fuelMb >= 1000) {
+//                this.fuelMb -= 1000;
                 //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun
                 AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
                 //shootFromRotation(player, xRot, yRot, gravity effect?, power <- setting this high will glitch, inaccuracy
                 acidShot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
                 level.addFreshEntity(acidShot);
-            }
+//            }
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
 

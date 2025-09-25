@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class FluidInteractionDataProvider implements DataProvider {
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
+    public CompletableFuture<?> run(@NonNull CachedOutput cache) {
         List<CompletableFuture<?>> futures = new ArrayList<>();
 
         FluidInteractionJson acid = new FluidInteractionBuilder(

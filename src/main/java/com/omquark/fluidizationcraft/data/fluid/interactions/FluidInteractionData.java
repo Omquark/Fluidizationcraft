@@ -4,6 +4,6 @@ import java.util.Map;
 
 public class FluidInteractionData {
     public String fluid;
-    public Map<String, String> blockInteractions;
-    public Map<String, String> fluidInteractions;
+    public Map<String, String> block_interactions;
+    public Map<String, String> fluid_interactions;
 }

@@ -24,7 +24,7 @@ public class FluidInteractionBuilder {
     }
 
     public FluidInteractionBuilder fluid(Fluid from, Block to){
-        blockInteractions.put(BuiltInRegistries.FLUID.getKey(from), BuiltInRegistries.BLOCK.getKey(to));
+        fluidInteractions.put(BuiltInRegistries.FLUID.getKey(from), BuiltInRegistries.BLOCK.getKey(to));
         return this;
     }
 
