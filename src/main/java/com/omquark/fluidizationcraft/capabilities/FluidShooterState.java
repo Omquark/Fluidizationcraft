@@ -28,8 +28,8 @@ public record FluidShooterState(
             new FluidShooterState(input, output, fluid.orElse(null), amount)));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FluidShooterState> STREAM_CODEC = StreamCodec.of((buf, state) -> {
-                ItemStack.STREAM_CODEC.encode(buf, state.input);
-                ItemStack.STREAM_CODEC.encode(buf, state.output);
+                ItemStack.STREAM_CODEC.encode(buf, state.input());
+                ItemStack.STREAM_CODEC.encode(buf, state.output());
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC).encode(buf, Optional.ofNullable((state.fluidId())));
                 buf.writeInt(state.amount);
             },

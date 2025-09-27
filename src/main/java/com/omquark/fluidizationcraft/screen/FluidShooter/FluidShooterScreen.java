@@ -22,8 +22,10 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
     @Override
     protected void init() {
         super.init();
-        this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
+        this.inventoryLabelX = 12;
+        this.inventoryLabelY = 75;
+        this.titleLabelX = 12;
+        this.titleLabelY = 9;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
                 mouseY > y + 21 && mouseY < y + 71){
             List<Component> tooltip = new ArrayList<>();
             tooltip.add(Component.literal("Acid"));
-            tooltip.add(Component.literal(menu.getDataFrom(0) + "mB /" + menu.getDataFrom(1) + "mB"));
+            tooltip.add(Component.literal(menu.getAmount() + "mB /" + menu.getCapacity() + "mB"));
             pGuiGraphics.renderTooltip(this.font, tooltip, Optional.empty(), mouseX, mouseY);
         }
     }
