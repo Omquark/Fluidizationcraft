@@ -1,4 +1,4 @@
-package com.omquark.fluidizationcraft.worldgen.ore;
+package com.omquark.fluidizationcraft.worldgen.features;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -13,7 +13,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.LayerConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -64,6 +63,12 @@ public class ModConfiguredFeatures {
         ConfiguredFeature<?, ?> feature = new ConfiguredFeature<>(
                 Feature.FOREST_ROCK,
                 new BlockStateConfiguration(Blocks.COARSE_DIRT.defaultBlockState()));
+        register(context, ALUMINUM_ORE, Feature.ORE, new OreConfiguration(aluminumOre, 10));
+        register(context, LEAD_ORE, Feature.ORE, new OreConfiguration(leadOre, 10));
+        register(context, NEPTUNIUM_ORE, Feature.ORE, new OreConfiguration(neptuniumOre, 10));
+        register(context, PLUTONIUM_ORE, Feature.ORE, new OreConfiguration(plutoniumOre, 10));
+        register(context, RADIONITE_ORE, Feature.ORE, new OreConfiguration(radioniteOre, 10));
+        register(context, TIN_ORE, Feature.ORE, new OreConfiguration(tinOre, 10));
         register(context, URANIUM_ORE, Feature.ORE, new OreConfiguration(uraniumOre, 10));
         register(context, LAKE_ACID, Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(FluidizationBlocks.ACID_BLOCK.get().defaultBlockState()),

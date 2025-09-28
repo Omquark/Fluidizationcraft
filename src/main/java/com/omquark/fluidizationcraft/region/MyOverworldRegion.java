@@ -10,17 +10,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
+import terrablender.api.ModifiedVanillaOverworldBuilder;
 import terrablender.api.ParameterUtils;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
 import terrablender.worldgen.DefaultOverworldRegion;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class MyOverworldRegion extends Region {
 
     public MyOverworldRegion(ResourceLocation name, RegionType type, int weight) {
+        super(name, RegionType.OVERWORLD, 50);
+    }
+
+    public MyOverworldRegion(ResourceLocation name, int weight){
         super(name, RegionType.OVERWORLD, 50);
     }
 

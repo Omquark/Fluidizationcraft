@@ -1,8 +1,7 @@
 package com.omquark.fluidizationcraft.worldgen;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.biomes.ModBiomes;
-import com.omquark.fluidizationcraft.worldgen.ore.ModPlacedFeatures;
+import com.omquark.fluidizationcraft.worldgen.features.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -11,16 +10,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-
-import java.util.List;
 
 public class ModBiomesModifier {
     protected static final ResourceKey<BiomeModifier> ALUMINUM_ORE = createKey("ore_aluminum");

@@ -16,6 +16,7 @@ import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.region.MyOverworldRegion;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
@@ -25,6 +26,7 @@ import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -45,6 +47,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FluidizationCraft.MODID)
@@ -136,7 +139,7 @@ public class FluidizationCraft {
         ModRecipeDataProvider.register(modEventBus);
         ModRecipeSerializerProvider.register(modEventBus);
         ModDataComponents.register(modEventBus);
-
+        Regions.register(new MyOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "acid_waste"), 2));
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);

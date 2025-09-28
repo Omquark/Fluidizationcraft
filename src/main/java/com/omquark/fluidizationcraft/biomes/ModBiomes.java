@@ -1,7 +1,8 @@
 package com.omquark.fluidizationcraft.biomes;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.worldgen.ore.ModPlacedFeatures;
+import com.omquark.fluidizationcraft.region.MyOverworldRegion;
+import com.omquark.fluidizationcraft.worldgen.features.ModPlacedFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import terrablender.api.Region;
+import terrablender.api.Regions;
 
 public class ModBiomes {
 
