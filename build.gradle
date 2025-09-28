@@ -123,7 +123,7 @@ dependencies {
 
 //    implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}"
     implementation "com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}"
-
+    implementation "com.github.glitchfiend:GlitchCore-neoforge:${minecraft_version}-${glitchcore_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

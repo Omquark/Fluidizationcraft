@@ -22,9 +22,9 @@ import java.util.function.Consumer;
 
 public class MyOverworldRegion extends Region {
 
-    public MyOverworldRegion(ResourceLocation name, RegionType type, int weight) {
-        super(name, RegionType.OVERWORLD, 50);
-    }
+//    public MyOverworldRegion(ResourceLocation name, RegionType type, int weight) {
+//        super(name, RegionType.OVERWORLD, 50);
+//    }
 
     public MyOverworldRegion(ResourceLocation name, int weight){
         super(name, RegionType.OVERWORLD, 50);
