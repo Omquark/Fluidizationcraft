@@ -23,6 +23,10 @@ public class ModEntities {
             ENTITY_TYPES.register("cryo_shot", () -> EntityType.Builder.<AbstractArrow>of(CryoShotProjectile::new,
                     MobCategory.MISC).build("cryo_shot"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<PrimedAcidTNTEntity>> ACID_TNT =
+            ENTITY_TYPES.register("acid_tnt", () -> EntityType.Builder.<PrimedAcidTNTEntity>of(PrimedAcidTNTEntity::new,
+                    MobCategory.MISC).build("acid_tnt"));
+
 
     public static void register(IEventBus eventBus){
         ENTITY_TYPES.register(eventBus);

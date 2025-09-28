@@ -1,6 +1,7 @@
 package com.omquark.fluidizationcraft.worldgen.ore;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.biomes.ModBiomes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -8,10 +9,15 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.core.Direction;
+import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.injection.selectors.ITargetSelector;
 
 import java.util.List;
 
@@ -28,9 +34,10 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LAKE_CRYONITE_OVERWORLD = createKey("lake_cryonite_overworld");
     public static final ResourceKey<PlacedFeature> LAKE_CRYONITE_UNDERGROUND = createKey("lake_cryonite_underground");
     public static final ResourceKey<PlacedFeature> LAKE_NETHERFLOW = createKey("lake_netherflow");
+    public static final ResourceKey<PlacedFeature> COARSE_DIRT_SURFACE = createKey("coarse_dirt_surface");
 
 
-    public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+    public static void bootstrap(@NotNull BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeature = context.lookup(Registries.CONFIGURED_FEATURE);
 
         Holder<ConfiguredFeature<?, ?>> aluminumHolder =
@@ -57,6 +64,8 @@ public class ModPlacedFeatures {
                 configuredFeature.getOrThrow(ModConfiguredFeatures.LAKE_CRYONITE);
         Holder<ConfiguredFeature<?, ?>> netherflowLakeHolder =
                 configuredFeature.getOrThrow(ModConfiguredFeatures.LAKE_NETHERFLOW);
+        Holder<ConfiguredFeature<?, ?>> coarseDirtSurfaceHolder =
+                configuredFeature.getOrThrow((ModConfiguredFeatures.COARSE_DIRT_SURFACE));
 
         register(context, ALUMINUM_ORE, aluminumHolder,
                 List.of(
@@ -149,6 +158,14 @@ public class ModPlacedFeatures {
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()
                 ));
+        context.register(COARSE_DIRT_SURFACE,
+                new PlacedFeature(configuredFeature.getOrThrow(ModConfiguredFeatures.COARSE_DIRT_SURFACE),
+                        List.of(
+                                CountPlacement.of(10),
+                                InSquarePlacement.spread(),
+                                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                                BiomeFilter.biome()
+                        )));
     }
 
     private static void register(

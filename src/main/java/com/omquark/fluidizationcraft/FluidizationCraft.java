@@ -1,6 +1,7 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
+import com.omquark.fluidizationcraft.biomes.ModBiomes;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.items.ItemGunFluid;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;

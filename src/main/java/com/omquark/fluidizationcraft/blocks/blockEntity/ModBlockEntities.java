@@ -6,6 +6,7 @@ import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.datafix.fixes.References;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

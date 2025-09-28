@@ -1,6 +1,7 @@
 package com.omquark.fluidizationcraft.data;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.biomes.ModBiomes;
 import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
 import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionDataProvider;
 import com.omquark.fluidizationcraft.worldgen.ModBiomesModifier;
@@ -35,6 +36,7 @@ public class DataGeneratorHandler {
         generator.addProvider(true, ModLootTableProvider.create(packOutput, event.getLookupProvider()));
         generator.addProvider(true, new ModBlockDataGenerator(packOutput, event.getLookupProvider(), existingFileHelper));
         generator.addProvider(true, new FluidInteractionDataProvider(packOutput));
+//        generator.addProvider(true, new ModBiomeProvider(packOutput, event.getLookupProvider()));
 //        generator.addProvider(true, new ModWorldGenProvider(packOutput, event.getLookupProvider()));
 
         generator.addProvider(event.includeServer(),
@@ -44,7 +46,8 @@ public class DataGeneratorHandler {
                                         .add(Registries.DAMAGE_TYPE, FluidizationDamageTypes::bootstrap)
                                         .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
                                         .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
-                                        .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomesModifier::bootstrap),
+                                        .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomesModifier::bootstrap)
+                                        .add(Registries.BIOME, ModBiomes::bootstrap),
                                         Set.of(FluidizationCraft.MODID)));
     }
 }
