@@ -3,10 +3,12 @@ package com.omquark.fluidizationcraft.capabilities;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.omquark.fluidizationcraft.data.items.FluidShooter;
+import it.unimi.dsi.fastutil.bytes.Byte2BooleanArrayMap;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
@@ -34,6 +36,8 @@ public record FluidShooterState(
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FluidShooterState> STREAM_CODEC = StreamCodec.of((buf, state) -> {
 
+//                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.input());
+//                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.output());
                 buf.writeOptional(state.input(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
                 buf.writeOptional(state.output(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
 //                ItemStack.STREAM_CODEC.encode(buf, state.input().orElse(ItemStack.EMPTY));
@@ -42,6 +46,8 @@ public record FluidShooterState(
                 buf.writeInt(state.amount);
             },
             buf -> {
+//                Optional<ItemStack> input = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
+//                Optional<ItemStack> output = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
                 Optional<ItemStack> input = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
                 Optional<ItemStack> output = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
 //                ItemStack input = ItemStack.STREAM_CODEC.decode(buf);
