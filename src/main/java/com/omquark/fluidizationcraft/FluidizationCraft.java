@@ -1,14 +1,11 @@
 package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
-import com.omquark.fluidizationcraft.biomes.ModBiomes;
+import com.omquark.fluidizationcraft.biomes.AcidWastes;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
-import com.omquark.fluidizationcraft.items.ItemGunFluid;
-import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
-import com.omquark.fluidizationcraft.data.Capability;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionLoader;
@@ -16,19 +13,17 @@ import com.omquark.fluidizationcraft.entity.ModEntities;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.items.FluidizationItems;
-import com.omquark.fluidizationcraft.region.MyOverworldRegion;
+import com.omquark.fluidizationcraft.region.AcidWastesRegion;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -38,7 +33,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -48,6 +42,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(FluidizationCraft.MODID)
@@ -139,7 +134,7 @@ public class FluidizationCraft {
         ModRecipeDataProvider.register(modEventBus);
         ModRecipeSerializerProvider.register(modEventBus);
         ModDataComponents.register(modEventBus);
-        Regions.register(new MyOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "acid_waste"), 2));
+
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS_REGISTER.register(modEventBus);
@@ -156,15 +151,12 @@ public class FluidizationCraft {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
+        event.enqueueWork(() -> {
+            Regions.register(new AcidWastesRegion(ResourceLocation.fromNamespaceAndPath(MODID, "acid_waste"), 2));
 
-        LOGGER.info("{}{}", Config.magicNumberIntroduction, Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, AcidWastes.makeRules());
+        });
     }
 
     // Add the example block item to the building blocks tab
@@ -182,20 +174,6 @@ public class FluidizationCraft {
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
-//
-//        @SubscribeEvent
-//        public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-//            event.registerBlockEntity(
-//                    DissolvinatorBlockEntity.ITEM_HANDLER_BLOCK,
-//                    ModBlockEntities.DISSOLVINATOR_ENTITY.get(),
-//                    (entity, context) -> ((DissolvinatorBlockEntity) entity).getItemStackHandler()
-//            );
-//            event.registerItem(
-//                    Capability.FLUID_SHOOTER_HANDLER,
-//                    (itemStack, context) -> ((ItemGunFluid) itemStack.getItem()).inventory,
-//                    FluidizationItems.GUN_ACID.get()
-//            );
-//        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

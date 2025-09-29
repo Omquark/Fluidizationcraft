@@ -26,8 +26,8 @@ public class GunSlotHandler extends ItemStackHandler {
         ItemStack result = ItemStack.EMPTY;
         FluidShooterState state = FluidShooterStateUtil.get(this.gun);
         switch (slot) {
-            case (0) -> result = state.input() != null ? state.input() : ItemStack.EMPTY;
-            case (1) -> result = state.output() != null ? state.output() : ItemStack.EMPTY;
+            case (0) -> result = state.input().orElse(ItemStack.EMPTY);
+            case (1) -> result = state.output().orElse(ItemStack.EMPTY);
 //            default -> result = ItemStack.EMPTY;
         }
 

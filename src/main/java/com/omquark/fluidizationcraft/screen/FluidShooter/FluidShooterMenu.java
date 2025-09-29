@@ -14,7 +14,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.SlotItemHandler;
+
+import java.util.Optional;
 
 @EverythingNonNullByDefault
 public class FluidShooterMenu extends AbstractContainerMenu {
@@ -76,8 +79,11 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         FluidShooterState state = FluidShooterStateUtil.get(gun);
 //        this.inputSlot.set(state.input() != null ? state.input() : ItemStack.EMPTY);
 //        this.outputSlot.set(state.output() != null ? state.output() : ItemStack.EMPTY);
+        this.inputSlot.set(state.input().orElse(ItemStack.EMPTY));
+        this.outputSlot.set(state.output().orElse(ItemStack.EMPTY));
         this.amount = state.amount();
         this.capacity = 16000;
+        FluidShooterStateUtil.set(gun, new FluidShooterState(Optional.of(this.inputSlot.getItem()), Optional.of(this.outputSlot.getItem()), state.fluidId(), this.amount));
     }
 
     @Override

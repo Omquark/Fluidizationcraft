@@ -8,8 +8,12 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -155,8 +159,9 @@ public class ModPlacedFeatures {
         context.register(COARSE_DIRT_SURFACE,
                 new PlacedFeature(configuredFeature.getOrThrow(ModConfiguredFeatures.COARSE_DIRT_SURFACE),
                         List.of(
-                                CountPlacement.of(10),
-                                InSquarePlacement.spread(),
+                                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.GRASS_BLOCK)),
+
+//                                HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
                                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                                 BiomeFilter.biome()
                         )));

@@ -2,7 +2,6 @@ package com.omquark.fluidizationcraft.dataComponents;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;

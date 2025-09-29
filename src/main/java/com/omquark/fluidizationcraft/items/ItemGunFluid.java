@@ -22,6 +22,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * TODO: This item doesn't work, the menu does not display the inventory correctly, thus the recipe is removed
@@ -60,15 +61,15 @@ public class ItemGunFluid extends Item {
 
             @Override
             public void set(int pIndex, int pValue) {
-//                switch (pIndex) {
-//                    case (0) -> {
-//                        ItemGunFluid.setState(
-//                                player.getItemInHand(InteractionHand.MAIN_HAND),
-//                                new FluidShooterState(state.input(), state.output(), state.fluidId(), pValue)
-//                        );
-//                    }
-//                    case (1) -> ItemGunFluid.this.maxFuel = pValue;
-//                }
+                switch (pIndex) {
+                    case (0) -> {
+                        ItemGunFluid.setState(
+                                player.getItemInHand(InteractionHand.MAIN_HAND),
+                                new FluidShooterState(state.input(), state.output(), state.fluidId(), pValue)
+                        );
+                    }
+                    case (1) -> ItemGunFluid.this.maxFuel = pValue;
+                }
             }
 
             @Override
@@ -132,15 +133,13 @@ public class ItemGunFluid extends Item {
 
         FluidShooterState state = getState(stack);
 
-        ItemStack fuel = state.input();
-        ItemStack outFuel = state.output();
+        ItemStack fuel = state.input().orElse(ItemStack.EMPTY);
+        ItemStack outFuel = state.output().orElse(ItemStack.EMPTY);
         Fluid fuelType = BuiltInRegistries.FLUID.get(state.fluidId());
         int fuelAmount = state.amount();
 
         ModVial vial;
-        if (outFuel == null) return;
         if (outFuel.getCount() >= outFuel.getMaxStackSize()) return;
-        if (fuel == null) return;
         if (!(fuel.getItem() instanceof ModVial)) return;
         vial = (ModVial) fuel.getItem();
         if (!vial.content.isSame(fuelType)) return;
@@ -151,6 +150,8 @@ public class ItemGunFluid extends Item {
         outFuel.grow(1);
         fuelAmount += 1000;
 
-        setState(stack, new FluidShooterState(fuel, outFuel, ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount));
+        setState(stack, new FluidShooterState(
+                Optional.of(fuel), Optional.of(outFuel),
+                ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount));
     }
 }

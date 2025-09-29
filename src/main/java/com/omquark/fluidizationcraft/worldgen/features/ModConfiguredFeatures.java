@@ -1,5 +1,6 @@
 package com.omquark.fluidizationcraft.worldgen.features;
 
+import com.mojang.serialization.Decoder;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import net.minecraft.core.registries.Registries;
@@ -8,12 +9,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.LakeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.*;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -60,9 +57,9 @@ public class ModConfiguredFeatures {
                 List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()),
                         OreConfiguration.target(deepslateReplacable, FluidizationBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()));
 
-        ConfiguredFeature<?, ?> feature = new ConfiguredFeature<>(
-                Feature.FOREST_ROCK,
-                new BlockStateConfiguration(Blocks.COARSE_DIRT.defaultBlockState()));
+//        ConfiguredFeature<?, ?> feature = new ConfiguredFeature<>(
+//                Feature.FOREST_ROCK,
+//                new BlockStateConfiguration(Blocks.COARSE_DIRT.defaultBlockState()));
         register(context, ALUMINUM_ORE, Feature.ORE, new OreConfiguration(aluminumOre, 10));
         register(context, LEAD_ORE, Feature.ORE, new OreConfiguration(leadOre, 10));
         register(context, NEPTUNIUM_ORE, Feature.ORE, new OreConfiguration(neptuniumOre, 10));
@@ -79,7 +76,8 @@ public class ModConfiguredFeatures {
         register(context, LAKE_NETHERFLOW, Feature.LAKE, new LakeFeature.Configuration(
                 BlockStateProvider.simple(FluidizationBlocks.NETHERFLOW_FLUID_BLOCK.get().defaultBlockState()),
                 BlockStateProvider.simple(Blocks.NETHERRACK.defaultBlockState())));
-        context.register(COARSE_DIRT_SURFACE, feature);
+        register(context, COARSE_DIRT_SURFACE, Feature.FILL_LAYER, new LayerConfiguration(80, Blocks.COARSE_DIRT.defaultBlockState()));
+//        context.register(COARSE_DIRT_SURFACE, feature);
     }
 
 
