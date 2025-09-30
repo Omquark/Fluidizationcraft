@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public record FluidShooterState(
@@ -36,20 +37,21 @@ public record FluidShooterState(
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FluidShooterState> STREAM_CODEC = StreamCodec.of((buf, state) -> {
 
-//                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.input());
-//                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.output());
-                buf.writeOptional(state.input(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
-                buf.writeOptional(state.output(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
+                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.input());
+                ByteBufCodecs.optional(ItemStack.STREAM_CODEC).encode(buf, state.output());
+
+//                buf.writeOptional(state.input(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
+//                buf.writeOptional(state.output(), ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
 //                ItemStack.STREAM_CODEC.encode(buf, state.input().orElse(ItemStack.EMPTY));
 //                ItemStack.STREAM_CODEC.encode(buf, state.output().orElse(ItemStack.EMPTY));
                 ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC).encode(buf, Optional.ofNullable(state.fluidId()));
                 buf.writeInt(state.amount);
             },
             buf -> {
-//                Optional<ItemStack> input = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
-//                Optional<ItemStack> output = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
-                Optional<ItemStack> input = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
-                Optional<ItemStack> output = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
+                Optional<ItemStack> input = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
+                Optional<ItemStack> output = ByteBufCodecs.optional(ItemStack.STREAM_CODEC).decode(buf);
+//                Optional<ItemStack> input = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
+//                Optional<ItemStack> output = buf.readOptional(ByteBufCodecs.fromCodec(ItemStack.OPTIONAL_CODEC));
 //                ItemStack input = ItemStack.STREAM_CODEC.decode(buf);
 //                ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
                 Optional<ResourceLocation> fluid = ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC).decode(buf);

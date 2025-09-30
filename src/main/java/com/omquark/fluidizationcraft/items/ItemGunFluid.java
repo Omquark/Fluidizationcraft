@@ -1,10 +1,12 @@
 package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
+import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
+import com.omquark.fluidizationcraft.util.ModInputSlot;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -43,7 +46,8 @@ public class ItemGunFluid extends Item {
     }
 
     public static void setState(ItemStack stack, FluidShooterState state) {
-        stack.set(ModDataComponents.FLUID_SHOOTER_STATE, state);
+        FluidShooterStateUtil.set(stack, state);
+//        stack.set(ModDataComponents.FLUID_SHOOTER_STATE, state);
     }
 
     @Nullable
@@ -63,10 +67,8 @@ public class ItemGunFluid extends Item {
             public void set(int pIndex, int pValue) {
                 switch (pIndex) {
                     case (0) -> {
-                        ItemGunFluid.setState(
-                                player.getItemInHand(InteractionHand.MAIN_HAND),
-                                new FluidShooterState(state.input(), state.output(), state.fluidId(), pValue)
-                        );
+                        setState(player.getItemInHand(player.getUsedItemHand()),
+                                new FluidShooterState(state.input(), state.output(), state.fluidId(), pValue));
                     }
                     case (1) -> ItemGunFluid.this.maxFuel = pValue;
                 }
@@ -77,7 +79,6 @@ public class ItemGunFluid extends Item {
                 return 2;
             }
         };
-//        return new FluidShooterMenu(containerId, playerInventory, null);
         return new FluidShooterMenu(containerId, playerInventory, player.getUsedItemHand());
     }
 
@@ -98,11 +99,6 @@ public class ItemGunFluid extends Item {
                         new SimpleMenuProvider(this::createMenu,
                                 getDisplayName()), buf -> buf.writeEnum(hand)
                 );
-//                serverPlayer.openMenu(new SimpleMenuProvider((id, inv, p) -> createMenu(id, inv, p), getDisplayName()));
-//                serverPlayer.openMenu(new FluidShooterInventory());
-//                FluidizationCraft.LOGGER.debug(player.getInventory().getSelected().toString());
-//                FluidShooterInventory.openGUI(serverPlayer, player.getInventory().getSelected());
-
             }
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
         }
@@ -124,8 +120,8 @@ public class ItemGunFluid extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (!pLevel.isClientSide) return;
-        if(getState(pStack).input() == null || getState(pStack).input().isEmpty()) return;
+//        if (!pLevel.isClientSide) return;
+        if(getState(pStack).input().isEmpty()) return;
         addFuel(pStack);
     }
 
@@ -133,8 +129,8 @@ public class ItemGunFluid extends Item {
 
         FluidShooterState state = getState(stack);
 
-        ItemStack fuel = state.input().orElse(ItemStack.EMPTY);
-        ItemStack outFuel = state.output().orElse(ItemStack.EMPTY);
+        ItemStack fuel = (state.input().orElse(ItemStack.EMPTY)).copy();
+        ItemStack outFuel = (state.output().orElse(ItemStack.EMPTY)).copy();
         Fluid fuelType = BuiltInRegistries.FLUID.get(state.fluidId());
         int fuelAmount = state.amount();
 
@@ -142,16 +138,20 @@ public class ItemGunFluid extends Item {
         if (outFuel.getCount() >= outFuel.getMaxStackSize()) return;
         if (!(fuel.getItem() instanceof ModVial)) return;
         vial = (ModVial) fuel.getItem();
-        if (!vial.content.isSame(fuelType)) return;
+        if (!fuelType.isSame(Fluids.EMPTY) && !vial.content.isSame(fuelType)) return;
         if (fuelAmount + 1000 > maxFuel) return;
         if (fuelType.isSame(Fluids.EMPTY)) fuelType = vial.content;
 
         fuel.shrink(1);
-        outFuel.grow(1);
+        if(outFuel.isEmpty()) outFuel = fuel.copyWithCount(0);
+        if(outFuel.isEmpty()) outFuel = new ItemStack(FluidizationItems.VIAL_EMPTY, 1);
+        else outFuel.grow(1);
         fuelAmount += 1000;
 
-        setState(stack, new FluidShooterState(
+        state = new FluidShooterState(
                 Optional.of(fuel), Optional.of(outFuel),
-                ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount));
+                ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount);
+
+        setState(stack, state);
     }
 }

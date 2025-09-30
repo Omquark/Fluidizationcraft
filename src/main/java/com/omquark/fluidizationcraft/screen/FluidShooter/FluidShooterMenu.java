@@ -41,8 +41,41 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotBar(inv);
 
-        inputSlot = this.addSlot(new SlotItemHandler(slotHandler, 0, 47, 37));
-        outputSlot = this.addSlot(new SlotItemHandler(slotHandler, 0, 115, 37));
+        inputSlot = this.addSlot(
+                new SlotItemHandler(slotHandler, 0, 47, 37) {
+                    @Override
+                    public void set(ItemStack stack) {
+                        FluidShooterState state = FluidShooterStateUtil.get(gun);
+                        FluidShooterStateUtil.set(gun, new FluidShooterState(Optional.of(stack), state.output(), state.fluidId(), state.amount()));
+                        super.set(stack);
+                    }
+
+//                    @Override
+//                    public ItemStack getItem() {
+//                        FluidShooterState state = FluidShooterStateUtil.get(gun);
+//                        return state.input().orElse(ItemStack.EMPTY);
+//                    }
+                });
+
+        outputSlot = this.addSlot(new SlotItemHandler(slotHandler, 1, 115, 37){
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+
+            @Override
+            public void set(ItemStack stack) {
+                super.set(stack);
+                FluidShooterMenu.super.broadcastChanges();
+            }
+
+            //            @Override
+//            public ItemStack getItem() {
+//                FluidShooterState state = FluidShooterStateUtil.get(gun);
+//                return state.output().orElse(ItemStack.EMPTY);
+//            }
+        });
+
 
         this.addDataSlot(new DataSlot() {
             @Override
@@ -77,8 +110,6 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 
     private void refreshFromComponent() {
         FluidShooterState state = FluidShooterStateUtil.get(gun);
-//        this.inputSlot.set(state.input() != null ? state.input() : ItemStack.EMPTY);
-//        this.outputSlot.set(state.output() != null ? state.output() : ItemStack.EMPTY);
         this.inputSlot.set(state.input().orElse(ItemStack.EMPTY));
         this.outputSlot.set(state.output().orElse(ItemStack.EMPTY));
         this.amount = state.amount();
@@ -88,15 +119,6 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 
     @Override
     public void broadcastChanges() {
-//        FluidShooterState state = FluidShooterStateUtil.get(gun);
-//        FluidShooterStateUtil.set(gun,
-//                new FluidShooterState(this.inputSlot.getItem(), this.outputSlot.getItem(),
-//                        ResourceLocation.bySeparator(FluidizationFluids.SOURCE_ACID.get().toString(), ':'),
-//                        this.amount));
-//        this.inputSlot.set(state.input());
-//        this.outputSlot.set(state.output());
-//        this.amount = state.amount();
-//        this.capacity = 16000;
         refreshFromComponent();
         super.broadcastChanges();
     }
