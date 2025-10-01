@@ -1,0 +1,76 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.omquark.fluidizationcraft",
+    "module": "Fluidizationcraft",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.13"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "Fluidizationcraft-0.1.0.jar",
+          "url": "Fluidizationcraft-0.1.0.jar",
+          "size": 501062,
+          "sha512": "e9fc6a35602a79a8c15cc9dace337bd2eff8cfe49cdcc9f2fb871e6d3804d1e5fe35997ce597e3fa36195425e878c9d4d5012693ccc9974227852723bc87ff16",
+          "sha256": "10ba5b02643e7d1dcd512aba873ad5d92fa10366bf0f66e2926524f07bb462f0",
+          "sha1": "948561c170c2600de427cd4bbbf22fde8d011b59",
+          "md5": "c0d8e94830e62dcf509b83ddc8296f3e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.github.glitchfiend",
+          "module": "TerraBlender-neoforge",
+          "version": {
+            "requires": "1.21.1-4.1.0.0"
+          }
+        },
+        {
+          "group": "com.github.glitchfiend",
+          "module": "GlitchCore-neoforge",
+          "version": {
+            "requires": "1.21.1-2.1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "Fluidizationcraft-0.1.0.jar",
+          "url": "Fluidizationcraft-0.1.0.jar",
+          "size": 501062,
+          "sha512": "e9fc6a35602a79a8c15cc9dace337bd2eff8cfe49cdcc9f2fb871e6d3804d1e5fe35997ce597e3fa36195425e878c9d4d5012693ccc9974227852723bc87ff16",
+          "sha256": "10ba5b02643e7d1dcd512aba873ad5d92fa10366bf0f66e2926524f07bb462f0",
+          "sha1": "948561c170c2600de427cd4bbbf22fde8d011b59",
+          "md5": "c0d8e94830e62dcf509b83ddc8296f3e"
+        }
+      ]
+    }
+  ]
+}
