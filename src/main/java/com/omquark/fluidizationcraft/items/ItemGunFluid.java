@@ -2,6 +2,7 @@ package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
+import com.omquark.fluidizationcraft.data.items.FluidShooter;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
@@ -79,6 +80,7 @@ public class ItemGunFluid extends Item {
                 return 2;
             }
         };
+
         return new FluidShooterMenu(containerId, playerInventory, player.getUsedItemHand());
     }
 
@@ -95,63 +97,67 @@ public class ItemGunFluid extends Item {
 
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-                serverPlayer.openMenu(
-                        new SimpleMenuProvider(this::createMenu,
-                                getDisplayName()), buf -> buf.writeEnum(hand)
+                serverPlayer.openMenu(new SimpleMenuProvider(this::createMenu, getDisplayName()),
+                        buf -> buf.writeEnum(hand)
                 );
             }
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
         }
 
         if (!level.isClientSide) {
-//            if (fuelMb >= 1000) {
-//                this.fuelMb -= 1000;
-            //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun
-            AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
-            //shootFromRotation(player, xRot, yRot, gravity effect?, power <- setting this high will glitch, inaccuracy
-            acidShot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
-            level.addFreshEntity(acidShot);
-//            }
+            ItemStack fuel = state.input().orElse(ItemStack.EMPTY);
+            ItemStack out = state.output().orElse(ItemStack.EMPTY);
+            if (!fuel.isEmpty() && fuel.is(FluidizationItems.VIAL_ACID.get())) {
+                fuel.shrink(1);
+                if(out.isEmpty()) out = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
+                else out.grow(1);
+                //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun
+                AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
+                //shootFromRotation(player, xRot, yRot, gravity effect?, power <- setting this high will glitch, inaccuracy
+                acidShot.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 3.0f, 0.0f);
+                level.addFreshEntity(acidShot);
+                setState(stack, new FluidShooterState(Optional.of(fuel), Optional.of(out), state.fluidId(), state.amount()));
+            }
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
 
         return InteractionResultHolder.fail(player.getItemInHand(hand));
     }
 
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+//    @Override
+//    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 //        if (!pLevel.isClientSide) return;
-        if(getState(pStack).input().isEmpty()) return;
-        addFuel(pStack);
-    }
+//        if(getState(pStack).input().isEmpty()) return;
+//        addFuel(pStack);
+//    }
 
-    private void addFuel(ItemStack stack) {
-
-        FluidShooterState state = getState(stack);
-
-        ItemStack fuel = (state.input().orElse(ItemStack.EMPTY)).copy();
-        ItemStack outFuel = (state.output().orElse(ItemStack.EMPTY)).copy();
-        Fluid fuelType = BuiltInRegistries.FLUID.get(state.fluidId());
-        int fuelAmount = state.amount();
-
-        ModVial vial;
-        if (outFuel.getCount() >= outFuel.getMaxStackSize()) return;
-        if (!(fuel.getItem() instanceof ModVial)) return;
-        vial = (ModVial) fuel.getItem();
-        if (!fuelType.isSame(Fluids.EMPTY) && !vial.content.isSame(fuelType)) return;
-        if (fuelAmount + 1000 > maxFuel) return;
-        if (fuelType.isSame(Fluids.EMPTY)) fuelType = vial.content;
-
-        fuel.shrink(1);
-        if(outFuel.isEmpty()) outFuel = fuel.copyWithCount(0);
-        if(outFuel.isEmpty()) outFuel = new ItemStack(FluidizationItems.VIAL_EMPTY, 1);
-        else outFuel.grow(1);
-        fuelAmount += 1000;
-
-        state = new FluidShooterState(
-                Optional.of(fuel), Optional.of(outFuel),
-                ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount);
-
-        setState(stack, state);
-    }
+//    private void addFuel(ItemStack stack) {
+//
+//        FluidShooterState state = getState(stack);
+//
+//        ItemStack fuel = (state.input().orElse(ItemStack.EMPTY)).copy();
+//        ItemStack outFuel = (state.output().orElse(ItemStack.EMPTY)).copy();
+//        Fluid fuelType = BuiltInRegistries.FLUID.get(state.fluidId());
+//        int fuelAmount = state.amount();
+//
+//        ModVial vial;
+//        if (outFuel.getCount() >= outFuel.getMaxStackSize()) return;
+//        if (!(fuel.getItem() instanceof ModVial)) return;
+//        vial = (ModVial) fuel.getItem();
+//        if (!fuelType.isSame(Fluids.EMPTY) && !vial.content.isSame(fuelType)) return;
+//        if (fuelAmount + 1000 > maxFuel) return;
+//        if (fuelType.isSame(Fluids.EMPTY)) fuelType = vial.content;
+//
+//        fuel.shrink(1);
+//        if(outFuel.isEmpty()) outFuel = fuel.copyWithCount(0);
+//        if(outFuel.isEmpty()) outFuel = new ItemStack(FluidizationItems.VIAL_EMPTY, 1);
+//        else outFuel.grow(1);
+//        fuelAmount += 1000;
+//
+//        state = new FluidShooterState(
+//                Optional.of(fuel), Optional.of(outFuel),
+//                ResourceLocation.tryBySeparator(fuelType.defaultFluidState().toString(), ':'), fuelAmount);
+//
+//        setState(stack, state);
+//    }
 }

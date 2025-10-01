@@ -16,7 +16,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
 
     public FluidShooterScreen(FluidShooterMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
-        texture("textures/gui/fluid_shooter.png");
+        texture("textures/gui/acid_shooter.png");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        renderTank(graphics, x, y);
+//        renderTank(graphics, x, y);
     }
 
     private void renderTank(GuiGraphics graphics, int x, int y) {
@@ -45,7 +45,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderMenuBackground(graphics);
         super.render(graphics, mouseX, mouseY, delta);
-        renderTooltip(graphics, mouseX, mouseY);
+//        renderTooltip(graphics, mouseX, mouseY);
     }
 
     protected void renderTooltip(GuiGraphics pGuiGraphics, int mouseX, int mouseY) {

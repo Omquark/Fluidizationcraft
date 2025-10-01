@@ -4,6 +4,7 @@ import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
 import com.omquark.fluidizationcraft.data.items.FluidShooter;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
+import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import com.omquark.fluidizationcraft.util.GunSlotHandler;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @EverythingNonNullByDefault
 public class FluidShooterMenu extends AbstractContainerMenu {
@@ -42,38 +44,49 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         addPlayerHotBar(inv);
 
         inputSlot = this.addSlot(
-                new SlotItemHandler(slotHandler, 0, 47, 37) {
-                    @Override
-                    public void set(ItemStack stack) {
+                new SlotItemHandler(slotHandler, 0, 66, 37) {
+
+                    private void updateStateFromSlot(ItemStack stack) {
                         FluidShooterState state = FluidShooterStateUtil.get(gun);
                         FluidShooterStateUtil.set(gun, new FluidShooterState(Optional.of(stack), state.output(), state.fluidId(), state.amount()));
+                    }
+
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return stack.is(FluidizationItems.VIAL_ACID.get());
+                    }
+
+                    @Override
+                    public void set(ItemStack stack) {
+                        updateStateFromSlot(stack);
                         super.set(stack);
                     }
 
-//                    @Override
-//                    public ItemStack getItem() {
-//                        FluidShooterState state = FluidShooterStateUtil.get(gun);
-//                        return state.input().orElse(ItemStack.EMPTY);
-//                    }
+                    @Override
+                    public void onTake(Player player, ItemStack stack) {
+                        super.onTake(player, stack);
+                        updateStateFromSlot(ItemStack.EMPTY);
+                    }
                 });
 
-        outputSlot = this.addSlot(new SlotItemHandler(slotHandler, 1, 115, 37){
+        outputSlot = this.addSlot(new SlotItemHandler(slotHandler, 1, 99, 37) {
+
+            private void updateStateFromSlot(ItemStack stack) {
+                FluidShooterState state = FluidShooterStateUtil.get(gun);
+                FluidShooterStateUtil.set(gun, new FluidShooterState(state.input(), Optional.of(stack), state.fluidId(), state.amount()));
+            }
+
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
 
+            //TODO: When taking a half stack, it will delete the other half. Fix
             @Override
-            public void set(ItemStack stack) {
-                super.set(stack);
-                FluidShooterMenu.super.broadcastChanges();
+            public void onTake(Player player, ItemStack stack) {
+                super.onTake(player, stack);
+                updateStateFromSlot(ItemStack.EMPTY);
             }
-
-            //            @Override
-//            public ItemStack getItem() {
-//                FluidShooterState state = FluidShooterStateUtil.get(gun);
-//                return state.output().orElse(ItemStack.EMPTY);
-//            }
         });
 
 
@@ -108,19 +121,12 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         this(containerId, inv, inv.player.getUsedItemHand());
     }
 
-    private void refreshFromComponent() {
+    public void refreshFromComponent() {
         FluidShooterState state = FluidShooterStateUtil.get(gun);
         this.inputSlot.set(state.input().orElse(ItemStack.EMPTY));
         this.outputSlot.set(state.output().orElse(ItemStack.EMPTY));
         this.amount = state.amount();
         this.capacity = 16000;
-        FluidShooterStateUtil.set(gun, new FluidShooterState(Optional.of(this.inputSlot.getItem()), Optional.of(this.outputSlot.getItem()), state.fluidId(), this.amount));
-    }
-
-    @Override
-    public void broadcastChanges() {
-        refreshFromComponent();
-        super.broadcastChanges();
     }
 
     @Override
@@ -141,7 +147,6 @@ public class FluidShooterMenu extends AbstractContainerMenu {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 9 + j * 18, 85 + i * 18));
-//                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
     }
@@ -149,7 +154,6 @@ public class FluidShooterMenu extends AbstractContainerMenu {
     private void addPlayerHotBar(Inventory playerInventory) {
         for (int i = 0; i < 9; i++) {
             this.addSlot(new Slot(playerInventory, i, 9 + i * 18, 142));
-//            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 
@@ -165,13 +169,14 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 //        ItemStack sourceStack = sourceSlot.getItem();
 //        ItemStack sourceCopy = sourceStack.copy();
 //
+//
 //        if (pIndex >= PLAYER_INVENTORY_COUNT && pIndex <= PLAYER_INVENTORY_COUNT + ITEM_INVENTORY_SIZE) { //Moving from entity to player
 //            if (!moveItemStackTo(sourceStack, 0, PLAYER_INVENTORY_COUNT, false)) {
 //                return ItemStack.EMPTY;
 //            }
 //        } else if (pIndex < PLAYER_INVENTORY_COUNT) { //Moving from the player to entity
 //            if (inputSlot.mayPlace(sourceStack)) { //Moving a recipe item
-//                if (!moveItemStackTo(sourceStack, PLAYER_INVENTORY_COUNT + INPUT_SLOT, PLAYER_INVENTORY_COUNT + INPUT_SLOT + 1, false)) {
+//                if (!moveItemStackTo(sourceStack, PLAYER_INVENTORY_COUNT + inputSlot.index, PLAYER_INVENTORY_COUNT + inputSlot.index + 1, false)) {
 //                    return ItemStack.EMPTY;
 //                }
 //            } else {
@@ -189,11 +194,6 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 //        sourceSlot.onTake(pPlayer, sourceStack);
 //        return sourceCopy;
     }
-
-//    @Override
-//    public boolean stillValid(Player pPlayer) {
-//        return !level.isClientSide;
-//    }
 
     public int getScaledProgress() {
         int progress = amount;
