@@ -16,14 +16,16 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
 
     public FluidShooterScreen(FluidShooterMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
-        texture("textures/gui/fluid_shooter.png");
+        texture("textures/gui/acid_shooter.png");
     }
 
     @Override
     protected void init() {
         super.init();
-        this.inventoryLabelY = 10000;
-        this.titleLabelY = 10000;
+        this.inventoryLabelX = 12;
+        this.inventoryLabelY = 75;
+        this.titleLabelX = 12;
+        this.titleLabelY = 9;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        renderTank(graphics, x, y);
+//        renderTank(graphics, x, y);
     }
 
     private void renderTank(GuiGraphics graphics, int x, int y) {
@@ -43,7 +45,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderMenuBackground(graphics);
         super.render(graphics, mouseX, mouseY, delta);
-        renderTooltip(graphics, mouseX, mouseY);
+//        renderTooltip(graphics, mouseX, mouseY);
     }
 
     protected void renderTooltip(GuiGraphics pGuiGraphics, int mouseX, int mouseY) {
@@ -60,7 +62,7 @@ public class FluidShooterScreen extends ModScreen<FluidShooterMenu> {
                 mouseY > y + 21 && mouseY < y + 71){
             List<Component> tooltip = new ArrayList<>();
             tooltip.add(Component.literal("Acid"));
-            tooltip.add(Component.literal(menu.getDataFrom(0) + "mB /" + menu.getDataFrom(1) + "mB"));
+            tooltip.add(Component.literal(menu.getAmount() + "mB /" + menu.getCapacity() + "mB"));
             pGuiGraphics.renderTooltip(this.font, tooltip, Optional.empty(), mouseX, mouseY);
         }
     }

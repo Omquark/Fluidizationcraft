@@ -7,7 +7,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.blaze3d.shaders.FogShape;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.IModBusEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,6 +57,9 @@ public class ModFluidType extends FluidType {
 //        return fogColor;
 //    }
 
+
+
+    //TODO: Register this on net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
     @Override
     public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
         consumer.accept(new IClientFluidTypeExtensions() {

@@ -1,8 +1,10 @@
 package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
+import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;

@@ -8,6 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -28,6 +29,7 @@ public class FluidizationBlocks {
             () -> new Block(BlockBehaviour.Properties.of().strength(10f)
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).mapColor(MapColor.COLOR_GRAY)
                     .noOcclusion()));
+    public static final DeferredHolder<Block, Block> CAUSTIC_DRUM_BLOCK = registerBlock("caustic_drum_block", CausticDrumBlock::new);
     public static final DeferredHolder<Block, Block> ACID_TANK = registerBlock("tank_acid",
             () -> new Block(BlockBehaviour.Properties.of().strength(10f)
                     .pushReaction(PushReaction.BLOCK).sound(SoundType.METAL).mapColor(MapColor.COLOR_BLACK)));
@@ -102,7 +104,7 @@ public class FluidizationBlocks {
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.STONE).mapColor(MapColor.STONE)
                     .requiresCorrectToolForDrops()));
 
-    public static final DeferredHolder<Block, Block> ACID_TNT = registerBlock("acid_tnt", AcidTNT::new);
+    public static final DeferredHolder<Block, Block> ACID_TNT = registerBlock("acid_tnt", AcidTNTBlock::new);
 
     private static <T extends Block> DeferredHolder<Block, T> registerBlockNoItem(String name, Supplier<T> block){
         DeferredHolder<Block, T> registeredBlock = BLOCKS.register(name, block);

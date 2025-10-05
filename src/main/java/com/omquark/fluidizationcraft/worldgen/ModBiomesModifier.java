@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.worldgen;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.worldgen.ore.ModPlacedFeatures;
+import com.omquark.fluidizationcraft.worldgen.features.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -35,7 +35,6 @@ public class ModBiomesModifier {
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeature = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
-
 
         context.register(
                 ALUMINUM_ORE,
