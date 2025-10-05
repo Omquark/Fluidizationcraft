@@ -109,8 +109,10 @@ public class ItemGunFluid extends Item {
             ItemStack out = state.output().orElse(ItemStack.EMPTY);
             if (!fuel.isEmpty() && fuel.is(FluidizationItems.VIAL_ACID.get())) {
                 fuel.shrink(1);
-                if(out.isEmpty()) out = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
-                else out.grow(1);
+                if(out.isEmpty())
+                    out = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
+                else
+                    out.grow(1);
                 //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun
                 AcidShotProjectile acidShot = new AcidShotProjectile(level, player, player.getItemInHand(hand), new ItemStack(this));
                 //shootFromRotation(player, xRot, yRot, gravity effect?, power <- setting this high will glitch, inaccuracy

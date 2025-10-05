@@ -114,21 +114,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
                 .unlockedBy("has_acid_vial", has(FluidizationItems.VIAL_ACID.get()))
                 .save(consumer);
-//TODO: Add this back when the Acid gun menu is fixed
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_ACID.get())
-//                .define('V', FluidizationItems.VIAL_EMPTY.get())
-//                .define('I', Items.IRON_INGOT)
-//                .define('T', FluidizationBlocks.TRANSPARENT_ALUMINUM.get())
-//                .define('G', Items.GUNPOWDER)
-//                .pattern("VT ")
-//                .pattern("TGI")
-//                .pattern("II ")
-//                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-//                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
-//                .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
-//                .unlockedBy("has_empty_vial", has(FluidizationItems.VIAL_EMPTY.get()))
-//                .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_ACID.get())
+                .define('V', FluidizationItems.VIAL_EMPTY.get())
+                .define('I', Items.IRON_INGOT)
+                .define('T', FluidizationBlocks.TRANSPARENT_ALUMINUM.get())
+                .define('G', Items.GUNPOWDER)
+                .pattern("VT ")
+                .pattern("TGI")
+                .pattern("II ")
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+                .unlockedBy("has_transparent_aluminum", has(FluidizationBlocks.TRANSPARENT_ALUMINUM.get()))
+                .unlockedBy("has_empty_vial", has(FluidizationItems.VIAL_EMPTY.get()))
+                .save(consumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FluidizationItems.GUN_CRYO.get())
                 .define('C', FluidizationItems.VIAL_CRYONITE.get())

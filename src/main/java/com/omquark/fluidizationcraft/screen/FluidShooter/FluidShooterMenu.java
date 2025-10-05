@@ -10,6 +10,7 @@ import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import com.omquark.fluidizationcraft.util.GunSlotHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -87,6 +88,12 @@ public class FluidShooterMenu extends AbstractContainerMenu {
                 super.onTake(player, stack);
                 updateStateFromSlot(ItemStack.EMPTY);
             }
+
+            @Override
+            public void set(ItemStack stack){
+                super.set(stack);
+                updateStateFromSlot(stack);
+            }
         });
 
 
@@ -122,11 +129,13 @@ public class FluidShooterMenu extends AbstractContainerMenu {
     }
 
     public void refreshFromComponent() {
+        if(!(player instanceof ServerPlayer)) return;
         FluidShooterState state = FluidShooterStateUtil.get(gun);
         this.inputSlot.set(state.input().orElse(ItemStack.EMPTY));
         this.outputSlot.set(state.output().orElse(ItemStack.EMPTY));
         this.amount = state.amount();
         this.capacity = 16000;
+        broadcastChanges();
     }
 
     @Override
