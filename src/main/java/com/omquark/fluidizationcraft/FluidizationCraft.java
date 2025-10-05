@@ -90,6 +90,7 @@ public class FluidizationCraft {
                 output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
                 output.accept(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
                 output.accept(FluidizationBlocks.ACID_TNT.get());
+                output.accept(FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get());
                 output.accept(FluidizationItems.DUST_IRON.get());
                 output.accept(FluidizationItems.DUST_GOLD.get());
                 output.accept(FluidizationItems.DUST_COPPER.get());

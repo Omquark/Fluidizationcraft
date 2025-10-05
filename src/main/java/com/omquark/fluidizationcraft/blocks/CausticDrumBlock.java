@@ -1,5 +1,6 @@
 package com.omquark.fluidizationcraft.blocks;
 
+import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -12,15 +13,19 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class CausticDrumBlock extends Block implements EntityBlock {
-    public CausticDrumBlock(Properties props){
-        super(props);
+
+    public CausticDrumBlock(){
+        super(Properties.of());
     }
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+        return new CausticDrumBlockEntity(pPos, pState);
     }
 
     @Override
