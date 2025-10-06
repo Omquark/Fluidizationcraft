@@ -1,5 +1,7 @@
 package com.omquark.fluidizationcraft.blocks.blockEntity;
 
+import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
+import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipe;
@@ -7,10 +9,10 @@ import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipeInput;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorMenu;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -24,9 +26,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -42,21 +46,21 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     public DissolvinatorRecipe currentRecipe;
 
     protected final ContainerData data;
+    public final FluidTank tank;
     private int progress = 0;
     private int maxProgress = 200;
-    private int fuelMb = 0;
-    private int maxFuelMb = 10000;
 
     public DissolvinatorBlockEntity(BlockPos blockPos, BlockState state) {
         super(ModBlockEntities.DISSOLVINATOR_ENTITY.get(), blockPos, state);
+        tank = new FluidTank(1000 * 10);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
                     case (0) -> DissolvinatorBlockEntity.this.progress;
                     case (1) -> DissolvinatorBlockEntity.this.maxProgress;
-                    case (2) -> DissolvinatorBlockEntity.this.fuelMb;
-                    case (3) -> DissolvinatorBlockEntity.this.maxFuelMb;
+                    case (2) -> DissolvinatorBlockEntity.this.tank.getFluidAmount();
+                    case (3) -> DissolvinatorBlockEntity.this.tank.getTankCapacity(0);
                     default -> 0;
                 };
             }
@@ -66,8 +70,9 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
                 switch (index) {
                     case (0) -> DissolvinatorBlockEntity.this.progress = value;
                     case (1) -> DissolvinatorBlockEntity.this.maxProgress = value;
-                    case (2) -> DissolvinatorBlockEntity.this.fuelMb = value;
-                    case (3) -> DissolvinatorBlockEntity.this.maxFuelMb = value;
+                    case (2) ->
+                            DissolvinatorBlockEntity.this.tank.setFluid(new FluidStack(FluidizationFluids.SOURCE_ACID, value));
+                    case (3) -> DissolvinatorBlockEntity.this.tank.setCapacity(value);
                 }
             }
 
@@ -123,14 +128,14 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         tag.put("inventory", itemStackHandler.serializeNBT(provider));
         tag.putInt("dissolvinator.progress", progress);
-        tag.putInt("dissolvinator.fuelMb", fuelMb);
+        tag.putInt("dissolvinator.fuelMb", tank.getFluidAmount());
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         itemStackHandler.deserializeNBT(provider, tag.getCompound("inventory"));
         progress = tag.getInt("dissolvinator.progress");
-        fuelMb = tag.getInt("dissolvinator.fuelMb");
+        tank.setFluid(new FluidStack(FluidizationFluids.SOURCE_ACID, tag.getInt("dissolvinator.fuelMb")));
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity blockEntity) {
@@ -138,8 +143,8 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
         DissolvinatorRecipe newRecipe = dissolvinatorBlock.currentRecipe;
         if (
                 dissolvinatorBlock.getCurrentRecipe().isPresent() &&
-                (newRecipe == null ||
-                        !dissolvinatorBlock.getCurrentRecipe().get().value().getResult().is(newRecipe.getResult().getItem()))
+                        (newRecipe == null ||
+                                !dissolvinatorBlock.getCurrentRecipe().get().value().getResult().is(newRecipe.getResult().getItem()))
         ) {
             dissolvinatorBlock.resetProgress();
             dissolvinatorBlock.currentRecipe = dissolvinatorBlock.getCurrentRecipe().get().value();
@@ -168,7 +173,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
         if (!fuel.is(FluidizationItems.VIAL_ACID.get()) || //Do not add if not acid
                 (!outFuel.is(FluidizationItems.VIAL_EMPTY.get()) && !outFuel.isEmpty()) || //Do not add if output is NOT an empty vial
                 (!outFuel.isEmpty() && outFuel.getCount() == outFuel.getMaxStackSize()) || //Do not add if output slot is full
-                fuelMb + 1000 > maxFuelMb) { //Do not add if it will go beyond max fuel
+                tank.getFluidAmount() + 1000 > tank.getCapacity()) { //Do not add if it will go beyond max fuel
             return;
         }
 
@@ -177,7 +182,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
         else outFuel.grow(1);
         itemStackHandler.setStackInSlot(INPUT_FUEL_SLOT, fuel);
         itemStackHandler.setStackInSlot(OUTPUT_FUEL_SLOT, outFuel);
-        this.fuelMb += 1000;
+        this.tank.fill(new FluidStack(FluidizationFluids.SOURCE_ACID, 1000), IFluidHandler.FluidAction.EXECUTE);
     }
 
     private boolean hasRecipe() {
@@ -230,7 +235,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void increaseCraftingProcess() {
-        if (fuelMb >= 125 &&
+        if (tank.getFluidAmount() >= 125 &&
                 getCurrentRecipe().isPresent() &&
                 (this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).is(getCurrentRecipe().get().value().getResult().getItem())) &&
                 this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).getCount() + getCurrentRecipe().get().value().getResult().getCount() <=
@@ -248,6 +253,22 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void consumeFuel() {
-        fuelMb = Math.max(fuelMb - 125, 0);
+        tank.drain(new FluidStack(FluidizationFluids.SOURCE_ACID, 125), IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    public IFluidHandler getTank() {
+        return tank;
+    }
+
+    public IFluidHandler getTank(@NotNull Direction direction){
+        return tank;
+    }
+
+
+    public static @Nullable IFluidHandler getTank(BlockEntity o, @Nullable Direction direction) {
+        if(o instanceof DissolvinatorBlockEntity dissolvinatorEntity){
+            return direction != null ? dissolvinatorEntity.getTank(direction) : dissolvinatorEntity.getTank();
+        }
+        return null;
     }
 }

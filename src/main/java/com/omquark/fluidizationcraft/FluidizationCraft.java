@@ -3,6 +3,7 @@ package com.omquark.fluidizationcraft;
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.biomes.AcidWastes;
 import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
+import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -156,6 +157,7 @@ public class FluidizationCraft {
 
     public void registerCapabilities(final RegisterCapabilitiesEvent event){
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.CAUSTIC_DRUM_ENTITY.get(), CausticDrumBlockEntity::getTank);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.DISSOLVINATOR_ENTITY.get(), DissolvinatorBlockEntity::getTank);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
