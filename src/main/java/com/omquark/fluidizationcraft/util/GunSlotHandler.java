@@ -34,7 +34,6 @@ public class GunSlotHandler extends ItemStackHandler {
         return result;
     }
 
-    //TODO: Causes a crash EncoderException: Empty ItemStack not allowed for FluidStateEncoder
     @Override
     public void setStackInSlot(int slot, @NotNull ItemStack stack) {
         FluidShooterState state = FluidShooterStateUtil.get(gun);

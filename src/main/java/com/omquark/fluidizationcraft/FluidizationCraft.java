@@ -2,6 +2,7 @@ package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.biomes.AcidWastes;
+import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -33,6 +34,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -142,13 +145,17 @@ public class FluidizationCraft {
 
         NeoForge.EVENT_BUS.register(this);
 
-        // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::registerCapabilities);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
+    }
+
+    public void registerCapabilities(final RegisterCapabilitiesEvent event){
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.CAUSTIC_DRUM_ENTITY.get(), CausticDrumBlockEntity::getTank);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

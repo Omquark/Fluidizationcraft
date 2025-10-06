@@ -2,18 +2,13 @@ package com.omquark.fluidizationcraft.items;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
-import com.omquark.fluidizationcraft.data.items.FluidShooter;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.entity.AcidShotProjectile;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterMenu;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
-import com.omquark.fluidizationcraft.util.ModInputSlot;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,17 +16,10 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.capabilities.Capabilities;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-/**
- * TODO: This item doesn't work, the menu does not display the inventory correctly, thus the recipe is removed
- * Add this recipe when the menu is fixed to add the item back in to be crafted
- */
 @EverythingNonNullByDefault
 public class ItemGunFluid extends Item {
 

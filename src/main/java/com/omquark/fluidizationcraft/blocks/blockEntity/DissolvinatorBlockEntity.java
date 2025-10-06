@@ -28,21 +28,18 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
-import net.minecraft.core.Direction;
 
 import java.util.Optional;
 
 @EverythingNonNullByDefault
 public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvider {
-    private static final int SLOT_COUNT = 4;
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
-    private static final int INPUT_FUEL_SLOT = 2;
-    private static final int OUTPUT_FUEL_SLOT = 3;
+    public static final int SLOT_COUNT = 4;
+    public static final int INPUT_SLOT = 0;
+    public static final int OUTPUT_SLOT = 1;
+    public static final int INPUT_FUEL_SLOT = 2;
+    public static final int OUTPUT_FUEL_SLOT = 3;
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(SLOT_COUNT);
-
-    public static final BlockCapability<IItemHandler, Void> ITEM_HANDLER_BLOCK = BlockCapability.createVoid(
-            ResourceLocation.parse("dissolvinator_item_handler"), IItemHandler.class);
+    public DissolvinatorRecipe currentRecipe;
 
     protected final ContainerData data;
     private int progress = 0;
@@ -67,14 +64,10 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case (0):
-                        DissolvinatorBlockEntity.this.progress = value;
-                    case (1):
-                        DissolvinatorBlockEntity.this.maxProgress = value;
-                    case (2):
-                        DissolvinatorBlockEntity.this.fuelMb = value;
-                    case (3):
-                        DissolvinatorBlockEntity.this.maxFuelMb = value;
+                    case (0) -> DissolvinatorBlockEntity.this.progress = value;
+                    case (1) -> DissolvinatorBlockEntity.this.maxProgress = value;
+                    case (2) -> DissolvinatorBlockEntity.this.fuelMb = value;
+                    case (3) -> DissolvinatorBlockEntity.this.maxFuelMb = value;
                 }
             }
 
@@ -95,6 +88,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     public boolean acceptsInput(Item input) {
+        if (this.level == null) return false;
         Optional<RecipeHolder<DissolvinatorRecipe>> recipeHolder = this.level
                 .getRecipeManager()
                 .getRecipeFor(
@@ -141,6 +135,15 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity blockEntity) {
         if (!(blockEntity instanceof DissolvinatorBlockEntity dissolvinatorBlock)) return;
+        DissolvinatorRecipe newRecipe = dissolvinatorBlock.currentRecipe;
+        if (
+                dissolvinatorBlock.getCurrentRecipe().isPresent() &&
+                (newRecipe == null ||
+                        !dissolvinatorBlock.getCurrentRecipe().get().value().getResult().is(newRecipe.getResult().getItem()))
+        ) {
+            dissolvinatorBlock.resetProgress();
+            dissolvinatorBlock.currentRecipe = dissolvinatorBlock.getCurrentRecipe().get().value();
+        }
 
         if (dissolvinatorBlock.hasRecipe()) {
             dissolvinatorBlock.increaseCraftingProcess();
@@ -227,8 +230,16 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void increaseCraftingProcess() {
-        if (fuelMb >= 125) {
+        if (fuelMb >= 125 &&
+                getCurrentRecipe().isPresent() &&
+                (this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).is(getCurrentRecipe().get().value().getResult().getItem())) &&
+                this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).getCount() + getCurrentRecipe().get().value().getResult().getCount() <=
+                        this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize() ||
+                this.itemStackHandler.getStackInSlot(OUTPUT_SLOT).isEmpty()
+        ) {
             progress++;
+        } else {
+            resetProgress();
         }
     }
 

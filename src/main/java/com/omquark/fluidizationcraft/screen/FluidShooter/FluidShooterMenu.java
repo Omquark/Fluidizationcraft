@@ -2,25 +2,20 @@ package com.omquark.fluidizationcraft.screen.FluidShooter;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
-import com.omquark.fluidizationcraft.data.items.FluidShooter;
-import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
 import com.omquark.fluidizationcraft.items.FluidizationItems;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import com.omquark.fluidizationcraft.util.GunSlotHandler;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @EverythingNonNullByDefault
 public class FluidShooterMenu extends AbstractContainerMenu {
