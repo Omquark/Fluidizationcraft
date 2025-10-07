@@ -30,7 +30,7 @@ public class FluidizationBlocks {
                     .pushReaction(PushReaction.NORMAL).sound(SoundType.GLASS).mapColor(MapColor.COLOR_GRAY)
                     .noOcclusion()));
     public static final DeferredHolder<Block, Block> CAUSTIC_DRUM_BLOCK = registerBlock("caustic_drum_block",
-            () -> new CausticDrumBlock(BlockBehaviour.Properties.of().strength(10f)));
+            () -> new CausticDrumBlock(BlockBehaviour.Properties.of().strength(10f).pushReaction(PushReaction.BLOCK)));
     public static final DeferredHolder<Block, Block> ACID_TANK = registerBlock("tank_acid",
             () -> new Block(BlockBehaviour.Properties.of().strength(10f)
                     .pushReaction(PushReaction.BLOCK).sound(SoundType.METAL).mapColor(MapColor.COLOR_BLACK)));

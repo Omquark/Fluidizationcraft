@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "fluidizationcraft:block/caustic_drum_block"
+    },
+    "facing=up": {
+      "model": "fluidizationcraft:block/caustic_drum_block"
+    },
+    "facing=north": {
+      "model": "fluidizationcraft:block/caustic_drum_block"
+    },
+    "facing=east": {
+      "model": "fluidizationcraft:block/caustic_drum_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fluidizationcraft:block/caustic_drum_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fluidizationcraft:block/caustic_drum_block",
+      "y": 270
+    }
+  }
+}

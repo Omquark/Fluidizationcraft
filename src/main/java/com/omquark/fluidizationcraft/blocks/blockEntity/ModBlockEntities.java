@@ -10,8 +10,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Objects;
-
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, FluidizationCraft.MODID);
@@ -27,6 +25,7 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(CausticDrumBlockEntity::new,
                             FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get())
                             .build(Util.fetchChoiceType(References.BLOCK_ENTITY, "CausticDrumBlock")));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

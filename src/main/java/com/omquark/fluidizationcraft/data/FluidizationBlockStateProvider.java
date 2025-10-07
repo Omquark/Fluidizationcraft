@@ -28,6 +28,7 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
         blockItemWithTranslucency(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
         blockItemWithTranslucency(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
         blockItemWithTranslucency(FluidizationBlocks.ACID_BARRIER.get());
+        blockItemWithTranslucency(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
 
         blockWithItem(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
         blockWithItem(FluidizationBlocks.LEAD_ORE_BLOCK.get());
@@ -37,10 +38,9 @@ public class FluidizationBlockStateProvider extends BlockStateProvider {
         blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK.get());
         blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
         blockWithItem(FluidizationBlocks.ACID_TANK.get());
+//        blockWithItem(FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get());
 
         cubeBottomTop(FluidizationBlocks.ACID_TNT.get(), "acid_tnt");
-
-        blockItemWithTranslucency(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
 
         this.yDirectionalBlock(
                 FluidizationBlocks.DISSOLVINATOR_BLOCK.get(),
