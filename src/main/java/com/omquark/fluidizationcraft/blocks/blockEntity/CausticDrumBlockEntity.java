@@ -29,11 +29,11 @@ public class CausticDrumBlockEntity extends BlockEntity {
         tank = new FluidTank(1000 * 32);
     }
 
-    public IFluidHandler getTank() {
-        return tank;
-    }
+//    public IFluidHandler getTank() {
+//        return tank;
+//    }
 
-    public IFluidHandler getTank(@NotNull Direction direction) {
+    public IFluidHandler getTank(@Nullable Direction direction) {
         return tank;
     }
 
@@ -47,10 +47,10 @@ public class CausticDrumBlockEntity extends BlockEntity {
         super.collectImplicitComponents(pComponents);
     }
 
-    public static @Nullable IFluidHandler getTank(BlockEntity o, @Nullable Direction direction) {
-        if (o instanceof CausticDrumBlockEntity causticEntity) {
-            return direction != null ? causticEntity.getTank(direction) : causticEntity.getTank();
-        }
-        return null;
-    }
+//    public static @Nullable IFluidHandler getTank(BlockEntity o, @Nullable Direction direction) {
+//        if (o instanceof CausticDrumBlockEntity causticEntity) {
+//            return direction != null ? causticEntity.getTank(direction) : causticEntity.getTank();
+//        }
+//        return null;
+//    }
 }

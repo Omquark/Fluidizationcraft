@@ -1,0 +1,4 @@
+{
+  "parent": "fluidizationcraft:block/caustic_drum_block",
+  "render_type": "minecraft:translucent"
+}

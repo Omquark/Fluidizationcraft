@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.biomes.AcidWastes;
 import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
+import com.omquark.fluidizationcraft.blocks.blockEntityRenderer.CausticDrumRenderer;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
 import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
@@ -21,6 +22,7 @@ import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -37,6 +39,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -156,7 +159,7 @@ public class FluidizationCraft {
     }
 
     public void registerCapabilities(final RegisterCapabilitiesEvent event){
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.CAUSTIC_DRUM_ENTITY.get(), CausticDrumBlockEntity::getTank);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.CAUSTIC_DRUM_ENTITY.get(), (entity, dir) -> entity.getTank(dir));
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.DISSOLVINATOR_ENTITY.get(), DissolvinatorBlockEntity::getTank);
     }
 
@@ -184,6 +187,11 @@ public class FluidizationCraft {
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event){
+            event.registerBlockEntityRenderer(ModBlockEntities.CAUSTIC_DRUM_ENTITY.get(), CausticDrumRenderer::new);
+        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

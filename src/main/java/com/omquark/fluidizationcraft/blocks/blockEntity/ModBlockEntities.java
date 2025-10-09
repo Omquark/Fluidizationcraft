@@ -20,7 +20,7 @@ public class ModBlockEntities {
                             FluidizationBlocks.DISSOLVINATOR_BLOCK.get())
                             .build(Util.fetchChoiceType(References.BLOCK_ENTITY, "DissolvinatorBlock")));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> CAUSTIC_DRUM_ENTITY =
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CausticDrumBlockEntity>> CAUSTIC_DRUM_ENTITY =
             BLOCK_ENTITIES.register("caustic_drum_entity", () ->
                     BlockEntityType.Builder.of(CausticDrumBlockEntity::new,
                             FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get())

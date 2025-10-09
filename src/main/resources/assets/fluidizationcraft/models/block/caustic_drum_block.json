@@ -9,7 +9,7 @@
 		"3": "fluidizationcraft:block/caustic_drum_block_4",
 		"4": "fluidizationcraft:block/caustic_drum_block_5",
 		"5": "fluidizationcraft:block/caustic_drum_block_6",
-		"particle": "caustic_drum_block_1"
+		"particle": "fluidizationcraft:block/caustic_drum_block_1"
 	},
 	"elements": [
 		{
