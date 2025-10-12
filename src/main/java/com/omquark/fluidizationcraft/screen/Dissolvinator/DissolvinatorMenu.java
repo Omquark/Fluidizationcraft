@@ -1,8 +1,8 @@
 package com.omquark.fluidizationcraft.screen.Dissolvinator;
 
-import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
+import com.omquark.fluidizationcraft.items.ModItems;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 import java.util.List;
@@ -73,7 +72,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
             }
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(FluidizationItems.VIAL_ACID.get());
+                return stack.is(ModItems.VIAL_ACID.get());
             }
 
         };
@@ -164,7 +163,7 @@ public class DissolvinatorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
+                player, ModBlocks.DISSOLVINATOR_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

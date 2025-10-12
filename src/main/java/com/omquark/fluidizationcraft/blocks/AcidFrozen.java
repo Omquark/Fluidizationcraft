@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.ModDamageTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -31,7 +31,7 @@ public class AcidFrozen extends IceBlock {
     }
 
     public static BlockState meltsInto() {
-        return FluidizationBlocks.ACID_BLOCK.get().defaultBlockState();
+        return ModBlocks.ACID_BLOCK.get().defaultBlockState();
     }
 
     public AcidFrozen() {
@@ -46,7 +46,7 @@ public class AcidFrozen extends IceBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 1f);
+        entity.hurt(level.damageSources().source(ModDamageTypes.ACID_DAMAGE), 1f);
         super.stepOn(level, pos, state, entity);
     }
 

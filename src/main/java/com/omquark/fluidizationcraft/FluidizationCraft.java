@@ -2,27 +2,25 @@ package com.omquark.fluidizationcraft;
 
 import com.mojang.logging.LogUtils;
 import com.omquark.fluidizationcraft.biomes.AcidWastes;
-import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.blocks.blockEntity.DissolvinatorBlockEntity;
 import com.omquark.fluidizationcraft.blocks.blockEntityRenderer.CausticDrumRenderer;
 import com.omquark.fluidizationcraft.dataComponents.ModDataComponents;
 import com.omquark.fluidizationcraft.blocks.blockEntity.ModBlockEntities;
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
 import com.omquark.fluidizationcraft.client.ModArrowRenderer;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.data.ModRecipeSerializerProvider;
 import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionLoader;
 import com.omquark.fluidizationcraft.entity.ModEntities;
-import com.omquark.fluidizationcraft.fluids.FluidizationFluidTypes;
-import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
-import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.fluids.ModFluidTypes;
+import com.omquark.fluidizationcraft.fluids.ModFluids;
+import com.omquark.fluidizationcraft.items.ModItems;
 import com.omquark.fluidizationcraft.region.AcidWastesRegion;
 import com.omquark.fluidizationcraft.screen.Dissolvinator.DissolvinatorScreen;
 import com.omquark.fluidizationcraft.screen.FluidShooter.FluidShooterScreen;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -60,69 +58,69 @@ public class FluidizationCraft {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FLUIDIZATION_CRAFT_TAB = CREATIVE_MODE_TABS_REGISTER.register("example_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance())
+            .icon(() -> ModBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
-                output.accept(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
-                output.accept(FluidizationBlocks.ACID_BARRIER.get());
-                output.accept(FluidizationBlocks.ACID_TANK.get());
-                output.accept(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
-                output.accept(FluidizationFluids.SOURCE_ACID.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_CRYONITE.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_NEPTUNIUM.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_NETHERFLOW.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_PLUTONIUM.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_PYRONITE.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_RADIONITE.get().getBucket());
-                output.accept(FluidizationFluids.SOURCE_URANIUM.get().getBucket());
-                output.accept(FluidizationItems.VIAL_EMPTY.get());
-                output.accept(FluidizationItems.VIAL_ACID.get());
-                output.accept(FluidizationItems.VIAL_CRYONITE.get());
-                output.accept(FluidizationItems.VIAL_NEPTUNIUM.get());
-                output.accept(FluidizationItems.VIAL_NETHERFLOW.get());
-                output.accept(FluidizationItems.VIAL_PLUTONIUM.get());
-                output.accept(FluidizationItems.VIAL_PYRONITE.get());
-                output.accept(FluidizationItems.VIAL_RADIONITE.get());
-                output.accept(FluidizationItems.VIAL_URANIUM.get());
-                output.accept(FluidizationItems.CELL_ACID.get());
-                output.accept(FluidizationItems.GUN_ACID.get());
-                output.accept(FluidizationItems.GUN_CRYO.get());
-                output.accept(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
+                output.accept(ModBlocks.FROZEN_ACID_BLOCK.get());
+                output.accept(ModBlocks.FROZEN_CRYONITE_BLOCK.get());
+                output.accept(ModBlocks.ACID_BARRIER.get());
+                output.accept(ModBlocks.ACID_TANK.get());
+                output.accept(ModBlocks.DISSOLVINATOR_BLOCK.get());
+                output.accept(ModFluids.SOURCE_ACID.get().getBucket());
+                output.accept(ModFluids.SOURCE_CRYONITE.get().getBucket());
+                output.accept(ModFluids.SOURCE_NEPTUNIUM.get().getBucket());
+                output.accept(ModFluids.SOURCE_NETHERFLOW.get().getBucket());
+                output.accept(ModFluids.SOURCE_PLUTONIUM.get().getBucket());
+                output.accept(ModFluids.SOURCE_PYRONITE.get().getBucket());
+                output.accept(ModFluids.SOURCE_RADIONITE.get().getBucket());
+                output.accept(ModFluids.SOURCE_URANIUM.get().getBucket());
+                output.accept(ModItems.VIAL_EMPTY.get());
+                output.accept(ModItems.VIAL_ACID.get());
+                output.accept(ModItems.VIAL_CRYONITE.get());
+                output.accept(ModItems.VIAL_NEPTUNIUM.get());
+                output.accept(ModItems.VIAL_NETHERFLOW.get());
+                output.accept(ModItems.VIAL_PLUTONIUM.get());
+                output.accept(ModItems.VIAL_PYRONITE.get());
+                output.accept(ModItems.VIAL_RADIONITE.get());
+                output.accept(ModItems.VIAL_URANIUM.get());
+                output.accept(ModItems.CELL_ACID.get());
+                output.accept(ModItems.GUN_ACID.get());
+                output.accept(ModItems.GUN_CRYO.get());
+                output.accept(ModBlocks.ALUMINUM_ORE_BLOCK.get());
 //                output.accept(FluidizationBlocks.ARGENTITE_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.LEAD_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.TIN_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
-                output.accept(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
-                output.accept(FluidizationBlocks.ACID_TNT.get());
-                output.accept(FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get());
-                output.accept(FluidizationItems.DUST_IRON.get());
-                output.accept(FluidizationItems.DUST_GOLD.get());
-                output.accept(FluidizationItems.DUST_COPPER.get());
-                output.accept(FluidizationItems.RAW_ALUMINUM.get());
-                output.accept(FluidizationItems.RAW_LEAD.get());
-                output.accept(FluidizationItems.RAW_NEPTUNIUM.get());
-                output.accept(FluidizationItems.RAW_PLUTONIUM.get());
-                output.accept(FluidizationItems.RAW_RADIONITE.get());
-                output.accept(FluidizationItems.RAW_TIN.get());
-                output.accept(FluidizationItems.RAW_URANIUM.get());
-                output.accept(FluidizationItems.DUST_ALUMINUM.get());
-                output.accept(FluidizationItems.DUST_LEAD.get());
-                output.accept(FluidizationItems.DUST_NEPTUNIUM.get());
-                output.accept(FluidizationItems.DUST_PLUTONIUM.get());
-                output.accept(FluidizationItems.DUST_RADIONITE.get());
-                output.accept(FluidizationItems.DUST_TIN.get());
-                output.accept(FluidizationItems.DUST_URANIUM.get());
-                output.accept(FluidizationItems.INGOT_ALUMINUM.get());
-                output.accept(FluidizationItems.INGOT_LEAD.get());
-                output.accept(FluidizationItems.INGOT_NEPTUNIUM.get());
-                output.accept(FluidizationItems.INGOT_PLUTONIUM.get());
-                output.accept(FluidizationItems.INGOT_RADIONITE.get());
-                output.accept(FluidizationItems.INGOT_TIN.get());
-                output.accept(FluidizationItems.INGOT_URANIUM.get());
-                output.accept(FluidizationItems.GOOP_ACID.get());
+                output.accept(ModBlocks.LEAD_ORE_BLOCK.get());
+                output.accept(ModBlocks.NEPTUNIUM_ORE_BLOCK.get());
+                output.accept(ModBlocks.PLUTONIUM_ORE_BLOCK.get());
+                output.accept(ModBlocks.RADIONITE_ORE_BLOCK.get());
+                output.accept(ModBlocks.TIN_ORE_BLOCK.get());
+                output.accept(ModBlocks.URANIUM_ORE_BLOCK.get());
+                output.accept(ModBlocks.TRANSPARENT_ALUMINUM.get());
+                output.accept(ModBlocks.ACID_TNT.get());
+                output.accept(ModBlocks.CAUSTIC_DRUM_BLOCK.get());
+                output.accept(ModItems.DUST_IRON.get());
+                output.accept(ModItems.DUST_GOLD.get());
+                output.accept(ModItems.DUST_COPPER.get());
+                output.accept(ModItems.RAW_ALUMINUM.get());
+                output.accept(ModItems.RAW_LEAD.get());
+                output.accept(ModItems.RAW_NEPTUNIUM.get());
+                output.accept(ModItems.RAW_PLUTONIUM.get());
+                output.accept(ModItems.RAW_RADIONITE.get());
+                output.accept(ModItems.RAW_TIN.get());
+                output.accept(ModItems.RAW_URANIUM.get());
+                output.accept(ModItems.DUST_ALUMINUM.get());
+                output.accept(ModItems.DUST_LEAD.get());
+                output.accept(ModItems.DUST_NEPTUNIUM.get());
+                output.accept(ModItems.DUST_PLUTONIUM.get());
+                output.accept(ModItems.DUST_RADIONITE.get());
+                output.accept(ModItems.DUST_TIN.get());
+                output.accept(ModItems.DUST_URANIUM.get());
+                output.accept(ModItems.INGOT_ALUMINUM.get());
+                output.accept(ModItems.INGOT_LEAD.get());
+                output.accept(ModItems.INGOT_NEPTUNIUM.get());
+                output.accept(ModItems.INGOT_PLUTONIUM.get());
+                output.accept(ModItems.INGOT_RADIONITE.get());
+                output.accept(ModItems.INGOT_TIN.get());
+                output.accept(ModItems.INGOT_URANIUM.get());
+                output.accept(ModItems.GOOP_ACID.get());
 
             })
             .title(Component.literal("Fluidization Craft"))
@@ -132,10 +130,10 @@ public class FluidizationCraft {
 
         modEventBus.addListener(this::commonSetup);
 
-        FluidizationBlocks.register(modEventBus);
-        FluidizationItems.register(modEventBus);
-        FluidizationFluidTypes.registerWithWaterRL(modEventBus);
-        FluidizationFluids.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModFluidTypes.registerWithWaterRL(modEventBus);
+        ModFluids.register(modEventBus);
         ModEntities.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
@@ -175,7 +173,7 @@ public class FluidizationCraft {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(FluidizationBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance());
+            event.accept(ModBlocks.FROZEN_ACID_BLOCK.get().asItem().getDefaultInstance());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -195,27 +193,27 @@ public class FluidizationCraft {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_ACID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_ACID.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_CRYONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_CRYONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_NEPTUNIUM.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_NEPTUNIUM.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_NETHERFLOW.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_NETHERFLOW.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_PLUTONIUM.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_PLUTONIUM.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_PYRONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_PYRONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_RADIONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_RADIONITE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.SOURCE_URANIUM.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(FluidizationFluids.FLOWING_URANIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_ACID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_ACID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_CRYONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_CRYONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_NEPTUNIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_NEPTUNIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_NETHERFLOW.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_NETHERFLOW.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_PLUTONIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_PLUTONIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_PYRONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_PYRONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_RADIONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_RADIONITE.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_URANIUM.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_URANIUM.get(), RenderType.translucent());
             EntityRenderers.register(ModEntities.ACID_PROJECTILE.get(),
                     context -> new ModArrowRenderer(context, "textures/entity/plasmaball.png"));
             EntityRenderers.register(ModEntities.CRYO_PROJECTILE.get(),
                     context -> new ModArrowRenderer(context, "textures/entity/railgunbolt.png"));
-            FluidizationFluids.createInteractions();
+            ModFluids.createInteractions();
         }
 
         @SubscribeEvent

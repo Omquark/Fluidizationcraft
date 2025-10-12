@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.joml.Vector3f;
 
-public class FluidizationFluidTypes {
+public class ModFluidTypes {
     public static final ResourceLocation WATER_STILL_RL = ResourceLocation.parse("block/water_still");
     public static final ResourceLocation WATER_FLOWING_RL = ResourceLocation.parse("block/water_flow");
     public static final ResourceLocation LAVA_STILL_RL = ResourceLocation.parse("block/lava_still");

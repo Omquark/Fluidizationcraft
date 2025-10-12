@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.entity;
 
-import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
+import com.omquark.fluidizationcraft.fluids.ModFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,7 +34,7 @@ public class PrimedAcidTNTEntity extends PrimedTnt {
             for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -radius, -radius),
                     center.offset(radius, radius, radius))) {
                 if (level().random.nextFloat() < 0.001f && level().isEmptyBlock(pos)) {
-                    level().setBlock(pos, FluidizationFluids.SOURCE_ACID.get().defaultFluidState().createLegacyBlock(), 3);
+                    level().setBlock(pos, ModFluids.SOURCE_ACID.get().defaultFluidState().createLegacyBlock(), 3);
                 }
             }
         }

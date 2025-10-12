@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.data.loot;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
-import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
+import com.omquark.fluidizationcraft.items.ModItems;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -24,28 +24,28 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        add(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get(), FluidizationItems.RAW_ALUMINUM.get()));
-        add(FluidizationBlocks.LEAD_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.LEAD_ORE_BLOCK.get(), FluidizationItems.RAW_LEAD.get()));
-        add(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get(), FluidizationItems.RAW_NEPTUNIUM.get()));
-        add(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get(), FluidizationItems.RAW_PLUTONIUM.get()));
-        add(FluidizationBlocks.RADIONITE_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.RADIONITE_ORE_BLOCK.get(), FluidizationItems.RAW_RADIONITE.get()));
-        add(FluidizationBlocks.TIN_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.TIN_ORE_BLOCK.get(), FluidizationItems.RAW_TIN.get()));
-        add(FluidizationBlocks.URANIUM_ORE_BLOCK.get(),
-                block -> createOreDrop(FluidizationBlocks.URANIUM_ORE_BLOCK.get(), FluidizationItems.RAW_URANIUM.get()));
+        add(ModBlocks.ALUMINUM_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.ALUMINUM_ORE_BLOCK.get(), ModItems.RAW_ALUMINUM.get()));
+        add(ModBlocks.LEAD_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.LEAD_ORE_BLOCK.get(), ModItems.RAW_LEAD.get()));
+        add(ModBlocks.NEPTUNIUM_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.NEPTUNIUM_ORE_BLOCK.get(), ModItems.RAW_NEPTUNIUM.get()));
+        add(ModBlocks.PLUTONIUM_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.PLUTONIUM_ORE_BLOCK.get(), ModItems.RAW_PLUTONIUM.get()));
+        add(ModBlocks.RADIONITE_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.RADIONITE_ORE_BLOCK.get(), ModItems.RAW_RADIONITE.get()));
+        add(ModBlocks.TIN_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.TIN_ORE_BLOCK.get(), ModItems.RAW_TIN.get()));
+        add(ModBlocks.URANIUM_ORE_BLOCK.get(),
+                block -> createOreDrop(ModBlocks.URANIUM_ORE_BLOCK.get(), ModItems.RAW_URANIUM.get()));
 
-        dropSelf(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
-        dropSelf(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
-        dropSelf(FluidizationBlocks.ACID_TANK.get());
-        dropSelf(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
-        dropSelf(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
-        dropSelf(FluidizationBlocks.ACID_BARRIER.get());
-        dropSelf(FluidizationBlocks.ACID_TNT.get());
+        dropSelf(ModBlocks.FROZEN_ACID_BLOCK.get());
+        dropSelf(ModBlocks.FROZEN_CRYONITE_BLOCK.get());
+        dropSelf(ModBlocks.ACID_TANK.get());
+        dropSelf(ModBlocks.DISSOLVINATOR_BLOCK.get());
+        dropSelf(ModBlocks.TRANSPARENT_ALUMINUM.get());
+        dropSelf(ModBlocks.ACID_BARRIER.get());
+        dropSelf(ModBlocks.ACID_TNT.get());
     }
 
     @Override

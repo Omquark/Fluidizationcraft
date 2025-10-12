@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.data;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -21,31 +21,31 @@ public class ModBlockDataGenerator extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         this.tag(Tags.Blocks.ORES)
-                .add(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.LEAD_ORE_BLOCK.get())
-                .add(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.RADIONITE_ORE_BLOCK.get())
-                .add(FluidizationBlocks.TIN_ORE_BLOCK.get())
-                .add(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
+                .add(ModBlocks.ALUMINUM_ORE_BLOCK.get())
+                .add(ModBlocks.LEAD_ORE_BLOCK.get())
+                .add(ModBlocks.NEPTUNIUM_ORE_BLOCK.get())
+                .add(ModBlocks.PLUTONIUM_ORE_BLOCK.get())
+                .add(ModBlocks.RADIONITE_ORE_BLOCK.get())
+                .add(ModBlocks.TIN_ORE_BLOCK.get())
+                .add(ModBlocks.URANIUM_ORE_BLOCK.get());
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.LEAD_ORE_BLOCK.get())
-                .add(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.RADIONITE_ORE_BLOCK.get())
-                .add(FluidizationBlocks.TIN_ORE_BLOCK.get())
-                .add(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
+                .add(ModBlocks.ALUMINUM_ORE_BLOCK.get())
+                .add(ModBlocks.LEAD_ORE_BLOCK.get())
+                .add(ModBlocks.NEPTUNIUM_ORE_BLOCK.get())
+                .add(ModBlocks.PLUTONIUM_ORE_BLOCK.get())
+                .add(ModBlocks.RADIONITE_ORE_BLOCK.get())
+                .add(ModBlocks.TIN_ORE_BLOCK.get())
+                .add(ModBlocks.URANIUM_ORE_BLOCK.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.LEAD_ORE_BLOCK.get())
-                .add(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.RADIONITE_ORE_BLOCK.get())
-                .add(FluidizationBlocks.TIN_ORE_BLOCK.get())
-                .add(FluidizationBlocks.URANIUM_ORE_BLOCK.get())
-                .add(FluidizationBlocks.DISSOLVINATOR_BLOCK.get());
+                .add(ModBlocks.ALUMINUM_ORE_BLOCK.get())
+                .add(ModBlocks.LEAD_ORE_BLOCK.get())
+                .add(ModBlocks.NEPTUNIUM_ORE_BLOCK.get())
+                .add(ModBlocks.PLUTONIUM_ORE_BLOCK.get())
+                .add(ModBlocks.RADIONITE_ORE_BLOCK.get())
+                .add(ModBlocks.TIN_ORE_BLOCK.get())
+                .add(ModBlocks.URANIUM_ORE_BLOCK.get())
+                .add(ModBlocks.DISSOLVINATOR_BLOCK.get());
     }
 }

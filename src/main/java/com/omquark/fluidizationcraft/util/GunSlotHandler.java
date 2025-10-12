@@ -2,10 +2,8 @@ package com.omquark.fluidizationcraft.util;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
-import com.omquark.fluidizationcraft.items.FluidizationItems;
-import com.omquark.fluidizationcraft.items.ModVial;
+import com.omquark.fluidizationcraft.items.ItemVial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +56,7 @@ public class GunSlotHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-        return stack.getItem() instanceof ModVial && slot == 0;
+        return stack.getItem() instanceof ItemVial && slot == 0;
     }
 
     @Override

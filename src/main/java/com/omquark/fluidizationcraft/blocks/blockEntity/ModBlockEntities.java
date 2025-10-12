@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.blocks.blockEntity;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,13 +17,13 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> DISSOLVINATOR_ENTITY =
             BLOCK_ENTITIES.register("dissolvinator_entity", () ->
                     BlockEntityType.Builder.of(DissolvinatorBlockEntity::new,
-                            FluidizationBlocks.DISSOLVINATOR_BLOCK.get())
+                            ModBlocks.DISSOLVINATOR_BLOCK.get())
                             .build(Util.fetchChoiceType(References.BLOCK_ENTITY, "DissolvinatorBlock")));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CausticDrumBlockEntity>> CAUSTIC_DRUM_ENTITY =
             BLOCK_ENTITIES.register("caustic_drum_entity", () ->
                     BlockEntityType.Builder.of(CausticDrumBlockEntity::new,
-                            FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get())
+                            ModBlocks.CAUSTIC_DRUM_BLOCK.get())
                             .build(Util.fetchChoiceType(References.BLOCK_ENTITY, "CausticDrumBlock")));
 
     public static void register(IEventBus eventBus){

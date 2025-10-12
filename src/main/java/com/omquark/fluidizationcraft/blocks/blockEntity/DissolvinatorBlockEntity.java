@@ -1,8 +1,7 @@
 package com.omquark.fluidizationcraft.blocks.blockEntity;
 
-import com.omquark.fluidizationcraft.blocks.DissolvinatorBlock;
-import com.omquark.fluidizationcraft.fluids.FluidizationFluids;
-import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.fluids.ModFluids;
+import com.omquark.fluidizationcraft.items.ModItems;
 import com.omquark.fluidizationcraft.data.ModRecipeDataProvider;
 import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipe;
 import com.omquark.fluidizationcraft.recipe.DissolvinatorRecipeInput;
@@ -71,7 +70,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
                     case (0) -> DissolvinatorBlockEntity.this.progress = value;
                     case (1) -> DissolvinatorBlockEntity.this.maxProgress = value;
                     case (2) ->
-                            DissolvinatorBlockEntity.this.tank.setFluid(new FluidStack(FluidizationFluids.SOURCE_ACID, value));
+                            DissolvinatorBlockEntity.this.tank.setFluid(new FluidStack(ModFluids.SOURCE_ACID, value));
                     case (3) -> DissolvinatorBlockEntity.this.tank.setCapacity(value);
                 }
             }
@@ -105,7 +104,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     public boolean acceptsFuel(Item fuel) {
-        return new ItemStack(fuel).is(FluidizationItems.VIAL_ACID.get());
+        return new ItemStack(fuel).is(ModItems.VIAL_ACID.get());
     }
 
     public void drops() {
@@ -135,7 +134,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         itemStackHandler.deserializeNBT(provider, tag.getCompound("inventory"));
         progress = tag.getInt("dissolvinator.progress");
-        tank.setFluid(new FluidStack(FluidizationFluids.SOURCE_ACID, tag.getInt("dissolvinator.fuelMb")));
+        tank.setFluid(new FluidStack(ModFluids.SOURCE_ACID, tag.getInt("dissolvinator.fuelMb")));
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BlockEntity blockEntity) {
@@ -170,19 +169,19 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
         ItemStack fuel = itemStackHandler.getStackInSlot(INPUT_FUEL_SLOT).copy();
         ItemStack outFuel = itemStackHandler.getStackInSlot(OUTPUT_FUEL_SLOT).copy();
 
-        if (!fuel.is(FluidizationItems.VIAL_ACID.get()) || //Do not add if not acid
-                (!outFuel.is(FluidizationItems.VIAL_EMPTY.get()) && !outFuel.isEmpty()) || //Do not add if output is NOT an empty vial
+        if (!fuel.is(ModItems.VIAL_ACID.get()) || //Do not add if not acid
+                (!outFuel.is(ModItems.VIAL_EMPTY.get()) && !outFuel.isEmpty()) || //Do not add if output is NOT an empty vial
                 (!outFuel.isEmpty() && outFuel.getCount() == outFuel.getMaxStackSize()) || //Do not add if output slot is full
                 tank.getFluidAmount() + 1000 > tank.getCapacity()) { //Do not add if it will go beyond max fuel
             return;
         }
 
         fuel.shrink(1);
-        if (outFuel.isEmpty()) outFuel = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
+        if (outFuel.isEmpty()) outFuel = new ItemStack(ModItems.VIAL_EMPTY.get(), 1);
         else outFuel.grow(1);
         itemStackHandler.setStackInSlot(INPUT_FUEL_SLOT, fuel);
         itemStackHandler.setStackInSlot(OUTPUT_FUEL_SLOT, outFuel);
-        this.tank.fill(new FluidStack(FluidizationFluids.SOURCE_ACID, 1000), IFluidHandler.FluidAction.EXECUTE);
+        this.tank.fill(new FluidStack(ModFluids.SOURCE_ACID, 1000), IFluidHandler.FluidAction.EXECUTE);
     }
 
     private boolean hasRecipe() {
@@ -253,7 +252,7 @@ public class DissolvinatorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     private void consumeFuel() {
-        tank.drain(new FluidStack(FluidizationFluids.SOURCE_ACID, 125), IFluidHandler.FluidAction.EXECUTE);
+        tank.drain(new FluidStack(ModFluids.SOURCE_ACID, 125), IFluidHandler.FluidAction.EXECUTE);
     }
 
     public IFluidHandler getTank() {

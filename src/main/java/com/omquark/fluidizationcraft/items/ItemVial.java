@@ -27,10 +27,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 @EverythingNonNullByDefault
-public class ModVial extends BucketItem {
+public class ItemVial extends BucketItem {
     private final Supplier<? extends Fluid> fluidSupplier;
 
-    public ModVial(Supplier<? extends Fluid> supplier, Properties builder) {
+    public ItemVial(Supplier<? extends Fluid> supplier, Properties builder) {
         super(supplier.get(), builder);
         this.fluidSupplier = supplier;
     }
@@ -87,7 +87,7 @@ public class ModVial extends BucketItem {
                     }
 
                     player.awardStat(Stats.ITEM_USED.get(this));
-                    player.addItem(new ItemStack(FluidizationItems.VIAL_EMPTY.get()));
+                    player.addItem(new ItemStack(ModItems.VIAL_EMPTY.get()));
                     player.getMainHandItem().shrink(1);
                     return InteractionResultHolder.consume(inHandStack);
                 } else {
@@ -99,9 +99,9 @@ public class ModVial extends BucketItem {
 
     public static ItemStack swapBucketForVial(ItemStack itemStack) {
         ItemStack stack = itemStack;
-        if (itemStack.getItem() instanceof FluidizationBucket) {
-            if (((FluidizationBucket) itemStack.getItem()).getFluid() instanceof ModFluid) {
-                FluidizationBucket bucket = (FluidizationBucket) itemStack.getItem();
+        if (itemStack.getItem() instanceof ModBucket) {
+            if (((ModBucket) itemStack.getItem()).getFluid() instanceof ModFluid) {
+                ModBucket bucket = (ModBucket) itemStack.getItem();
                 ModFluid fluid = (ModFluid) bucket.getFluid();
                 stack = new ItemStack(fluid.getVial(), itemStack.getCount());
             }

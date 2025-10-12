@@ -12,8 +12,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 @EverythingNonNullByDefault
-public class FluidizationBucket extends BucketItem {
-    public FluidizationBucket(Fluid fluid, Properties builder) {
+public class ModBucket extends BucketItem {
+    public ModBucket(Fluid fluid, Properties builder) {
         super(fluid, builder);
     }
 

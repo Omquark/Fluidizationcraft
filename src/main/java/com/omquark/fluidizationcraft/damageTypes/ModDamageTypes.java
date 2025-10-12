@@ -7,8 +7,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
 
-public class FluidizationDamageTypes {
-    private FluidizationDamageTypes() {}
+public class ModDamageTypes {
+    private ModDamageTypes() {}
 
     public static final ResourceKey<DamageType> ACID_DAMAGE = register("acid");
     public static final ResourceKey<DamageType> CRYONITE_DAMAGE = register("cryonite");

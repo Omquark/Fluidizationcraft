@@ -2,7 +2,7 @@ package com.omquark.fluidizationcraft.data;
 
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.biomes.ModBiomes;
-import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.ModDamageTypes;
 import com.omquark.fluidizationcraft.data.fluid.interactions.FluidInteractionDataProvider;
 import com.omquark.fluidizationcraft.worldgen.ModBiomesModifier;
 import com.omquark.fluidizationcraft.worldgen.features.ModConfiguredFeatures;
@@ -30,8 +30,8 @@ public class DataGeneratorHandler {
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(true, new FluidizationBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(true, new FluidizationItemProvider(packOutput, FluidizationCraft.MODID, existingFileHelper));
+        generator.addProvider(true, new ModBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(true, new ModItemProvider(packOutput, FluidizationCraft.MODID, existingFileHelper));
         generator.addProvider(true, new ModRecipeProvider(packOutput, event.getLookupProvider()));
         generator.addProvider(true, ModLootTableProvider.create(packOutput, event.getLookupProvider()));
         generator.addProvider(true, new ModBlockDataGenerator(packOutput, event.getLookupProvider(), existingFileHelper));
@@ -43,7 +43,7 @@ public class DataGeneratorHandler {
                 (DataProvider.Factory<DatapackBuiltinEntriesProvider>) (output) ->
                         new DatapackBuiltinEntriesProvider
                                 (output, event.getLookupProvider(), new RegistrySetBuilder()
-                                        .add(Registries.DAMAGE_TYPE, FluidizationDamageTypes::bootstrap)
+                                        .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap)
                                         .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
                                         .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
                                         .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomesModifier::bootstrap)

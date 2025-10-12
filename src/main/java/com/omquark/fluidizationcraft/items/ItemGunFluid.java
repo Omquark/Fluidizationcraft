@@ -95,10 +95,10 @@ public class ItemGunFluid extends Item {
         if (!level.isClientSide) {
             ItemStack fuel = state.input().orElse(ItemStack.EMPTY);
             ItemStack out = state.output().orElse(ItemStack.EMPTY);
-            if (!fuel.isEmpty() && fuel.is(FluidizationItems.VIAL_ACID.get())) {
+            if (!fuel.isEmpty() && fuel.is(ModItems.VIAL_ACID.get())) {
                 fuel.shrink(1);
                 if(out.isEmpty())
-                    out = new ItemStack(FluidizationItems.VIAL_EMPTY.get(), 1);
+                    out = new ItemStack(ModItems.VIAL_EMPTY.get(), 1);
                 else
                     out.grow(1);
                 //TODO: Adjust the acid projectile to spawn different fluid depending on what is in the gun

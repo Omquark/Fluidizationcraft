@@ -9,7 +9,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CausticDrumRenderer implements BlockEntityRenderer<CausticDrumBlockEntity> {
@@ -18,6 +21,19 @@ public class CausticDrumRenderer implements BlockEntityRenderer<CausticDrumBlock
 
     @Override
     public void render(CausticDrumBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+
+        Minecraft.getInstance().getBlockColors().register(
+            (state, level, pos, tintIndex) -> {
+                if (level != null && pos != null) {
+                    BlockEntity entity = level.getBlockEntity(pos);
+                    if (entity instanceof CausticDrumBlockEntity drum && !drum.getTank(null).getFluidInTank(0).isEmpty()) {
+                        var fluidExtensions = IClientFluidTypeExtensions.of(drum.getTank(null).getFluidInTank(0).getFluid());
+                        return fluidExtensions.getTintColor();
+                    }
+                }
+                return 0xFFFFFF;
+            });
+
         FluidStack fluidStack = blockEntity.getTank(null).getFluidInTank(0);
         String fluidName;
         int amount;
@@ -25,8 +41,9 @@ public class CausticDrumRenderer implements BlockEntityRenderer<CausticDrumBlock
         Direction facing = blockEntity.getBlockState().getValue(BlockStateProperties.FACING);
 
         if(blockEntity.getTank(null).getFluidInTank(0).isEmpty()){
-            fluidName = "Empty";
-            amount = 0;
+            return;
+//            fluidName = "Empty";
+//            amount = 0;
         } else {
             fluidName = fluidStack.getHoverName().toString();
             amount = fluidStack.getAmount();

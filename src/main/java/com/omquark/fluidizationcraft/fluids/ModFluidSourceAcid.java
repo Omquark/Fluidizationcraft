@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.fluids;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -33,7 +33,7 @@ public class ModFluidSourceAcid extends ModFluid.Source {
         }
 
         if (currentBiome.value().coldEnoughToSnow(blockPos) && canSeeSky) {
-            level.setBlockAndUpdate(blockPos, FluidizationBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState());
+            level.setBlockAndUpdate(blockPos, ModBlocks.FROZEN_ACID_BLOCK.get().defaultBlockState());
             return;
         }
         super.tick(level, blockPos, state);

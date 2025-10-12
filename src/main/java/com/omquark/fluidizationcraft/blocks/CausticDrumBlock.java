@@ -2,13 +2,15 @@ package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
 import com.omquark.fluidizationcraft.blocks.blockEntity.CausticDrumBlockEntity;
+import com.omquark.fluidizationcraft.items.ModBucket;
+import com.omquark.fluidizationcraft.items.ItemVial;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,18 +43,6 @@ public class CausticDrumBlock extends BaseEntityBlock {
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH));
 
-        Minecraft.getInstance().getBlockColors().register(
-                (state, level, pos, tintIndex) -> {
-                    if (level != null && pos != null) {
-                        BlockEntity entity = level.getBlockEntity(pos);
-                        if (entity instanceof CausticDrumBlockEntity drum && !drum.getTank(null).getFluidInTank(0).isEmpty()) {
-                            var fluidExtensions = IClientFluidTypeExtensions.of(drum.getTank(null).getFluidInTank(0).getFluid());
-                            return fluidExtensions.getTintColor();
-                        }
-                    }
-                    return 0xFFFFFF;
-                }
-        );
     }
 
     @Override
@@ -104,13 +93,23 @@ public class CausticDrumBlock extends BaseEntityBlock {
     }
 
     protected InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        player.displayClientMessage(Component.literal("Used CausticDrum"), false);
+
+        ItemStack useItem = player.getItemInHand(player.getUsedItemHand());
         BlockEntity entity = level.getBlockEntity(pos);
+
         if (entity instanceof CausticDrumBlockEntity causticDrumBlockEntity) {
-            player.displayClientMessage(Component.literal("Entity exists and is expected type"), false);
-            player.displayClientMessage(Component.literal("Tank: " + causticDrumBlockEntity.getTank(null).getTankCapacity(0)), false);
-        } else {
-            player.displayClientMessage(Component.literal("Entity does not exist or is not of expected type"), false);
+            if(useItem.getItem() instanceof ItemVial vial){
+
+            } else if (useItem.getItem() instanceof ModBucket bucket){
+
+            }
+
+            String message = String.format(
+                    "%d / %d \nFluid: %s",
+                    causticDrumBlockEntity.getTank(null).getFluidInTank(0).getAmount(),
+                    causticDrumBlockEntity.getTank(null).getTankCapacity(0),
+                    causticDrumBlockEntity.getTank(null).getFluidInTank(0).getHoverName());
+            player.displayClientMessage(Component.literal(message), false);
         }
         return InteractionResult.SUCCESS;
     }

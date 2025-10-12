@@ -2,7 +2,7 @@ package com.omquark.fluidizationcraft.screen.FluidShooter;
 
 import com.omquark.fluidizationcraft.capabilities.FluidShooterState;
 import com.omquark.fluidizationcraft.capabilities.FluidShooterStateUtil;
-import com.omquark.fluidizationcraft.items.FluidizationItems;
+import com.omquark.fluidizationcraft.items.ModItems;
 import com.omquark.fluidizationcraft.screen.ModMenuTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import com.omquark.fluidizationcraft.util.GunSlotHandler;
@@ -49,7 +49,7 @@ public class FluidShooterMenu extends AbstractContainerMenu {
 
                     @Override
                     public boolean mayPlace(ItemStack stack) {
-                        return stack.is(FluidizationItems.VIAL_ACID.get());
+                        return stack.is(ModItems.VIAL_ACID.get());
                     }
 
                     @Override

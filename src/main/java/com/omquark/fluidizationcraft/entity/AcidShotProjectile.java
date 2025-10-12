@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.entity;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -35,7 +35,7 @@ public class AcidShotProjectile extends AbstractArrow {
     }
 
     private void spawnAcid(BlockPos pos) {
-        this.level().setBlock(pos, FluidizationBlocks.ACID_BLOCK.get().defaultBlockState(), 3);
+        this.level().setBlock(pos, ModBlocks.ACID_BLOCK.get().defaultBlockState(), 3);
         this.discard();
     }
 

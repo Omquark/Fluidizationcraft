@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.blocks;
 
-import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.ModDamageTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +27,6 @@ public class AcidBarrier extends HalfTransparentBlock {
             return;
         }
         super.stepOn(level, pos, state, entity);
-        entity.hurt(level.damageSources().source(FluidizationDamageTypes.ACID_DAMAGE), 10f);
+        entity.hurt(level.damageSources().source(ModDamageTypes.ACID_DAMAGE), 10f);
     }
 }

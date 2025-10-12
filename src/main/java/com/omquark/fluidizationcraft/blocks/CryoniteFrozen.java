@@ -1,7 +1,7 @@
 package com.omquark.fluidizationcraft.blocks;
 
 import com.mojang.serialization.MapCodec;
-import com.omquark.fluidizationcraft.damageTypes.FluidizationDamageTypes;
+import com.omquark.fluidizationcraft.damageTypes.ModDamageTypes;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -33,6 +33,6 @@ public class CryoniteFrozen extends HalfTransparentBlock {
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        entity.hurt(level.damageSources().source(FluidizationDamageTypes.CRYONITE_DAMAGE), 1f);
+        entity.hurt(level.damageSources().source(ModDamageTypes.CRYONITE_DAMAGE), 1f);
     }
 }

@@ -1,6 +1,6 @@
 package com.omquark.fluidizationcraft.data;
 
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import com.omquark.fluidizationcraft.FluidizationCraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -18,33 +18,33 @@ import java.util.function.Function;
 
 import static net.neoforged.neoforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
 
-public class FluidizationBlockStateProvider extends BlockStateProvider {
-    public FluidizationBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+public class ModBlockStateProvider extends BlockStateProvider {
+    public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, FluidizationCraft.MODID, existingFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
-        blockItemWithTranslucency(FluidizationBlocks.FROZEN_ACID_BLOCK.get());
-        blockItemWithTranslucency(FluidizationBlocks.FROZEN_CRYONITE_BLOCK.get());
-        blockItemWithTranslucency(FluidizationBlocks.ACID_BARRIER.get());
-        blockItemWithTranslucency(FluidizationBlocks.TRANSPARENT_ALUMINUM.get());
+        blockItemWithTranslucency(ModBlocks.FROZEN_ACID_BLOCK.get());
+        blockItemWithTranslucency(ModBlocks.FROZEN_CRYONITE_BLOCK.get());
+        blockItemWithTranslucency(ModBlocks.ACID_BARRIER.get());
+        blockItemWithTranslucency(ModBlocks.TRANSPARENT_ALUMINUM.get());
 
-        blockWithItem(FluidizationBlocks.ALUMINUM_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.LEAD_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.RADIONITE_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.TIN_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.URANIUM_ORE_BLOCK.get());
-        blockWithItem(FluidizationBlocks.ACID_TANK.get());
+        blockWithItem(ModBlocks.ALUMINUM_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.LEAD_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.NEPTUNIUM_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.PLUTONIUM_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.RADIONITE_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.TIN_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.URANIUM_ORE_BLOCK.get());
+        blockWithItem(ModBlocks.ACID_TANK.get());
 //        blockWithItem(FluidizationBlocks.CAUSTIC_DRUM_BLOCK.get());
 
-        cubeBottomTop(FluidizationBlocks.ACID_TNT.get(), "acid_tnt");
+        cubeBottomTop(ModBlocks.ACID_TNT.get(), "acid_tnt");
 
         this.yDirectionalBlock(
-                FluidizationBlocks.DISSOLVINATOR_BLOCK.get(),
-                (state) -> orientable(FluidizationBlocks.DISSOLVINATOR_BLOCK.get(), "dissolvinator"),
+                ModBlocks.DISSOLVINATOR_BLOCK.get(),
+                (state) -> orientable(ModBlocks.DISSOLVINATOR_BLOCK.get(), "dissolvinator"),
                 180);
 
     }

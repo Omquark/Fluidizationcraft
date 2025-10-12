@@ -1,8 +1,7 @@
 package com.omquark.fluidizationcraft.worldgen.features;
 
-import com.mojang.serialization.Decoder;
 import com.omquark.fluidizationcraft.FluidizationCraft;
-import com.omquark.fluidizationcraft.blocks.FluidizationBlocks;
+import com.omquark.fluidizationcraft.blocks.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -37,25 +36,25 @@ public class ModConfiguredFeatures {
         RuleTest netherrackReplacable = new BlockMatchTest(Blocks.NETHERRACK);
 
         List<OreConfiguration.TargetBlockState> aluminumOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.ALUMINUM_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.ALUMINUM_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.ALUMINUM_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.ALUMINUM_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> leadOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.LEAD_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.LEAD_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.LEAD_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.LEAD_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> neptuniumOre =
-                List.of(OreConfiguration.target(netherrackReplacable, FluidizationBlocks.NEPTUNIUM_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(netherrackReplacable, ModBlocks.NEPTUNIUM_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> plutoniumOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.PLUTONIUM_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.PLUTONIUM_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.PLUTONIUM_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> radioniteOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.RADIONITE_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.RADIONITE_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.RADIONITE_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.RADIONITE_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> tinOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.TIN_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.TIN_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.TIN_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.TIN_ORE_BLOCK.get().defaultBlockState()));
         List<OreConfiguration.TargetBlockState> uraniumOre =
-                List.of(OreConfiguration.target(stoneReplacable, FluidizationBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()),
-                        OreConfiguration.target(deepslateReplacable, FluidizationBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()));
+                List.of(OreConfiguration.target(stoneReplacable, ModBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()),
+                        OreConfiguration.target(deepslateReplacable, ModBlocks.URANIUM_ORE_BLOCK.get().defaultBlockState()));
 
 //        ConfiguredFeature<?, ?> feature = new ConfiguredFeature<>(
 //                Feature.FOREST_ROCK,
@@ -68,13 +67,13 @@ public class ModConfiguredFeatures {
         register(context, TIN_ORE, Feature.ORE, new OreConfiguration(tinOre, 10));
         register(context, URANIUM_ORE, Feature.ORE, new OreConfiguration(uraniumOre, 10));
         register(context, LAKE_ACID, Feature.LAKE, new LakeFeature.Configuration(
-                BlockStateProvider.simple(FluidizationBlocks.ACID_BLOCK.get().defaultBlockState()),
+                BlockStateProvider.simple(ModBlocks.ACID_BLOCK.get().defaultBlockState()),
                 BlockStateProvider.simple(Blocks.STONE.defaultBlockState())));
         register(context, LAKE_CRYONITE, Feature.LAKE, new LakeFeature.Configuration(
-                BlockStateProvider.simple(FluidizationBlocks.CRYONITE_BLOCK.get().defaultBlockState()),
+                BlockStateProvider.simple(ModBlocks.CRYONITE_BLOCK.get().defaultBlockState()),
                 BlockStateProvider.simple(Blocks.STONE.defaultBlockState())));
         register(context, LAKE_NETHERFLOW, Feature.LAKE, new LakeFeature.Configuration(
-                BlockStateProvider.simple(FluidizationBlocks.NETHERFLOW_FLUID_BLOCK.get().defaultBlockState()),
+                BlockStateProvider.simple(ModBlocks.NETHERFLOW_FLUID_BLOCK.get().defaultBlockState()),
                 BlockStateProvider.simple(Blocks.NETHERRACK.defaultBlockState())));
         register(context, COARSE_DIRT_SURFACE, Feature.FILL_LAYER, new LayerConfiguration(80, Blocks.COARSE_DIRT.defaultBlockState()));
 //        context.register(COARSE_DIRT_SURFACE, feature);

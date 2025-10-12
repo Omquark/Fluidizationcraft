@@ -1,6 +1,5 @@
 package com.omquark.fluidizationcraft.items;
 
-import com.omquark.fluidizationcraft.FluidizationCraft;
 import com.omquark.fluidizationcraft.util.EverythingNonNullByDefault;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,8 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 @EverythingNonNullByDefault
-public class ModCell extends Item {
-    public ModCell(Properties properties) {
+public class ItemCell extends Item {
+    public ItemCell(Properties properties) {
         super(properties);
     }
 
